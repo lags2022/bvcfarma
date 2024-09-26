@@ -73,7 +73,7 @@ export async function POST(request: Request) {
 
 		// Send the message con twilio por whatsapp
 		const response = await clientTwilio.messages.create({
-			body: `Hola, este es un mensaje de prueba y el correo es ${order?.orderAddress?.email} el link es https://ecommerce-bvc.vercel.app/`,
+			body: `Hola, este es un mensaje de prueba y el correo es ${order?.orderAddress?.email} el link es https://bvcfarma.vercel.app`,
 			from: 'whatsapp:+14155238886', // Your Twilio Sandbox Number
 			to: `whatsapp:+51932052849`, // Recipient's phone number
 		})
