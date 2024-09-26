@@ -1,0 +1,17 @@
+### CATEGORIES
+GET https://retoolapi.dev/Ls1JUh/categories
+
+### SUBCATEGORIES
+GET https://retoolapi.dev/kzUqOT/subcategories
+
+### SUBSUBCATEGORIES
+GET https://retoolapi.dev/8hluUh/subsubcatories
+
+### PRODUCTS
+GET https://retoolapi.dev/AGzFrG/products
+
+### ESCALA AHORRO PRODUCTS
+GET https://retoolapi.dev/uxkYGj/escala_ahorro
+
+### LINEAS
+GET https://retoolapi.dev/wt7CLE/lineas

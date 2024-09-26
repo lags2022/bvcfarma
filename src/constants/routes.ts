@@ -1,0 +1,6 @@
+export const ROUTES_ADMIN = ['/admin']
+export const ROUTES_USER = ['/dashboard']
+export const ROUTES_PROTECTED = [...ROUTES_USER, ...ROUTES_ADMIN]
+export const ROUTES_PUBLIC = ['/']
+export const ROUTES_AUTH = ['/login']
+export const ROUTES_LOGIN = ['/checkout', '/favorites', '/profile', '/orders']

@@ -1,0 +1,453 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+    --chart-1: 241 40% 38%;
+    --chart-2: 200 98% 35%;
+    --chart-3: 200 100% 38%;
+    --chart-4: 205 56% 79%;
+    --chart-5: 199 61% 93%;
+    --picker-1: hsl(213, 85%, 95%);
+    --picker-2: hsl(210, 55%, 81%);
+    --picker-3: hsl(197, 92%, 42%);
+    --picker-4: hsl(201, 78%, 36%);
+    --picker-5: hsl(218, 40%, 35%);
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* para las lineas de los productos de farmacia */
+  .products-totals {
+    @apply w-full inline-flex flex-nowrap overflow-hidden
+  }
+
+  .products-item {
+    @apply flex items-center justify-center md:justify-start animate-infinite-scroll *:cursor-pointer
+  }
+}
+
+@layer components {
+
+
+  /* revisar esta parte talvez afecte a la aplicacion */
+  /* https://github.com/shadcn-ui/ui/issues/977 */
+  /* https://github.com/shadcn-ui/ui/issues/1175 */
+  html {
+    overflow-x: hidden;
+    /* overflow-y: scroll; */
+  }
+
+  body[data-scroll-locked] {
+    min-width: 100%;
+  }
+
+  /* revisar esta parte talvez afecte a la aplicacion */
+
+
+  /* ============= estilos para el scroll del navbar bottom categories ============= */
+  body,
+  .menu-categories {
+    --sb-track-color: #f1f7f9;
+    --sb-thumb-color: #1471A4;
+    --sb-size: 7px;
+    --sb-size-navbar: 5px;
+  }
+
+  body::-webkit-scrollbar {
+    width: var(--sb-size)
+  }
+
+  .menu-categories::-webkit-scrollbar {
+    width: var(--sb-size-navbar)
+  }
+
+  body::-webkit-scrollbar-track,
+  .menu-categories::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+  }
+
+  .menu-categories::-webkit-scrollbar-track {
+    border-radius: 3px;
+  }
+
+  body::-webkit-scrollbar-thumb,
+  .menu-categories::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+  }
+
+  .menu-categories::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+  }
+
+
+  @supports not selector(::-webkit-scrollbar) {
+
+    body,
+    .menu-categories {
+      scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    }
+  }
+
+  /* fin de estilos para el scroll del navbar bottom categories */
+
+
+  /* ============= estilos para el Page404 =============== */
+
+  .error404 #main-wrapper {
+    width: 100%
+  }
+
+  .error404 #sidebar-wrapper {
+    display: none
+  }
+
+  .errorWrap {
+    color: #444444;
+    text-align: center;
+    padding: 60px 0;
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  .errorWrap h3 {
+    font-size: 160px;
+    line-height: 1em;
+    margin: 0 0 20px
+  }
+
+  .errorWrap h4 {
+    font-size: 18px;
+    /* margin: 0 0 20px */
+  }
+
+  .errorWrap p {
+    margin: 0 0 10px;
+    font-size: 14px
+  }
+
+  .errorWrap a {
+    display: inline-block;
+    height: 32px;
+    background-color: #652f8f;
+    font-size: 15px;
+    color: #fff;
+    font-weight: 700;
+    line-height: 32px;
+    padding: 0 20px;
+    margin: 15px 0 0;
+    border-radius: 2px
+  }
+
+  .errorWrap a:hover {
+    background-color: #652f8f;
+    color: #fff
+  }
+
+  .wheel {
+    animation: wheel-rotate 6s ease infinite;
+    transform-origin: center;
+    transform-box: fill-box
+  }
+
+  @keyframes wheel-rotate {
+    50% {
+      transform: rotate(360deg);
+      animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53)
+    }
+
+    100% {
+      transform: rotate(960deg)
+    }
+  }
+
+  .clock-hand-1 {
+    animation: clock-rotate 3s linear infinite;
+    transform-origin: bottom;
+    transform-box: fill-box
+  }
+
+  .clock-hand-2 {
+    animation: clock-rotate 6s linear infinite;
+    transform-origin: bottom;
+    transform-box: fill-box
+  }
+
+  @keyframes clock-rotate {
+    100% {
+      transform: rotate(360deg)
+    }
+  }
+
+  #box-top {
+    animation: box-top-anim 2s linear infinite;
+    transform-origin: right top;
+    transform-box: fill-box
+  }
+
+  @keyframes box-top-anim {
+    50% {
+      transform: rotate(-5deg)
+    }
+  }
+
+  #umbrella {
+    animation: umbrella-anim 6s linear infinite;
+    transform-origin: center;
+    transform-box: fill-box
+  }
+
+  @keyframes umbrella-anim {
+    25% {
+      transform: translateY(10px) rotate(5deg)
+    }
+
+    75% {
+      transform: rotate(-5deg)
+    }
+  }
+
+  #cup {
+    animation: cup-rotate 3s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+    transform-origin: top left;
+    transform-box: fill-box
+  }
+
+  @keyframes cup-rotate {
+    50% {
+      transform: rotate(-5deg)
+    }
+  }
+
+  #pillow {
+    animation: pillow-anim 3s linear infinite;
+    transform-origin: center;
+    transform-box: fill-box
+  }
+
+  @keyframes pillow-anim {
+    25% {
+      transform: rotate(10deg) translateY(5px)
+    }
+
+    75% {
+      transform: rotate(-10deg)
+    }
+  }
+
+  #stripe {
+    animation: stripe-anim 3s linear infinite;
+    transform-origin: center;
+    transform-box: fill-box
+  }
+
+  @keyframes stripe-anim {
+    25% {
+      transform: translate(10px, 0) rotate(-10deg)
+    }
+
+    75% {
+      transform: translateX(10px)
+    }
+  }
+
+  #bike {
+    animation: bike-anim 6s ease infinite
+  }
+
+  @keyframes bike-anim {
+    0% {
+      transform: translateX(-1300px)
+    }
+
+    50% {
+      transform: translateX(0);
+      animation-timing-function: cubic-bezier(0.47, 0, 0.745, 0.715)
+    }
+
+    100% {
+      transform: translateX(1300px)
+    }
+  }
+
+  #rucksack {
+    animation: ruck-anim 3s linear infinite;
+    transform-origin: top;
+    transform-box: fill-box
+  }
+
+  @keyframes ruck-anim {
+    50% {
+      transform: rotate(5deg)
+    }
+  }
+
+  .error_page .circle {
+    animation: circle-anim ease infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+    perspective: 0
+  }
+
+  .error_page .circle.c1 {
+    animation-duration: 2s
+  }
+
+  .error_page .circle.c2 {
+    animation-duration: 3s
+  }
+
+  .error_page .circle.c3 {
+    animation-duration: 1s
+  }
+
+  .error_page .circle.c4 {
+    animation-duration: 1s
+  }
+
+  .error_page .circle.c5 {
+    animation-duration: 2s
+  }
+
+  .error_page .circle.c6 {
+    animation-duration: 3s
+  }
+
+  @keyframes circle-anim {
+    50% {
+      transform: scale(.2) rotateX(360deg) rotateY(360deg)
+    }
+  }
+
+  .four,
+  #ou {
+    animation: four-anim cubic-bezier(0.39, 0.575, 0.565, 1) infinite
+  }
+
+  .four.a {
+    transform-origin: bottom left;
+    animation-duration: 3s;
+    transform-box: fill-box
+  }
+
+  .four.b {
+    transform-origin: bottom right;
+    animation-duration: 3s;
+    transform-box: fill-box
+  }
+
+  #ou {
+    animation-duration: 6s;
+    transform-origin: center;
+    transform-box: fill-box
+  }
+
+  .cls-1 {
+    fill: #B3CEE9
+  }
+
+  .cls-8.wheel,
+  .cls-2 {
+    fill: #0893CC
+  }
+
+  .cls-3 {
+    fill: #0893CC
+  }
+
+  .cls-4 {
+    fill: #1471A4
+  }
+
+  .cls-5 {
+    fill: #354F7D
+  }
+
+  .cls-6,
+  .cls-7,
+  .cls-8 {
+    fill: #354F7D
+  }
+
+  .cls-10,
+  .cls-6 {
+    opacity: 0.6
+  }
+
+  .cls-7 {
+    opacity: 0.4
+  }
+
+  .cls-9 {
+    fill: #E7F1FD
+  }
+
+  .cls-11 {
+    fill: #E7F1FD
+  }
+
+  .cls-12 {
+    fill: #E7F1FD
+  }
+
+  .cls-13 {
+    fill: #E7F1FD
+  }
+
+  .cls-14 {
+    fill: #E7F1FD
+  }
+
+  /* fin de estilos para el Page404 */
+}

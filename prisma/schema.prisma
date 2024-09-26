@@ -1,0 +1,259 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  // url      = env("POSTGRES_PRISMA_URL_DEVELOPMENT")
+  url       = env("DATABASE_URL") // uses connection pooling
+  directUrl = env("DIRECT_URL") // uses a direct connection
+}
+
+model User {
+  id            String    @id @default(uuid()) @db.Uuid
+  name          String    @db.VarChar(50)
+  email         String    @unique @db.VarChar(150)
+  emailVerified DateTime? @map("email_verified") @db.Timestamptz(6)
+  password      String
+  favorites     Int[] //Todo revisar para cambiar cuando es uuid
+  role          Role      @default(PUBLIC)
+  birthdate     DateTime? @db.Date
+  ruc           String?   @db.VarChar(11)
+  colorTheme    String    @default("#0274AE") @map("color_theme") @db.VarChar(7)
+  isActive      Boolean   @default(true) @map("is_active")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  address UserAddress?
+  orders  Order[]
+
+  @@map("user_table")
+}
+
+model UserAddress {
+  id        String  @id @default(uuid()) @db.Uuid
+  firstName String  @map("first_name") @db.VarChar(50)
+  lastName  String  @map("last_name") @db.VarChar(50)
+  image     String?
+  phone     String  @db.VarChar(20)
+
+  // Todo revisar si se puede eliminar esto y usar asi como el orderAddress
+  address    String  @db.VarChar(255)
+  address2   String? @db.VarChar(255) // Campo opcional
+  postalCode String  @map("postal_code") @db.VarChar(20)
+  city       String  @db.VarChar(255)
+
+  // Relación con el modelo 'Country'
+  countryId Int     @map("country_id")
+  country   Country @relation(fields: [countryId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  // Relación con el modelo 'User'
+  userId String @unique @map("user_id") @db.Uuid
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@map("user_addresses")
+}
+
+model Country {
+  id       Int    @id @default(autoincrement()) @db.Integer
+  name     String @db.VarChar(100)
+  imageUrl String @map("image_url") @db.VarChar(255)
+
+  userAddresses  UserAddress[]
+  orderAddresses OrderAddress[]
+
+  @@map("countries")
+}
+
+// usado mas para el slug
+model FieldsAddProduct {
+  id String @id @default(uuid()) @db.Uuid
+
+  // TODO: REVISAR SI CAMBIAR POR UUID
+  // idProductErp String @map("id_product_erp") @db.Uuid
+  idProductErp Int @map("id_product_erp") @db.Integer
+
+  slug      String?
+  notActive Boolean @default(false) @map("not_active")
+
+  @@unique([idProductErp, slug])
+  @@map("fields_add_product")
+}
+
+model Order {
+  id            String        @id @default(uuid()) @db.Uuid
+  status        StatusOrder   @default(VALIDATING)
+  paidAt        DateTime?     @default(now()) @map("paid_at")
+  isPaid        Boolean       @default(false) @map("is_paid")
+  paymentMethod PaymentMethod @map("payment_method")
+  deliveryType  DeliveryType  @map("delivery_type")
+  quantityItems Int           @map("quantity_items")
+
+  // TODO: REVISAR SI AÑADIR Y MOSTRAR EL SUBTOTAL(SIN IGV) Y EL TOTAL DEL IGV
+  // subtotal      Float
+  // tax           Float
+
+  total         Float
+  totalCart     Float   @map("total_cart")
+  discount      Float   @map("discount")
+  subtotal      Float   @map("subtotal")
+  shippingCost  Float   @map("shipping_cost")
+  observation   String? @db.Text
+  transactionId String  @unique @map("transaction_id") @db.VarChar(255)
+  documentUrl   String? @map("document_url") @db.VarChar(255)
+
+  // la orden de compra
+  ocNumber String @unique @map("oc_number") @db.VarChar(13)
+
+  // Relación con el modelo 'User'
+  userId String @map("user_id") @db.Uuid
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Relación con el modelo 'CulqiCharge'
+  culqiCharge  CulqiCharge?
+  orderItems   OrderItemProduct[]
+  orderAddress OrderAddress?
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  isActive  Boolean   @default(true) @map("is_active")
+
+  @@map("order")
+}
+
+model CulqiCharge {
+  id                  String  @id @default(uuid()) @db.Uuid // ID único
+  creationDate        BigInt  @map("creation_date") @db.BigInt // Fecha de creación
+  amount              Int // Monto total
+  amountRefunded      Int     @map("amount_refunded") @db.Integer // Monto reembolsado
+  currentAmount       Int     @map("current_amount") // Monto actual
+  currencyCode        String  @map("currency_code") @db.VarChar(3) // Código de moneda
+  description         String  @db.VarChar(255) // Descripción del pago
+  installments        Int     @db.Integer // Número de cuotas
+  statementDescriptor String  @map("statement_descriptor") @db.VarChar(255) // Descriptor del estado de cuenta
+  paid                Boolean // Estado de pago
+  dispute             Boolean // Indica si hay una disputa
+  sourceIdToken       String  @unique @map("source_id_token") @db.VarChar(255) // ID del token de la fuente
+  sourceType          String  @map("source_type") @db.VarChar(10) // Tipo de fuente (ej. tarjeta)
+  fraudScore          Int?    @map("fraud_score") // Puntuación de fraude
+  userMessage         String  @map("user_message") @db.VarChar(255) // Mensaje para el usuario
+  merchantMessage     String  @map("merchant_message") @db.VarChar(255) // Mensaje para el comerciante
+
+  // Relación con el modelo 'Order'
+  orderId String @unique @map("order_id") @db.Uuid
+  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@map("culqi_charge")
+}
+
+model OrderItemProduct {
+  id           Int    @id @default(autoincrement()) @db.Integer
+  price        String @db.VarChar(8)
+  quantity     Int // unidades del mismo producto
+  name         String @map("name") @db.VarChar(150)
+  image        String @map("image") @db.VarChar(255)
+  subtotalItem Float  @map("subtotal_item")
+  // confirmedUnits Int?   @map("confirmed_units")
+
+  // TODO: REVISAR SI CAMBIAR POR UUID
+  // idProductErp String @map("id_product_erp") @db.Uuid
+  idProductErp Int @map("id_product_erp") @db.Integer
+
+  // Relaciones
+  orderId String @map("order_id") @db.Uuid
+  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@map("order_item_products")
+}
+
+model OrderAddress {
+  id             String       @id @default(uuid()) @db.Uuid
+  firstName      String       @map("first_name") @db.VarChar(50)
+  lastName       String       @map("last_name") @db.VarChar(50)
+  phone          String       @db.VarChar(20)
+  typeDocument   TypeDocument @map("type_document")
+  numberDocument String?      @map("number_document") @db.VarChar(50)
+  email          String       @db.VarChar(150)
+
+  // TODO: REVISAR ESTO SI CREAMOS OTRA TABLA DE CITY OR PROVINCE
+  // city       String? @db.VarChar
+  address    String  @db.VarChar
+  postalCode String  @map("postal_code") @db.VarChar(5)
+  department String  @db.VarChar(50)
+  province   String  @db.VarChar(50)
+  district   String  @db.VarChar(50)
+  reference  String? @db.VarChar(150)
+
+  // Relación con el modelo 'Country'
+  countryId Int     @map("country_id") @db.Integer
+  country   Country @relation(fields: [countryId], references: [id], onDelete: Cascade)
+
+  // Relación con el modelo 'Order'
+  orderId String @unique @map("order_id") @db.Uuid
+  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@map("order_address")
+}
+
+enum Role {
+  PUBLIC
+  PHARMACY
+  OWNER
+  ADMIN
+}
+
+enum PaymentMethod {
+  CASH
+  TRANSFER
+  CARD
+  YAPE
+  POS
+  // Considera añadir un comentario aquí en el archivo de esquema para revisar el uso de PLIN en el futuro.
+}
+
+enum StatusOrder {
+  CANCELLED
+  VALIDATING
+  PREPARING
+  ASSIGNED
+  DELIVERED
+}
+
+enum DeliveryType {
+  STANDARD
+  EXPRESS
+  PICKUP
+}
+
+enum TypeDocument {
+  DNI
+  PASSPORT
+  FOREIGNER_CARD
+}
+
+// model CulqiCharge {
+//   id                 String   @id @default(cuid()) // ID único
+//   creationDate       Int      // Fecha de creación
+//   amount             Int      // Monto total
+//   amountRefunded     Int      // Monto reembolsado
+//   currentAmount      Int      // Monto actual
+//   currencyCode       String   // Código de moneda
+//   description        String   // Descripción del pago
+//   installments       Int      // Número de cuotas
+//   statementDescriptor String   // Descriptor del estado de cuenta
+//   paid               Boolean   // Estado de pago
+//   dispute            Boolean   // Indica si hay una disputa
+//   referenceCode      String   // Código de referencia
+//   sourceId           String   // ID del token de la fuente
+//   sourceType         String   // Tipo de fuente (ej. tarjeta)
+//   fraudScore         Int      // Puntuación de fraude
+//   userMessage        String   // Mensaje para el usuario
+//   merchantMessage     String   // Mensaje para el comerciante
+// }
