@@ -107,7 +107,7 @@ export const NavbarBottonSeccion = ({
 	}
 
 	return (
-		<nav className="contain flex gap-2 pr-0">
+		<nav className="contain flex gap-2 px-0 lg:px-6">
 			{/* seccion categorias menu multinivel */}
 			<div
 				className="group hidden sm:inline-block relative"

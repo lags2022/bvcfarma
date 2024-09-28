@@ -38,13 +38,13 @@ export const NavbarMiddleSeccion = ({
 					<Menu className="block sm:hidden text-picker-4" />
 				)}
 
-				<Link href="/">
+				<Link className='sm:!ml-0' href="/">
 					<Image
 						src={LOGO_NAME}
 						alt="Logo Bvcfarma"
 						width={150}
 						height={50}
-						className="max-w-none aspect-[143.5/40] w-auto h-8 sm:h-10 object-contain"
+						className="max-w-none aspect-[143.5/40] w-auto h-9 sm:h-10 object-contain"
 					/>
 					{/* <Image
 						src={LOGO}

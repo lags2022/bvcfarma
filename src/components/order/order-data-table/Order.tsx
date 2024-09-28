@@ -1,6 +1,5 @@
 'use client'
 
-import { PaymentMethod, StatusOrder } from '@prisma/client'
 import {
 	ColumnDef,
 	ColumnFiltersState,
