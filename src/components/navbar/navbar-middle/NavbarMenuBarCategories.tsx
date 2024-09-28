@@ -15,15 +15,15 @@ import {
 export const NavbarMenuBarCategories = () => {
 	return (
 		<Drawer direction="left">
-			<DrawerTrigger className="sm:hidden p-2 text-picker-4 hover:bg-gray-100 rounded-sm transition duration-300 ease hover:text-picker-4">
+			<DrawerTrigger className="p-2 text-picker-4 hover:bg-gray-100 rounded-sm transition duration-300 ease hover:text-picker-4">
 				{/* <Button
 					variant="ghost"
-					className=" sm:hidden p-2 text-picker-4 hover:text-picker-4"
+					className=" p-2 text-picker-4 hover:text-picker-4"
 				> */}
 				<Menu className="" />
 				{/* </Button> */}
 			</DrawerTrigger>
-			<DrawerContent className="sm:hidden top-0 right-0 w-screen max-w-80 !h-full rounded-none mt-0 first:*:hidden bg-gray-200">
+			<DrawerContent className="top-0 right-0 w-screen max-w-80 !h-full rounded-none mt-0 first:*:hidden bg-gray-200">
 				<DrawerHeader className="bg-white flex items-center justify-between py-1 pr-2">
 					<DrawerTitle>
 						<p>Menú</p>

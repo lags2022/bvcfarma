@@ -12,6 +12,7 @@ import { Instagram } from '@/components/svg/Instagram'
 import { Youtube } from '@/components/svg/Youtube'
 import { Button } from '@/components/ui/button'
 import { LOGO_NAME } from '@/constants/general'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 
 import { NavbarAutocomplete } from './NavbarAutocomplete'
 import { NavbarMenuBarCategories } from './NavbarMenuBarCategories'
@@ -25,12 +26,13 @@ export const NavbarMiddleSeccion = ({
 	session: Session | null
 }) => {
 	// const setLastRoute = useLastRouteStore((state) => state.setLastRoute)
+	const isMovil = useMediaQuery('(max-width: 640px)')
 
 	return (
 		<div className="contain flex items-center justify-between py-4 space-x-4 sm:space-x-6">
 			{/* logo bvcfarma */}
 			<div className="flex items-center justify-center space-x-2 sm:space-x-4">
-				<NavbarMenuBarCategories />
+				{isMovil && <NavbarMenuBarCategories />}
 
 				<Link href="/">
 					<Image

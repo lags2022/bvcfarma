@@ -3,7 +3,6 @@
 import { HomeIcon } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
 
 import {
 	Breadcrumb,
@@ -45,7 +44,6 @@ export const BreadCrumbShared = ({
 	const ITEMS_TO_DISPLAY =
 		breadcrumbItems.length === 2 ? 2 : breadcrumbItems.length === 3 ? 3 : 4
 	const pathname = usePathname()
-	const [open, setOpen] = useState(false)
 	const isTablet = useMediaQuery('(min-width: 640px)')
 
 	return (
@@ -68,7 +66,7 @@ export const BreadCrumbShared = ({
 					<>
 						<BreadcrumbItem>
 							{isTablet ? (
-								<DropdownMenu open={open} onOpenChange={setOpen}>
+								<DropdownMenu>
 									<DropdownMenuTrigger
 										className="flex items-center gap-1"
 										aria-label="Toggle menu"
@@ -88,7 +86,7 @@ export const BreadCrumbShared = ({
 									</DropdownMenuContent>
 								</DropdownMenu>
 							) : (
-								<Drawer open={open} onOpenChange={setOpen}>
+								<Drawer>
 									<DrawerTrigger aria-label="Toggle Menu">
 										<BreadcrumbEllipsis className="h-4 w-4" />
 									</DrawerTrigger>
