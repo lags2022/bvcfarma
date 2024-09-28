@@ -13,11 +13,7 @@ import {
 	getFirstSearchParam,
 } from '@/helpers/getSearchParams'
 import {
-	getBrands,
-	getCategories,
-	getProducts,
-	getSubCategories,
-	getSubSubCategories,
+  getApiData,
 } from '@/services/getProducts'
 
 export default function PageProducts() {
@@ -52,14 +48,7 @@ export default function PageProducts() {
 
 	useEffect(() => {
 		const fetchAll = async () => {
-			const [products, tipos, categories, subCategories, lines] =
-				await Promise.all([
-					getProducts(),
-					getCategories(),
-					getSubCategories(),
-					getSubSubCategories(),
-					getBrands(),
-				])
+      const { products, tipos, categories, subCategories, lines } = await getApiData()
 
 			setAll(
 				products,

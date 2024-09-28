@@ -4,84 +4,33 @@ import Link from 'next/link'
 import { useState } from 'react'
 
 import { Button } from '@/components/ui/button'
-import { FilterTypes } from '@/context/useFilterStore'
+import { multilevelNavbar } from '@/helpers/multilevel-navbar'
 import {
 	CategoryApi,
 	SubCategoryApi,
 	SubSubCategoryApi,
 } from '@/interfaces/general'
+import { MultiLevel } from '@/interfaces/navbar'
 import { cn } from '@/lib/utils'
 
 import { UnderlineAnimation } from '../shared/UnderlineAnimation'
 import { DropdownArrow } from '../svg/DropdownArrow'
 import { ScrollArea, ScrollBar } from '../ui/scroll-area'
 
-const ICON_MULTILEVEL_NAVBAR_CATEGORIA = {
-	medicamentos: { color: 'bg-red-500' },
-	suplementos: { color: 'bg-green-500' },
-	'cuidado personal': { color: 'bg-pink-500' },
-	'adulto mayor': { color: 'bg-blue-500' },
-	dermocosmetica: { color: 'bg-yellow-500' },
-	infantil: { color: 'bg-purple-500' },
-	maternidad: { color: 'bg-orange-500' },
-	blog: { color: 'bg-gray-500' },
-} as {
-	[key: string]: { color: string }
-}
-
-interface MultiLevelProps {
-	id: number
-	type: FilterTypes
-	name: string
-	idCategory?: string
-	idSubCategory?: string
-}
-
-interface MultiLevel extends MultiLevelProps {
-	icon: string
-	color: string
-	items: (MultiLevelProps &
-		Partial<{
-			items: MultiLevelProps[]
-		}>)[]
-}
-
 export const NavbarBottonSeccion = ({
+	tipos,
 	categories,
-	subcategories,
-	subsubcategories,
+	subCategories,
 }: {
-	categories: CategoryApi[]
-	subcategories: SubCategoryApi[]
-	subsubcategories: SubSubCategoryApi[]
+	tipos: CategoryApi[]
+	categories: SubCategoryApi[]
+	subCategories: SubSubCategoryApi[]
 }) => {
-	const MULTILEVEL_NAVBAR: MultiLevel[] = categories.map((item) => ({
-		// const MULTILEVEL_NAVBAR: MultiLevel[] = categories.map((item) => ({
-		id: item.id,
-		type: 'tipos',
-		name: item.name,
-		icon: item.icon,
-		color: ICON_MULTILEVEL_NAVBAR_CATEGORIA[item.name].color,
-		items: subcategories
-			.filter((subItem) => parseInt(subItem.idCategory) === item.id)
-			.map((subItem) => ({
-				id: subItem.id,
-				idCategory: subItem.idCategory,
-				type: 'categories',
-				name: subItem.name,
-				items: subsubcategories
-					.filter(
-						(subSubItem) => parseInt(subSubItem.idSubCategory) === subItem.id,
-					)
-					.map((subSubItem) => ({
-						id: subSubItem.id,
-						idCategory: subItem.idCategory,
-						idSubCategory: subSubItem.idSubCategory,
-						type: 'subCategories',
-						name: subSubItem.name,
-					})),
-			})),
-	}))
+	const multilevel = multilevelNavbar({
+		tipos,
+		categories,
+		subCategories,
+	})
 
 	const [activeMenus, setActiveMenus] = useState<any>({})
 	const [isClose, setIsClose] = useState(false)
@@ -106,10 +55,10 @@ export const NavbarBottonSeccion = ({
 		return (
 			<div
 				style={{
-					transform: `translateX(${(num - 2) * 100}%) translateY(40px)`,
+					transform: `translateX(${(num - 2) * 100}%) translateY(36px)`,
 				}}
 				className={cn(
-					'menu-categories bg-white border absolute top-0 left-[150%] min-w-40 h-[190px] overflow-y-scroll z-10',
+					'menu-categories bg-white border absolute top-0 left-[157%] min-w-48 h-[170px] overflow-y-scroll z-10',
 					activeMenus[`level${num + 1}`] ? 'rounded-none' : 'rounded-br-md',
 				)}
 			>
@@ -175,12 +124,12 @@ export const NavbarBottonSeccion = ({
 				{/* Nivel 1 */}
 				<div
 					className={cn(
-						'menu-categories bg-white border opacity-0 scale-0 group-hover:scale-100 group-hover:opacity-100 absolute transition-[opacity,transform] ease-in-out origin-top h-[190px] min-w-40 overflow-y-scroll z-10',
+						'menu-categories bg-white border opacity-0 scale-0 group-hover:scale-100 group-hover:opacity-100 absolute transition-[opacity,transform] ease-in-out origin-top h-[170px] min-w-48 overflow-y-scroll z-10',
 						activeMenus['level1'] ? 'rounded-bl-md' : 'rounded-b-md',
 						isClose && 'hidden',
 					)}
 				>
-					{MULTILEVEL_NAVBAR.map((item) => (
+					{multilevel.map((item) => (
 						<Link
 							key={item.id}
 							className="px-3 py-1 hover:bg-gray-100 transition-[background] ease-in-out cursor-pointer flex items-center justify-between gap-1 group/item text-sm capitalize"
@@ -216,7 +165,7 @@ export const NavbarBottonSeccion = ({
 			<ScrollArea className="w-full">
 				<div className="flex items-end gap-4">
 					{/* seccion categorias principales */}
-					{MULTILEVEL_NAVBAR.map((item) => (
+					{multilevel.map((item) => (
 						<Link
 							key={item.id}
 							className="relative group hover:bg-gray-100 transition-[background] ease-in-out cursor-pointer p-2 rounded-t-md flex items-center justify-center"

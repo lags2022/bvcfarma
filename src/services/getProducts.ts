@@ -21,6 +21,7 @@ async function fetchData<T>(url: string): Promise<T> {
 		const data = await fetchUrl({ url })
 		return data as T
 	} catch (error) {
+    console.log(error)
 		throw error
 	}
 }
@@ -77,4 +78,44 @@ export async function getSavingsScaleByIdProduct(idProduct: string) {
 	return await fetchData<SavingsScaleApi[]>(
 		`${URL_SAVINGS_SCALE}?idProduct=${idProduct}`,
 	)
+}
+
+// Función genérica que acepta un número variable de promesas
+const runPromises = async (...promises: Array<() => Promise<any>>) => {
+	return await Promise.all(promises.map((fn) => fn()))
+}
+
+// Uso de la función genérica
+export const getApiData = async () => {
+	// Llama a la función genérica pasando tus funciones de promesa como argumentos
+	const [products, tipos, categories, subCategories, lines] = await runPromises(
+		getProducts,
+		getCategories,
+		getSubCategories,
+		getSubSubCategories,
+		getBrands,
+	)
+
+	return {
+		products,
+		tipos,
+		categories,
+		subCategories,
+		lines,
+	}
+}
+
+export const getCategoriesData = async () => {
+	// También puedes usar la función genérica con otro conjunto de funciones
+	const [tipos, categories, subCategories] = await runPromises(
+		getCategories,
+		getSubCategories,
+		getSubSubCategories,
+	)
+
+	return {
+		tipos,
+		categories,
+		subCategories,
+	}
 }
