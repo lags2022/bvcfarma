@@ -13,7 +13,7 @@ export default function ErrorGlobal({
 	reset: () => void
 }) {
 	return (
-		<main className="container mx-auto flex w-full max-w-lg flex-col items-center justify-center space-y-8 text-center py-6">
+		<main className="contain flex w-full max-w-lg flex-col items-center justify-center space-y-8 text-center py-6">
 			<AlertTriangle
 				className="h-24 w-24 text-destructive"
 				aria-hidden="true"

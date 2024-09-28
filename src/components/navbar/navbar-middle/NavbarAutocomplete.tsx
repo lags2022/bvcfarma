@@ -32,11 +32,11 @@ interface AutocompleteInputProps {
 	emptyMessage?: string
 }
 
-export function AutocompleteInput({
+function AutocompleteInput({
 	options,
 	onSelect,
-	placeholder = 'Search...',
-	emptyMessage = 'No results found.',
+	placeholder = 'Buscando...',
+	emptyMessage = 'Sin resultados',
 }: AutocompleteInputProps) {
 	const [open, setOpen] = useState(false)
 	const [value, setValue] = useState(0)
@@ -71,12 +71,14 @@ export function AutocompleteInput({
 					variant="outline"
 					role="combobox"
 					aria-expanded={open}
-					className="w-full justify-between capitalize"
+					className="w-full justify-end xs:justify-between capitalize"
 				>
-					{value
-						? options.find((option) => option.id === value)?.name
-						: placeholder}
-					<SearchIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+					<span className="hidden xs:block truncate">
+						{value
+							? options.find((option) => option.id === value)?.name
+							: placeholder}
+					</span>
+					<SearchIcon className="xs:ml-2 h-4 w-4 shrink-0 opacity-50" />
 				</Button>
 			</PopoverTrigger>
 			<PopoverContent className="w-full p-0">
@@ -143,11 +145,11 @@ export const NavbarAutocomplete = () => {
 	}, [])
 
 	return (
-		<div className="w-full max-w-xl mx-auto">
+		<div className="w-full max-w-fit xs:max-w-36 sm:max-w-52  md:max-w-xs xl:max-w-sm m-0">
 			<AutocompleteInput
 				options={options}
 				onSelect={(value) => router.push(`/products/${value}`)}
-				placeholder="Buscar productos..."
+				placeholder="Buscar..."
 				emptyMessage="No se encontraron resultados"
 			/>
 		</div>

@@ -10,7 +10,7 @@ export default function RootLayout({
 	return (
 		<>
 			<Navbar />
-			<main className="bg-gray-100 mt-36 h-full">{children}</main>
+			<main className="mt-[140px]">{children}</main>
 			<Footer />
 			<WhatsappLink className="size-14 fixed bottom-5 right-5 hover:scale-110 transition-transform ease-in-out duration-300 active:scale-90 cursor-pointer" />
 		</>

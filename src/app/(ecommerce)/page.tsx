@@ -9,10 +9,10 @@ export default function Home() {
 	return (
 		<div className="w-full space-y-10">
 			<HomeCarousel />
-			<HomeCountdownTimer />
+			{/* <HomeCountdownTimer /> */}
 			<CardProductCarousel type="homeProduct" />
 			<CardOfferContainer />
-			<CardOfferSpecific />
+			{/* <CardOfferSpecific /> */}
 			<LinesContainer />
 		</div>
 	)

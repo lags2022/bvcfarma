@@ -41,7 +41,7 @@ export const OrderDetails = () => {
 	}
 
 	return (
-		<div className="container mx-auto">
+		<div className="contain">
 			<div className="bg-white shadow-md rounded-lg flex justify-between w-full relative p-6 gap-10">
 				<ButtonGeneral
 					onClick={() => setSlideIn(false)}

@@ -50,10 +50,12 @@ export class OrderModelPrisma implements OrderModelImplements {
 		value: string,
 		orderAddress?: boolean,
 		culqiCharge?: boolean,
+    orderItems?: boolean,
 	): Promise<
 		| (Order & {
 				orderAddress?: OrderAddress | null
 				culqiCharge?: CulqiCharge | null
+        orderItems?: OrderItemProduct[]
 		  })
 		| null
 	> {
@@ -65,6 +67,7 @@ export class OrderModelPrisma implements OrderModelImplements {
 				include: {
 					orderAddress,
 					culqiCharge,
+          orderItems,
 				},
 			})
 			return order

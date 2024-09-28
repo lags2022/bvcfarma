@@ -13,7 +13,8 @@ const nextConfig = {
 			'd1flfk77wl2xk4.cloudfront.net',
 			'cdn-prod.medicalnewstoday.com',
 			'pharmafactz.com',
-      "logo.clearbit.com"
+			'logo.clearbit.com',
+			'res.cloudinary.com',
 		].map((hostname) => ({
 			protocol: 'https',
 			hostname,

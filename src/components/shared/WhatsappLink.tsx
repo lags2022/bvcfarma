@@ -1,6 +1,7 @@
 import { ClassValue } from 'clsx'
 
 import { Whatsapp } from '@/components/svg/Whatsapp'
+import { URL_WHATSAPP } from '@/constants/general'
 import { cn } from '@/lib/utils'
 
 export const WhatsappLink = ({
@@ -12,7 +13,7 @@ export const WhatsappLink = ({
 }) => {
 	return (
 		<a
-			href="https://wa.me/yourwhatsappnumber"
+			href={URL_WHATSAPP}
 			target="_blank"
 			rel="noopener noreferrer"
 			className="flex items-center justify-center w-fit mx-auto"

@@ -18,8 +18,36 @@ export const Navbar = async () => {
 		getSubSubCategories(),
 	])
 
+	categories.push(
+		{
+			id: 10,
+			name: 'adulto mayor',
+			icon: '👨‍👩‍👧‍👦',
+		},
+		{
+			id: 11,
+			name: 'dermocosmetica',
+			icon: '💄',
+		},
+		{
+			id: 12,
+			name: 'infantil',
+			icon: '👶',
+		},
+		{
+			id: 13,
+			name: 'maternidad',
+			icon: '👩‍🦰',
+		},
+    {
+      id: 14,
+      name: "blog",
+      icon: "📝",
+    }
+	)
+
 	return (
-		<header className="w-full top-0 fixed z-50 bg-white">
+		<header className="w-full bg-white top-0 fixed z-50">
 			<NavbarTopSeccion />
 			<NavbarMiddleSeccion session={session} />
 			<NavbarBottonSeccion

@@ -10,7 +10,7 @@ export default function Checkout() {
 	const productsCart = useCartStore((state) => state.productsCart)
 
 	return (
-		<main className="container mx-auto p-4 text-sm">
+		<main className="contain text-sm">
 			<h1 className="font-bold text-base mb-4">
 				{productsCart.length === 0
 					? 'No hay productos en tu carrito'

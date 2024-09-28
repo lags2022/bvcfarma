@@ -36,16 +36,18 @@ export const NavbarUser = ({ session }: { session?: Session }) => {
 					</AvatarFallback>
 				</Avatar>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent>
+			<DropdownMenuContent className="[&_a_div]:cursor-pointer">
 				<Link href="/profile">
-					<DropdownMenuItem className="cursor-pointer">
-						Mi cuenta
-					</DropdownMenuItem>
+					<DropdownMenuItem>Mi cuenta</DropdownMenuItem>
+				</Link>
+				<Link className="sm:hidden" href="/checkout">
+					<DropdownMenuItem>Mi pedido</DropdownMenuItem>
+				</Link>
+				<Link className="sm:hidden" href="/favorites">
+					<DropdownMenuItem>Mis favoritos</DropdownMenuItem>
 				</Link>
 				<Link href="/orders">
-					<DropdownMenuItem className="cursor-pointer">
-						Mis pedidos
-					</DropdownMenuItem>
+					<DropdownMenuItem>Mis ordenes</DropdownMenuItem>
 				</Link>
 				<Separator className="my-1 w-[93%] mx-auto" />
 				<form action={handleLogout} className="w-full">

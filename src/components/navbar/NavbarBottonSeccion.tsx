@@ -14,13 +14,19 @@ import { cn } from '@/lib/utils'
 
 import { UnderlineAnimation } from '../shared/UnderlineAnimation'
 import { DropdownArrow } from '../svg/DropdownArrow'
+import { ScrollArea, ScrollBar } from '../ui/scroll-area'
 
 const ICON_MULTILEVEL_NAVBAR_CATEGORIA = {
-	medicamentos: { icon: '💊', color: 'bg-red-500' },
-	suplementos: { icon: '🏥', color: 'bg-green-500' },
-	'cuidado personal': { icon: '👧', color: 'bg-pink-500' },
+	medicamentos: { color: 'bg-red-500' },
+	suplementos: { color: 'bg-green-500' },
+	'cuidado personal': { color: 'bg-pink-500' },
+	'adulto mayor': { color: 'bg-blue-500' },
+	dermocosmetica: { color: 'bg-yellow-500' },
+	infantil: { color: 'bg-purple-500' },
+	maternidad: { color: 'bg-orange-500' },
+	blog: { color: 'bg-gray-500' },
 } as {
-	[key: string]: { icon: string; color: string }
+	[key: string]: { color: string }
 }
 
 interface MultiLevelProps {
@@ -32,8 +38,8 @@ interface MultiLevelProps {
 }
 
 interface MultiLevel extends MultiLevelProps {
-	icon: any
-	color: any
+	icon: string
+	color: string
 	items: (MultiLevelProps &
 		Partial<{
 			items: MultiLevelProps[]
@@ -50,10 +56,11 @@ export const NavbarBottonSeccion = ({
 	subsubcategories: SubSubCategoryApi[]
 }) => {
 	const MULTILEVEL_NAVBAR: MultiLevel[] = categories.map((item) => ({
+		// const MULTILEVEL_NAVBAR: MultiLevel[] = categories.map((item) => ({
 		id: item.id,
 		type: 'tipos',
 		name: item.name,
-		icon: ICON_MULTILEVEL_NAVBAR_CATEGORIA[item.name].icon,
+		icon: item.icon,
 		color: ICON_MULTILEVEL_NAVBAR_CATEGORIA[item.name].color,
 		items: subcategories
 			.filter((subItem) => parseInt(subItem.idCategory) === item.id)
@@ -77,7 +84,7 @@ export const NavbarBottonSeccion = ({
 	}))
 
 	const [activeMenus, setActiveMenus] = useState<any>({})
-  const [isClose, setIsClose] = useState(false)
+	const [isClose, setIsClose] = useState(false)
 
 	const handleSelect = (level: string, item: any) => {
 		setActiveMenus((prevState: any) => ({
@@ -102,7 +109,7 @@ export const NavbarBottonSeccion = ({
 					transform: `translateX(${(num - 2) * 100}%) translateY(40px)`,
 				}}
 				className={cn(
-					'menu-categories bg-white border absolute top-0 left-[150%] min-w-40 h-[225px] overflow-y-scroll z-10',
+					'menu-categories bg-white border absolute top-0 left-[150%] min-w-40 h-[190px] overflow-y-scroll z-10',
 					activeMenus[`level${num + 1}`] ? 'rounded-none' : 'rounded-br-md',
 				)}
 			>
@@ -151,14 +158,14 @@ export const NavbarBottonSeccion = ({
 	}
 
 	return (
-		<nav className="container mx-auto flex items-center gap-4">
+		<nav className="contain flex gap-2 pr-0">
 			{/* seccion categorias menu multinivel */}
 			<div
-				className="group inline-block relative"
+				className="group hidden sm:inline-block relative"
 				onMouseLeave={handleMouseLeave}
-        onMouseEnter={() => setIsClose(false)}
+				onMouseEnter={() => setIsClose(false)}
 			>
-				<Button className="relative py-1 px-2" variant="ghost">
+				<Button className="relative h-9" variant="ghost">
 					<div className="flex justify-center items-center gap-1">
 						<span className="text-sm">Categorías</span>
 						<DropdownArrow className="group-hover:-rotate-180" />
@@ -168,7 +175,7 @@ export const NavbarBottonSeccion = ({
 				{/* Nivel 1 */}
 				<div
 					className={cn(
-						'menu-categories bg-white border opacity-0 scale-0 group-hover:scale-100 group-hover:opacity-100 absolute transition-[opacity,transform] ease-in-out origin-top h-[225px] min-w-40 overflow-y-scroll z-10',
+						'menu-categories bg-white border opacity-0 scale-0 group-hover:scale-100 group-hover:opacity-100 absolute transition-[opacity,transform] ease-in-out origin-top h-[190px] min-w-40 overflow-y-scroll z-10',
 						activeMenus['level1'] ? 'rounded-bl-md' : 'rounded-b-md',
 						isClose && 'hidden',
 					)}
@@ -181,7 +188,7 @@ export const NavbarBottonSeccion = ({
 							onMouseEnter={() => handleSelect('level1', item)}
 							onClick={() => {
 								handleMouseLeave()
-                setIsClose(true)
+								setIsClose(true)
 							}}
 						>
 							{item.name}
@@ -206,20 +213,33 @@ export const NavbarBottonSeccion = ({
 				})}
 			</div>
 
-			{/* seccion categorias principales */}
-			{MULTILEVEL_NAVBAR.map((item) => (
-				<Link
-					key={item.id}
-					className="relative group hover:bg-gray-100 transition-[background] ease-in-out cursor-pointer p-2 rounded-t-md flex items-center justify-center"
-					href={`/products?${item.type}=${item.id}`}
-				>
-					<div className="flex justify-center items-center gap-1">
-						<span>{item.icon}</span>
-						<span className="text-sm capitalize">{item.name}</span>
-					</div>
-					<UnderlineAnimation className={item.color} />
-				</Link>
-			))}
+			<ScrollArea className="w-full">
+				<div className="flex items-end gap-4">
+					{/* seccion categorias principales */}
+					{MULTILEVEL_NAVBAR.map((item) => (
+						<Link
+							key={item.id}
+							className="relative group hover:bg-gray-100 transition-[background] ease-in-out cursor-pointer p-2 rounded-t-md flex items-center justify-center"
+							href={`/products?${item.type}=${item.id}`}
+						>
+							<div className="flex justify-center items-center gap-1">
+								<span>
+									{item.icon.startsWith('U')
+										? String.fromCodePoint(
+												parseInt(item.icon.replace('U+', '0x')),
+											)
+										: item.icon}
+								</span>
+								<span className="capitalize whitespace-nowrap">
+									{item.name}
+								</span>
+							</div>
+							<UnderlineAnimation className={item.color} />
+						</Link>
+					))}
+				</div>
+				<ScrollBar orientation="horizontal" className="hidden" />
+			</ScrollArea>
 		</nav>
 	)
 }

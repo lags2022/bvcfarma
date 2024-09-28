@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="es">
-			<body className={mavenPro.className}>
+			<body className={`${mavenPro.className} text-sm bg-white`}>
 				<ThemeProvider attribute="class" defaultTheme="ligth" enableSystem>
 					{children}
 				</ThemeProvider>

@@ -49,7 +49,7 @@ export default function CartPage() {
 
 	return (
 		<>
-			<div className="container mx-auto p-4 text-sm">
+			<div className="contain text-sm">
 				<Card className="border-none shadow-none">
 					<CardHeader>
 						<CardTitle className="text-lg font-bold text-blue-900">

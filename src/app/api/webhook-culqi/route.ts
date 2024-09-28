@@ -7,8 +7,6 @@ import { resend } from '@/lib/resend'
 import { clientTwilio } from '@/lib/twilio'
 
 export async function POST(request: Request) {
-	console.log(request.headers, 'PORQUE NO INGRESA')
-
 	try {
 		const body = await request.json()
 
@@ -24,49 +22,58 @@ export async function POST(request: Request) {
 			chargeData.id,
 			true,
 			true,
+			true,
 		)
 
 		if (!order) {
 			throw new Error('No se encontró la orden')
 		}
 
-		if (!order?.culqiCharge) {
-			const newOrderCulqiCharge = await culqiChargeController().create({
-				creationDate: chargeData.creationDate,
-				amount: chargeData.amount,
-				amountRefunded: chargeData.amountRefunded,
-				currentAmount: chargeData.currentAmount,
-				currencyCode: chargeData.currencyCode,
-				description: chargeData.description,
-				installments: chargeData.installments,
-				statementDescriptor: chargeData.statementDescriptor,
-				paid: chargeData.paid,
-				dispute: chargeData.dispute,
-				sourceIdToken: chargeData.source.id,
-				sourceType: chargeData.source.type,
-				fraudScore: chargeData.fraudScore,
-				userMessage: chargeData.outcome.userMessage,
-				merchantMessage: chargeData.outcome.merchantMessage,
-				order: {
-					connect: {
-						id: order.id,
-					},
-				},
-			})
+		if (order?.culqiCharge) {
+			console.log('El order ya tiene un culqi charge')
+			return NextResponse.json(
+				{ message: 'El order ya tiene un culqi charge' },
+				{ status: 200 },
+			)
+		}
 
-			if (!newOrderCulqiCharge) {
-				throw new Error(
-					`No se pudo crear el nuevo culqi charge a la orden ${order.id}`,
-				)
-			}
+		const newOrderCulqiCharge = await culqiChargeController().create({
+			creationDate: chargeData.creationDate,
+			amount: chargeData.amount,
+			amountRefunded: chargeData.amountRefunded,
+			currentAmount: chargeData.currentAmount,
+			currencyCode: chargeData.currencyCode,
+			description: chargeData.description,
+			installments: chargeData.installments,
+			statementDescriptor: chargeData.statementDescriptor,
+			paid: chargeData.paid,
+			dispute: chargeData.dispute,
+			sourceIdToken: chargeData.source.id,
+			sourceType: chargeData.source.type,
+			fraudScore: chargeData.fraudScore,
+			userMessage: chargeData.outcome.userMessage,
+			merchantMessage: chargeData.outcome.merchantMessage,
+			order: {
+				connect: {
+					id: order.id,
+				},
+			},
+		})
+
+		if (!newOrderCulqiCharge) {
+			throw new Error(
+				`No se pudo crear el nuevo culqi charge a la orden ${order.id}`,
+			)
 		}
 
 		// Send the message con resend
 		const data = await resend.emails.send({
 			from: 'melcabo954@lgdevs.com',
-			to: order?.orderAddress?.email as string,
+			to: [order?.orderAddress?.email as string, 'melcabo954@gmail.com'],
 			subject: 'Prueba de email',
-			react: EmailTemplateCheckoutSuccess(),
+			react: EmailTemplateCheckoutSuccess({
+				order,
+			}),
 		})
 
 		console.log(data)

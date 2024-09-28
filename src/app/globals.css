@@ -76,6 +76,10 @@
   .products-item {
     @apply flex items-center justify-center md:justify-start animate-infinite-scroll *:cursor-pointer
   }
+
+  .contain{
+    @apply container md:px-6 lg:px-8
+  }
 }
 
 @layer components {

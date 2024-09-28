@@ -12,7 +12,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@custom-react-hooks/use-media-query": "^1.5.1",
     "@formkit/tempo": "^0.1.2",
     "@hookform/resolvers": "^3.9.0",
     "@prisma/client": "^5.18.0",

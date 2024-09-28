@@ -1,6 +1,5 @@
 'use client'
 
-import { useMediaQuery } from '@custom-react-hooks/use-media-query'
 import { HomeIcon } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -31,6 +30,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { cn } from '@/lib/utils'
 
 import { Button } from '../ui/button'
@@ -46,7 +46,7 @@ export const BreadCrumbShared = ({
 		breadcrumbItems.length === 2 ? 2 : breadcrumbItems.length === 3 ? 3 : 4
 	const pathname = usePathname()
 	const [open, setOpen] = useState(false)
-	const isDesktop = useMediaQuery('(min-width: 768px)')
+	const isTablet = useMediaQuery('(min-width: 640px)')
 
 	return (
 		<Breadcrumb>
@@ -67,7 +67,7 @@ export const BreadCrumbShared = ({
 				{breadcrumbItems.length > ITEMS_TO_DISPLAY ? (
 					<>
 						<BreadcrumbItem>
-							{isDesktop ? (
+							{isTablet ? (
 								<DropdownMenu open={open} onOpenChange={setOpen}>
 									<DropdownMenuTrigger
 										className="flex items-center gap-1"

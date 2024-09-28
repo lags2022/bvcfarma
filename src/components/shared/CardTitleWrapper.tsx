@@ -20,7 +20,7 @@ export const CardTitleWrapper = ({
 					{title}
 				</h4>
 			)}
-			<div className={cn('container', className)}>{children}</div>
+			<div className={cn('contain', className)}>{children}</div>
 		</div>
 	)
 }
