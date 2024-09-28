@@ -37,7 +37,7 @@ export const NavbarMenuBarCategories = () => {
 	return (
 		<Drawer direction="left">
 			<DrawerTrigger className="text-picker-4 rounded-sm transition duration-300 ease hover:text-picker-4">
-				<Menu className="" />
+				<Menu/>
 			</DrawerTrigger>
 			<DrawerContent className="top-0 right-0 w-screen max-w-80 !h-full rounded-none mt-0 first:*:hidden bg-white text-sm">
 				<DrawerHeader className="flex items-center justify-between py-1 pr-2">

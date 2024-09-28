@@ -1,6 +1,6 @@
 'use client'
 
-import { HeartIcon, Menu, TruckIcon, User, X } from 'lucide-react'
+import { HeartIcon, Menu, TruckIcon, User } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Session } from 'next-auth'
@@ -32,7 +32,11 @@ export const NavbarMiddleSeccion = ({
 		<div className="contain flex items-center justify-between py-4 space-x-4 sm:space-x-6">
 			{/* logo bvcfarma */}
 			<div className="flex items-center justify-center space-x-2 sm:space-x-4">
-				{isMovil && <NavbarMenuBarCategories />}
+				{isMovil ? (
+					<NavbarMenuBarCategories />
+				) : (
+					<Menu className="block sm:hidden text-picker-4" />
+				)}
 
 				<Link href="/">
 					<Image
