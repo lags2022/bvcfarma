@@ -7,7 +7,8 @@ import { LinesContainer } from '@/components/line/LinesContainer'
 
 export default function Home() {
 	return (
-		<div className="w-full space-y-10">
+    // se coloco bg-white porque el drawer hace que se vea negro en el fondo de algunas componentes
+		<div className="w-full space-y-10 bg-white">
 			<HomeCarousel />
 			{/* <HomeCountdownTimer /> */}
 			<CardProductCarousel type="homeProduct" />
