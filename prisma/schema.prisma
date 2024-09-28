@@ -22,7 +22,7 @@ model User {
   emailVerified DateTime? @map("email_verified") @db.Timestamptz(6)
   password      String
   favorites     Int[] //Todo revisar para cambiar cuando es uuid
-  role          Role      @default(PUBLIC)
+  role          Role      @default(CUSTOMER)
   birthdate     DateTime? @db.Date
   ruc           String?   @db.VarChar(11)
   colorTheme    String    @default("#0274AE") @map("color_theme") @db.VarChar(7)
@@ -203,8 +203,8 @@ model OrderAddress {
 }
 
 enum Role {
-  PUBLIC
-  PHARMACY
+  CUSTOMER
+  MERCHANT
   OWNER
   ADMIN
 }

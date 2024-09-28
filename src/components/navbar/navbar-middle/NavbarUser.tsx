@@ -37,6 +37,11 @@ export const NavbarUser = ({ session }: { session?: Session }) => {
 				</Avatar>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className="[&_a_div]:cursor-pointer">
+				{session?.user?.role === 'OWNER' && (
+					<Link href="/dashboard">
+						<DropdownMenuItem>Mi dashboard</DropdownMenuItem>
+					</Link>
+				)}
 				<Link href="/profile">
 					<DropdownMenuItem>Mi cuenta</DropdownMenuItem>
 				</Link>

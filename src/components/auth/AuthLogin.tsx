@@ -23,7 +23,7 @@ export const AuthLogin = () => {
 		try {
 			if (!formData.get('email') && !formData.get('password')) return
 
-			const result = await loginAction({ formData, redirectTo: '/' })
+			const result = await loginAction({ formData })
 
 			// toast.promise(result, {
 			// 	loading: 'Iniciando sesión...',

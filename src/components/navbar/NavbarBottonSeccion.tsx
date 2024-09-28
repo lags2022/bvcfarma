@@ -55,10 +55,10 @@ export const NavbarBottonSeccion = ({
 		return (
 			<div
 				style={{
-					transform: `translateX(${(num - 2) * 100}%) translateY(36px)`,
+					transform: `translateX(${(num - 2) * 100}%) translateY(40px)`,
 				}}
 				className={cn(
-					'menu-categories bg-white border absolute top-0 left-[157%] min-w-48 h-[170px] overflow-y-scroll z-10',
+					'menu-categories bg-white border absolute top-0 left-[157%] min-w-52 h-[193px] overflow-y-scroll z-10',
 					activeMenus[`level${num + 1}`] ? 'rounded-none' : 'rounded-br-md',
 				)}
 			>
@@ -86,7 +86,7 @@ export const NavbarBottonSeccion = ({
 					return (
 						<Link
 							key={subItem.id}
-							className="px-3 py-1 hover:bg-gray-100 transition-[background] ease-in-out cursor-pointer flex items-center justify-between gap-1 group/item text-sm capitalize"
+							className="px-3 py-1 hover:bg-gray-100 transition-[background] ease-in-out cursor-pointer flex items-center justify-between gap-1 group/item text-base capitalize"
 							onMouseEnter={() => handleSelect(`level${num + 1}`, subItem)}
 							href={{
 								pathname: '/products',
@@ -114,9 +114,9 @@ export const NavbarBottonSeccion = ({
 				onMouseLeave={handleMouseLeave}
 				onMouseEnter={() => setIsClose(false)}
 			>
-				<Button className="relative h-9" variant="ghost">
+				<Button className="relative h-10" variant="ghost">
 					<div className="flex justify-center items-center gap-1">
-						<span className="text-sm">Categorías</span>
+						<span className='text-base'>Categorías</span>
 						<DropdownArrow className="group-hover:-rotate-180" />
 					</div>
 					<UnderlineAnimation className="bg-picker-3" />
@@ -124,7 +124,7 @@ export const NavbarBottonSeccion = ({
 				{/* Nivel 1 */}
 				<div
 					className={cn(
-						'menu-categories bg-white border opacity-0 scale-0 group-hover:scale-100 group-hover:opacity-100 absolute transition-[opacity,transform] ease-in-out origin-top h-[170px] min-w-48 overflow-y-scroll z-10',
+						'menu-categories bg-white border opacity-0 scale-0 group-hover:scale-100 group-hover:opacity-100 absolute transition-[opacity,transform] ease-in-out origin-top h-[193px] min-w-52 overflow-y-scroll z-10',
 						activeMenus['level1'] ? 'rounded-bl-md' : 'rounded-b-md',
 						isClose && 'hidden',
 					)}
@@ -132,7 +132,7 @@ export const NavbarBottonSeccion = ({
 					{multilevel.map((item) => (
 						<Link
 							key={item.id}
-							className="px-3 py-1 hover:bg-gray-100 transition-[background] ease-in-out cursor-pointer flex items-center justify-between gap-1 group/item text-sm capitalize"
+							className="px-3 py-1 hover:bg-gray-100 transition-[background] ease-in-out cursor-pointer flex items-center justify-between gap-1 group/item capitalize"
 							href={`/products?${item.type}=${item.id}`}
 							onMouseEnter={() => handleSelect('level1', item)}
 							onClick={() => {

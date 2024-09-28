@@ -159,7 +159,7 @@ export const USERS: Prisma.UserCreateInput[] = [
 		email: 'melcabo954@gmail.com',
 		password: hashSync('emulnor1865pharmacy', 10),
 		ruc: '12345678901',
-		role: 'PHARMACY',
+		role: 'MERCHANT',
 	},
 	{
 		name: 'Propietario 1',

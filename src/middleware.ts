@@ -1,35 +1,37 @@
+import { Role } from '@prisma/client'
+
 import { auth } from '@/auth'
 
 import {
-	ROUTES_LOGIN,
+	ROUTES_CUSTOMER,
 	ROUTES_AUTH,
 	ROUTES_PROTECTED,
 	ROUTES_PUBLIC,
 	ROUTES_ADMIN,
-	ROUTES_USER,
+	ROUTES_OWNER,
 } from './constants/routes'
 
 export default auth(({ auth, nextUrl }) => {
 	const isLoggedIn = !!auth?.user
-	const role = auth?.user?.role
+	const role = auth?.user?.role as Role
 
 	const redirectUrlMod = (route: string[]) => new URL(route[0], nextUrl.origin)
 
 	const routesMapping = [
 		{
-			routes: ROUTES_LOGIN,
+			routes: ROUTES_CUSTOMER,
 			condition: !isLoggedIn,
 			redirectUrl: redirectUrlMod(ROUTES_AUTH),
 		},
 		{
 			routes: ROUTES_PROTECTED,
-			condition: !isLoggedIn,
+			condition: !isLoggedIn || ['CUSTOMER', 'MERCHANT'].includes(role),
 			redirectUrl: redirectUrlMod(ROUTES_PUBLIC),
 		},
 		{
 			routes: ROUTES_ADMIN,
-			condition: role === 'USER',
-			redirectUrl: redirectUrlMod(ROUTES_USER),
+			condition: role === 'OWNER',
+			redirectUrl: redirectUrlMod(ROUTES_OWNER),
 		},
 	]
 

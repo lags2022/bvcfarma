@@ -1,13 +1,13 @@
 import { auth } from '@/auth'
 
-export const PermissionRole = async ({
+export const PermissionRoleOwner = async ({
 	children,
 }: {
 	children: React.ReactNode
 }) => {
 	const session = await auth()
 
-	if (session?.user?.role === 'ADMIN') {
+	if (session?.user?.role === 'OWNER') {
 		return <main>{children}</main>
 	}
 
