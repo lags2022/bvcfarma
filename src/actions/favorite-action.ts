@@ -32,7 +32,6 @@ export async function removeFavoriteAction(productId: number) {
 		if (!user) {
 			return
 		}
-
 		const updatedFavorites = user?.favorites.filter((id) => id !== productId)
 
 		const { message, status } = await userController().removeFavorite(

@@ -35,6 +35,7 @@ export const useFavoriteStore = create<FavoriteStore>((set) => ({
 
 	removeFavorite: async (productId) => {
 		try {
+
 			const response = await removeFavoriteAction(productId)
 
 			if (response?.status !== 'success') {

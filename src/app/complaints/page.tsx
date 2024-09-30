@@ -1,5 +1,5 @@
 import { ErrorPageNotFound } from '@/components/error/ErrorPageNotFound'
 
-export default function Page404() {
+export default function PageComplaints() {
 	return <ErrorPageNotFound />
 }

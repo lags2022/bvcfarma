@@ -21,7 +21,7 @@ async function fetchData<T>(url: string): Promise<T> {
 		const data = await fetchUrl({ url })
 		return data as T
 	} catch (error) {
-    console.log(error)
+		console.log(error)
 		throw error
 	}
 }
@@ -107,6 +107,7 @@ export const getApiData = async () => {
 
 export const getCategoriesData = async () => {
 	// También puedes usar la función genérica con otro conjunto de funciones
+
 	const [tipos, categories, subCategories] = await runPromises(
 		getCategories,
 		getSubCategories,

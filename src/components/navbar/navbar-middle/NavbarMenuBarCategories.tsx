@@ -88,7 +88,7 @@ export const NavbarMenuBarCategories = () => {
 	return (
 		<Drawer direction="left" open={open} onOpenChange={setOpen}>
 			<DrawerTrigger className="text-picker-4 hover:text-picker-4">
-				<Menu />
+				<Menu className='size-5' />
 			</DrawerTrigger>
 			<DrawerContent className="top-0 right-0 w-screen max-w-80 !h-full rounded-none mt-0 first:*:hidden bg-white text-base">
 				<div className="overflow-x-hidden">

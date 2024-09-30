@@ -2,7 +2,7 @@
 
 import { ErrorCustom } from '@/components/error/ErrorCustom'
 
-export default function Error({
+export default function GlobalError({
 	error,
 	reset,
 }: {

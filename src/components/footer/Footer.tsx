@@ -1,5 +1,12 @@
+import Image from 'next/image'
+import Link from 'next/link'
+
+import { Social } from '../social/Social'
+import { ComplaintsBook } from '../svg/ComplaintsBook'
 import { Facebook } from '../svg/Facebook'
 import { Instagram } from '../svg/Instagram'
+import { Mastercard } from '../svg/Mastercard'
+import { Visa } from '../svg/Visa'
 import { Youtube } from '../svg/Youtube'
 
 export const Footer = () => {
@@ -102,53 +109,29 @@ export const Footer = () => {
 						<li>Fono: (+51) 987 654 321</li>
 					</ul>
 				</div>
-				<div>
-					<h3 className="font-semibold mb-4">Síguenos</h3>
-					<div className="flex space-x-4 mb-6">
-						<a href="#" className="text-gray-400 hover:text-gray-500">
-							<Instagram className="size-6" />
-						</a>
-						<a href="#" className="text-gray-400 hover:text-gray-500">
-							<Facebook className="size-6" />
-						</a>
-						<a href="#" className="text-gray-400 hover:text-gray-500">
-							<Youtube className="size-6" />
-						</a>
+				<div className="space-y-2 [&>div]:space-y-1 [&_h3]:font-semibold">
+					<div>
+						<h3>Síguenos</h3>
+						<Social className="justify-start [&>a>svg]:text-gray-400 hover:[&>a>svg]:text-gray-500" />
 					</div>
-					<div className="mb-6">
-						{/* <Image
-							src="/placeholder.svg?height=60&width=120"
-							alt="Libro de Reclamaciones"
-							width={120}
-							height={60}
-						/> */}
+					<div>
+						<h3>Libro de Reclamaciones</h3>
+						<Link href="/complaints">
+							<ComplaintsBook className="fill-white h-8 mt-1" />
+						</Link>
 					</div>
-					<h3 className="font-semibold mb-4">Medios de pago</h3>
-					<div className="flex space-x-2">
-						{/* <Image
-							src="/placeholder.svg?height=30&width=50"
-							alt="American Express"
-							width={50}
-							height={30}
-						/>
-						<Image
-							src="/placeholder.svg?height=30&width=50"
-							alt="Oh!"
-							width={50}
-							height={30}
-						/>
-						<Image
-							src="/placeholder.svg?height=30&width=50"
-							alt="Mastercard"
-							width={50}
-							height={30}
-						/>
-						<Image
-							src="/placeholder.svg?height=30&width=50"
-							alt="PagoEfectivo"
-							width={50}
-							height={30}
-						/> */}
+					<div>
+						<h3>Medios de pago</h3>
+						<div className="flex justify-start items-center space-x-4">
+							<Visa className="h-10" />
+							<Mastercard className="h-11" />
+							<Image
+								src="https://res.cloudinary.com/dvozbuwkx/image/upload/v1727719802/yape_ktmvji.png"
+								alt="Yape"
+								width={26}
+								height={26}
+							/>
+						</div>
 					</div>
 				</div>
 			</div>

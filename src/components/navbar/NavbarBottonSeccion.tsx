@@ -58,7 +58,7 @@ export const NavbarBottonSeccion = ({
 					transform: `translateX(${(num - 2) * 100}%) translateY(40px)`,
 				}}
 				className={cn(
-					'menu-categories bg-white border absolute top-0 left-[157%] min-w-52 h-[193px] overflow-y-scroll z-10',
+					'menu-categories bg-white border absolute top-0 left-[157%] min-w-52 h-[200px] overflow-y-scroll z-10',
 					activeMenus[`level${num + 1}`] ? 'rounded-none' : 'rounded-br-md',
 				)}
 			>
@@ -86,7 +86,7 @@ export const NavbarBottonSeccion = ({
 					return (
 						<Link
 							key={subItem.id}
-							className="px-3 py-1 hover:bg-gray-100 transition-[background] ease-in-out cursor-pointer flex items-center justify-between gap-1 group/item text-base capitalize"
+							className="px-4 py-2 hover:bg-gray-100 transition-[background] ease-in-out cursor-pointer flex items-center justify-between gap-1 group/item text-base capitalize font-medium"
 							onMouseEnter={() => handleSelect(`level${num + 1}`, subItem)}
 							href={{
 								pathname: '/products',
@@ -124,7 +124,7 @@ export const NavbarBottonSeccion = ({
 				{/* Nivel 1 */}
 				<div
 					className={cn(
-						'menu-categories bg-white border opacity-0 scale-0 group-hover:scale-100 group-hover:opacity-100 absolute transition-[opacity,transform] ease-in-out origin-top h-[193px] min-w-52 overflow-y-scroll z-10',
+						'menu-categories bg-white border opacity-0 scale-0 group-hover:scale-100 group-hover:opacity-100 absolute transition-[opacity,transform] ease-in-out origin-top h-[200px] min-w-52 overflow-y-scroll z-10',
 						activeMenus['level1'] ? 'rounded-bl-md' : 'rounded-b-md',
 						isClose && 'hidden',
 					)}
@@ -132,7 +132,7 @@ export const NavbarBottonSeccion = ({
 					{multilevel.map((item) => (
 						<Link
 							key={item.id}
-							className="px-3 py-1 hover:bg-gray-100 transition-[background] ease-in-out cursor-pointer flex items-center justify-between gap-1 group/item capitalize"
+							className="px-4 py-2 hover:bg-gray-100 transition-[background] ease-in-out cursor-pointer flex items-center justify-between gap-1 group/item capitalize font-medium"
 							href={`/products?${item.type}=${item.id}`}
 							onMouseEnter={() => handleSelect('level1', item)}
 							onClick={() => {
@@ -179,7 +179,7 @@ export const NavbarBottonSeccion = ({
 											)
 										: item.icon}
 								</span>
-								<span className="capitalize whitespace-nowrap">
+								<span className="capitalize font-medium whitespace-nowrap">
 									{item.name}
 								</span>
 							</div>

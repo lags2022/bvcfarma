@@ -2,6 +2,7 @@
 
 import { Heart } from 'lucide-react'
 import { useTransition, useOptimistic } from 'react'
+import { useDebouncedCallback } from 'use-debounce'
 import { useShallow } from 'zustand/react/shallow'
 
 import { Button } from '@/components/ui/button'
@@ -24,7 +25,42 @@ export const FavoriteButton = ({
 	)
 	const [isPending, startTransition] = useTransition()
 
-  const [optmisticFavorites, modOptimisticFavorite] = useOptimistic(
+	// const handleFavorite = (evt: any) => {
+	// 	evt.stopPropagation()
+	// 	console.log('isFavoriteQQQQQQQQQQQQQ', isFavorite)
+
+	// 	startTransition(async () => {
+	// 		if (isFavorite) {
+	// 			console.log('REMOVEEEEEEEEEEE')
+	// 			modOptimisticFavorite({
+	// 				productId,
+	// 				type: 'remove',
+	// 			})
+	// 			await removeFavorite(productId) // Optimistic update handled in Zustand
+	// 		} else {
+	// 			console.log('AÑADIRRRRRRRRRRRRRRRR')
+	// 			modOptimisticFavorite({
+	// 				productId,
+	// 				type: 'add',
+	// 			})
+	// 			await addFavorite(productId) // Optimistic update handled in Zustand
+	// 		}
+	// 	})
+	// }
+
+	const debouncedHandleFavorite = useDebouncedCallback((type: 'add' | 'remove') => {
+		startTransition(async () => {
+			modOptimisticFavorite({ productId, type })
+
+			if (type === 'add') {
+				await addFavorite(productId)
+			} else {
+				await removeFavorite(productId)
+			}
+		})
+	}, 300)
+
+	const [optmisticFavorites, modOptimisticFavorite] = useOptimistic(
 		favorites,
 		(state, { productId, type }) =>
 			type === 'add'
@@ -34,24 +70,14 @@ export const FavoriteButton = ({
 
 	const isFavorite = optmisticFavorites.includes(productId)
 
-	const handleFavorite = (evt: any) => {
+	const handleClick = (evt: React.MouseEvent) => {
 		evt.stopPropagation()
 
-		startTransition(async () => {
-			if (isFavorite) {
-				modOptimisticFavorite({
-					productId,
-					type: 'remove',
-				})
-				await removeFavorite(productId) // Optimistic update handled in Zustand
-			} else {
-				modOptimisticFavorite({
-					productId,
-					type: 'add',
-				})
-				await addFavorite(productId) // Optimistic update handled in Zustand
-			}
-		})
+		if (isFavorite) {
+			debouncedHandleFavorite('remove')
+		} else {
+			debouncedHandleFavorite('add')
+		}
 	}
 
 	return (
@@ -59,8 +85,8 @@ export const FavoriteButton = ({
 			variant="outline"
 			className={cn('size-10 border-none hover:bg-white', className)}
 			size="icon"
-			onClick={handleFavorite}
-			disabled={isPending}
+			onClick={handleClick}
+			// disabled={isPending}
 		>
 			<Heart
 				className={cn(
