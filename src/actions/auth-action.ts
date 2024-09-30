@@ -5,6 +5,7 @@ import { AuthError } from 'next-auth'
 
 import { signIn, signOut } from '@/auth'
 import { userController } from '@/lib/factoryController'
+import { clientTwilio } from '@/lib/twilio'
 import { registerSchema } from '@/schemas/auth-schema'
 
 export async function loginAction({
@@ -52,6 +53,16 @@ export async function registerAction(formData: FormData) {
 			...restOfData,
 			password: hashSync(password, 10),
 		})
+
+		if (userCreated) {
+			const response = await clientTwilio.messages.create({
+				body: `Usuario creado con éxito, el correo es ${userCreated.email}`,
+				from: 'whatsapp:+14155238886', // Your Twilio Sandbox Number
+				to: `whatsapp:+51932052849`, // Recipient's phone number
+			})
+
+			console.log(response)
+		}
 
 		await signIn('credentials', {
 			email: userCreated.email,
