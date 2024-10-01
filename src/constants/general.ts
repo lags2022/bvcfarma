@@ -16,6 +16,7 @@ export const URL_BRANDS = 'https://retoolapi.dev/wt7CLE/lineas'
 export const URL_SAVINGS_SCALE = 'https://retoolapi.dev/uxkYGj/escala_ahorro'
 export const URL_WHATSAPP = 'https://wa.me/+51932052849'
 export const URL_BASE = 'https://bvcfarma.vercel.app/'
+export const URL_PORTFOLIO = 'https://portfolio-lags2022.vercel.app/'
 
 // Logos
 export const LOGO =

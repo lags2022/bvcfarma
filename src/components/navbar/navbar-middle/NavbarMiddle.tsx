@@ -31,7 +31,7 @@ export const NavbarMiddleSeccion = ({
 			{/* logo bvcfarma */}
 			<div className="flex flex-grow basis-0 items-center space-x-2 sm:space-x-4">
 				{!isTablet ? (
-					<NavbarMenuBarCategories />
+					<NavbarMenuBarCategories session={session} />
 				) : (
 					<Menu className="block sm:hidden text-picker-4" />
 				)}

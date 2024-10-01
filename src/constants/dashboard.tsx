@@ -1,13 +1,11 @@
 import {
-	ChevronLeft,
-	ChevronRight,
 	LayoutDashboard,
-	ShoppingCart,
 	Package,
 	Users,
 	BarChart2,
 	Settings,
 	HelpCircle,
+  ShoppingBag,
 } from 'lucide-react'
 
 export const SIDEBAR_ITEMS = [
@@ -17,7 +15,7 @@ export const SIDEBAR_ITEMS = [
 		href: '/dashboard',
 	},
 	{
-		icon: <ShoppingCart />,
+		icon: <ShoppingBag />,
 		label: 'Ordenes',
 		href: '/dashboard/orders',
     badge: '15'

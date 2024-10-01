@@ -30,7 +30,7 @@ export const CartShopping = () => {
 				>
 					<ShoppingCart className="text-picker-4 size-5" />
 					{productsCart.length ? (
-						<span className="absolute translate-y-1.5 translate-x-2.5 rounded-full bg-picker-4 px-[4.5px] py-0 text-white font-semibold text-xs ">
+						<span className="absolute translate-y-1.5 translate-x-2.5 rounded-full bg-picker-4 px-[4.5px] py-0 w-4 text-white font-semibold text-xs ">
 							{productsCart.length}
 						</span>
 					) : null}
