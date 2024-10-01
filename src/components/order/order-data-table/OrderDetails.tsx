@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useShallow } from 'zustand/react/shallow'
 
 import { getOrderItems } from '@/actions/order-items'
@@ -18,6 +18,8 @@ export const OrderDetails = () => {
 		useShallow((state) => [state.setSlideIn, state.details]),
 	)
 
+	let cancelScrollAnimationRef = useRef<() => void>()
+
 	const [orderItems, setOrderItems] = useState<OrderGetAll['orderItems']>([])
 
 	useEffect(() => {
@@ -26,15 +28,15 @@ export const OrderDetails = () => {
 			setOrderItems(orderItems)
 		}
 
-		let cancelScrollAnimation: () => void
-
 		if (details.orderId) {
 			getOrders()
-			cancelScrollAnimation = smoothScrollToTop()
+			cancelScrollAnimationRef.current = smoothScrollToTop()
 		}
 
 		return () => {
-			cancelScrollAnimation()
+			if (cancelScrollAnimationRef.current) {
+				cancelScrollAnimationRef.current()
+			}
 			setOrderItems([])
 		}
 	}, [details.orderId])

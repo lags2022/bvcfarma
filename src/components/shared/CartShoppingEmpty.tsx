@@ -17,7 +17,7 @@ export const CartShoppingEmpty = ({
 			{typeComponent === 'cart' && (
 				<h2 className="font-semibold text-gray-800 pr-4">Bvcfarma</h2>
 			)}
-			<div className="p-8 pr-12 rounded-lg max-w-sm w-full h-full flex flex-col justify-center items-center text-center gap-2">
+			<div className="p-8 pr-12 rounded-lg w-full h-full flex flex-col justify-center items-center text-center gap-2">
 				<div className="relative inline-block">
 					<ShoppingCart className="w-16 h-16 text-picker-3" />
 					<span className="absolute top-0 -right-1.5 inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-picker-3 rounded-full">

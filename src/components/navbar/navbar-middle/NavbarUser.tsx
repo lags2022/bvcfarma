@@ -33,7 +33,7 @@ export const NavbarUser = ({ session }: { session?: Session }) => {
 			<DropdownMenuTrigger asChild>
 				<Button
 					variant="ghost"
-					className="cursor-pointer flex justify-center items-center w-full group px-2"
+					className="hidden sm:flex cursor-pointer justify-center items-center w-full group px-2"
 				>
 					<AvatarCustom session={session} />
 					<p className="ml-2 font-medium truncate w-20 text-base hidden md:block">
@@ -43,7 +43,7 @@ export const NavbarUser = ({ session }: { session?: Session }) => {
 				</Button>
 			</DropdownMenuTrigger>
 
-			<DropdownMenuContent className="w-36">
+			<DropdownMenuContent className="hidden sm:block w-36">
 				{NAVBAR_ITEMS.filter((item) => {
 					if (item.label === 'Mis favoritos') return false
 

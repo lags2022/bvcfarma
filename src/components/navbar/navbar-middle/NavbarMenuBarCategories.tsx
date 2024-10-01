@@ -18,6 +18,7 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { URL_PORTFOLIO } from '@/constants/general'
 import { NAVBAR_ITEMS } from '@/constants/navbar-link'
 import { multilevelNavbar } from '@/helpers/multilevel-navbar'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { MultiLevel } from '@/interfaces/navbar'
 import { cn } from '@/lib/utils'
 import { getCategoriesData } from '@/services/getProducts'
@@ -47,10 +48,10 @@ export const NavbarMenuBarCategories = ({
 	)
 
 	const [open, setOpen] = useState(false)
+	const isTablet = useMediaQuery('(min-width: 640px)')
+	const pathname = usePathname()
 
 	const userRole = session?.user?.role as Role
-
-	const pathname = usePathname()
 
 	useEffect(() => {
 		const fetchCategories = async () => {
@@ -64,10 +65,12 @@ export const NavbarMenuBarCategories = ({
 			)
 		}
 
+		if (isTablet) setOpen(false)
+
 		if (multilevel.length === 0) fetchCategories()
 
 		handleClose()
-	}, [open])
+	}, [open, isTablet])
 
 	const handleClose = () => {
 		setSlideInCategories(false)

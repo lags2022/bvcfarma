@@ -25,7 +25,7 @@ export default function LoginPage() {
 	}, [params?.value])
 
 	return (
-		<div className="flex w-full justify-center items-center p-4 bg-gray-50">
+		<div className="flex w-full justify-center items- p-4 bg-gray-50">
 			<Tabs
 				defaultValue="login"
 				value={activeTab}
