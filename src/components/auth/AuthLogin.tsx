@@ -42,8 +42,8 @@ export const AuthLogin = () => {
 	}
 
 	return (
-		<div className="w-1/2 p-8">
-			<h2 className="text-2xl font-bold mb-4">Iniciar sesión</h2>
+		<div className="p-4 sm:p-6 !pt-4 text-sm">
+			{/* <h2 className="text-2xl font-bold mb-4">Iniciar sesión</h2> */}
 			<p className="text-gray-600 mb-6">
 				Por favor, inicia sesión usando los detalles de la cuenta a
 				continuación.
@@ -85,7 +85,7 @@ export const AuthLogin = () => {
 						</Button>
 					</div>
 				</div>
-				<a href="#" className="text-sm text-picker-3 hover:underline">
+				<a href="#" className="text-picker-3 hover:underline">
 					¿Olvidaste tu contraseña?
 				</a>
 				<ButtonGeneral type="submit">Iniciar sesión</ButtonGeneral>

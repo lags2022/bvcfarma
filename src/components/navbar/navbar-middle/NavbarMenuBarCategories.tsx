@@ -1,13 +1,7 @@
 'use client'
 
-import {
-	ArrowLeft,
-	Heart,
-	LogOut,
-	Menu,
-	Settings,
-	ShoppingBag,
-} from 'lucide-react'
+import { Role } from '@prisma/client'
+import { ArrowLeft, Menu } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { usePathname } from 'next/navigation'
 import { Session } from 'next-auth'
@@ -15,17 +9,20 @@ import { useEffect, useState } from 'react'
 
 import { logoutAction } from '@/actions/auth-action'
 import { ButtonGeneral } from '@/components/button/ButtonGeneral'
+import { AvatarCustom } from '@/components/shared/AvatarCustom'
 import { Social } from '@/components/social/Social'
 import { DropdownArrow } from '@/components/svg/DropdownArrow'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { URL_PORTFOLIO } from '@/constants/general'
+import { NAVBAR_ITEMS } from '@/constants/navbar-link'
 import { multilevelNavbar } from '@/helpers/multilevel-navbar'
 import { MultiLevel } from '@/interfaces/navbar'
 import { cn } from '@/lib/utils'
 import { getCategoriesData } from '@/services/getProducts'
+
+import { NavbarLink } from './NavbarLink'
 
 export const NavbarMenuBarCategories = ({
 	session,
@@ -50,6 +47,9 @@ export const NavbarMenuBarCategories = ({
 	)
 
 	const [open, setOpen] = useState(false)
+
+	const userRole = session?.user?.role as Role
+
 	const pathname = usePathname()
 
 	useEffect(() => {
@@ -90,14 +90,19 @@ export const NavbarMenuBarCategories = ({
 		}
 	}
 
+	const handleLogout = () => {
+		setOpen(false)
+		logoutAction()
+	}
+
 	return (
 		<Sheet open={open} onOpenChange={setOpen}>
-			<SheetTrigger className="text-picker-4 hover:text-picker-4">
+			<SheetTrigger className="block sm:hidden text-picker-4 hover:text-picker-4">
 				<Menu className="size-5" />
 			</SheetTrigger>
 			<SheetContent
 				side="left"
-				className="w-screen h-full flex flex-col justify-between rounded-none mt-0 py-2 px-0 bg-white text-base"
+				className="w-screen h-full flex sm:hidden flex-col justify-between rounded-none mt-0 py-2 px-0 bg-white text-base"
 			>
 				<ScrollArea className="w-screen">
 					<section className="w-screen">
@@ -233,10 +238,10 @@ export const NavbarMenuBarCategories = ({
 					<div className="border-t h-1 border-gray-200" />
 
 					{!session ? (
-						<div className="flex flex-col items-center justify-center gap-2 py-4">
+						<div className="flex flex-col items-center justify-center gap-2 py-4 [&_button]:text-base">
 							<ButtonGeneral
 								className="w-full"
-								href="/login"
+								href="/login?tab=register"
 								onClick={() => setOpen(false)}
 							>
 								Registrarse
@@ -252,85 +257,30 @@ export const NavbarMenuBarCategories = ({
 						</div>
 					) : (
 						<nav className="flex flex-col items-center [&>a>button]:gap-2 [&>a>button]:justify-start w-full [&>a]:w-full [&>a>button]:w-full [&>a>button]:text-base py-1 pb-2 [&>a>button]:rounded-sm text-gray-500 hover:text-gray-500">
-							<div className="w-full pl-4 pr-1 py-2 flex items-center justify-between font-semibold text-base text-black">
-								{session?.user?.name || session?.user?.email}
-								<Avatar className=" cursor-pointer ring-gray-200 ring-2 ring-offset-1">
-									<AvatarImage src="https://github.com/shadcn.png" />
-									<AvatarFallback>
-										{session?.user
-											?.name!.split(' ')
-											.slice(0, 2)
-											.map((part: string) => part[0])
-											.join('')
-											.toLocaleUpperCase()}
-									</AvatarFallback>
-								</Avatar>
+							<div className="w-full px-4 py-2 flex items-center justify-between font-semibold text-base text-black">
+								<span className="truncate w-40">
+									{session?.user?.name || session?.user?.email}
+								</span>
+								<AvatarCustom session={session} />
 							</div>
-							<ButtonGeneral
-								variant="ghost"
-								href="/favorites"
-								onClick={() => setOpen(false)}
-								className={cn(
-									'group hover:text-black',
-									pathname === '/favorites' &&
-										'bg-accent text-black hover:text-black',
-								)}
-							>
-								<Heart
-									className={cn(
-										'group-hover:text-black text-gray-500 size-5',
-										pathname === '/favorites' && 'text-black',
-									)}
-								/>
-								Favoritos
-							</ButtonGeneral>
-							<ButtonGeneral
-								variant="ghost"
-								href="/orders"
-								onClick={() => setOpen(false)}
-								className={cn(
-									'group hover:text-black',
-									pathname === '/orders' &&
-										'bg-accent text-black hover:text-black',
-								)}
-							>
-								<ShoppingBag
-									className={cn(
-										'group-hover:text-black text-gray-500 size-5',
-										pathname === '/orders' && 'text-black',
-									)}
-								/>
-								Órdenes
-							</ButtonGeneral>
-							<ButtonGeneral
-								variant="ghost"
-								href="/profile"
-								onClick={() => setOpen(false)}
-								className={cn(
-									'group hover:text-black',
-									pathname === '/profile' &&
-										'bg-accent text-black hover:text-black',
-								)}
-							>
-								<Settings
-									className={cn(
-										'group-hover:text-black text-gray-500 size-5',
-										pathname === '/profile' && 'text-black',
-									)}
-								/>
-								Ajustes
-							</ButtonGeneral>
-							<Button
-								variant="ghost"
-								onClick={() => {
-									setOpen(false)
-									logoutAction()
-								}}
-								className="w-full flex group hover:text-black items-center justify-start gap-2 text-gray-500  text-base mt-1"
-							>
-								<LogOut className="group-hover:text-black text-gray-500 size-5" />
-								Cerrar sesión
-							</Button>
+
+							{NAVBAR_ITEMS.filter((item) => item.role.includes(userRole)).map(
+								(item) => (
+									<NavbarLink
+										key={item.id}
+										href={item.href}
+										icon={item.icon}
+										label={item.label}
+										isDropdown={false}
+										isActive={pathname === item.href}
+										onClick={() =>
+											item.label === 'Cerrar sesión'
+												? handleLogout()
+												: setOpen(false)
+										}
+									/>
+								),
+							)}
 						</nav>
 					)}
 

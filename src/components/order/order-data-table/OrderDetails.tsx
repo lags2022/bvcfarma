@@ -26,12 +26,15 @@ export const OrderDetails = () => {
 			setOrderItems(orderItems)
 		}
 
+		let cancelScrollAnimation: () => void
+
 		if (details.orderId) {
 			getOrders()
-			smoothScrollToTop()
+			cancelScrollAnimation = smoothScrollToTop()
 		}
 
 		return () => {
+			cancelScrollAnimation()
 			setOrderItems([])
 		}
 	}, [details.orderId])

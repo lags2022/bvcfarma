@@ -44,7 +44,11 @@ export const ChekoutSuccess = ({
 	shippingCost,
 }: ChekoutSuccessProps) => {
 	useEffect(() => {
-		smoothScrollToTop()
+		const cancelScrollAnimation = smoothScrollToTop()
+
+		return () => {
+			cancelScrollAnimation()
+		}
 	}, [])
 
 	const formattedDate =
@@ -94,7 +98,7 @@ export const ChekoutSuccess = ({
 							<h3 className="font-semibold mb-2">Medio de Pago</h3>
 							<p>
 								Pago {paymentMethodMod !== 'efectivo' ? 'con' : 'en'}{' '}
-								<span className='capitalize'>{paymentMethodMod}</span>
+								<span className="capitalize">{paymentMethodMod}</span>
 							</p>
 							<p>{deliveryTypeMod}</p>
 						</div>

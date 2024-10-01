@@ -46,8 +46,7 @@ export const AuthRegister = () => {
 	}
 
 	return (
-		<div className="w-1/2 p-8 bg-gray-50">
-			<h2 className="text-2xl font-bold mb-4">Registrarse</h2>
+		<div className="p-4 sm:p-6 text-sm">
 			<p className="text-gray-600 mb-6">¿No tienes una cuenta? Regístrate</p>
 			<form action={handleSubmit} className="space-y-4">
 				<div>

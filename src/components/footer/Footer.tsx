@@ -3,15 +3,12 @@ import Link from 'next/link'
 
 import { Social } from '../social/Social'
 import { ComplaintsBook } from '../svg/ComplaintsBook'
-import { Facebook } from '../svg/Facebook'
-import { Instagram } from '../svg/Instagram'
 import { Mastercard } from '../svg/Mastercard'
 import { Visa } from '../svg/Visa'
-import { Youtube } from '../svg/Youtube'
 
 export const Footer = () => {
 	return (
-		<footer className="bg-white text-gray-600 py-8 px-4 text-sm">
+		<footer className="bg-picker-1 text-gray-600 py-8 px-4 text-sm">
 			<div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
 				<div>
 					<h3 className="font-semibold mb-4">Sobre Bvcfarma</h3>
@@ -117,7 +114,7 @@ export const Footer = () => {
 					<div>
 						<h3>Libro de Reclamaciones</h3>
 						<Link href="/complaints">
-							<ComplaintsBook className="fill-white h-8 mt-1" />
+							<ComplaintsBook className="fill-gray-100 h-8 mt-1" />
 						</Link>
 					</div>
 					<div>

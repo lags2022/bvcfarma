@@ -1,20 +1,27 @@
-import Link from 'next/link'
+import { Role } from '@prisma/client'
+import { usePathname } from 'next/navigation'
 import { Session } from 'next-auth'
 
 import { logoutAction } from '@/actions/auth-action'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { AvatarCustom } from '@/components/shared/AvatarCustom'
+import { DropdownArrow } from '@/components/svg/DropdownArrow'
 import { Button } from '@/components/ui/button'
 import {
 	DropdownMenu,
 	DropdownMenuContent,
-	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Separator } from '@/components/ui/separator'
+import { NAVBAR_ITEMS } from '@/constants/navbar-link'
 import { useFavoriteStore } from '@/context/useFavoriteStore'
+
+import { NavbarLink } from './NavbarLink'
 
 export const NavbarUser = ({ session }: { session?: Session }) => {
 	const setFavorites = useFavoriteStore((state) => state.setFavorites)
+	const userRole = session?.user?.role as Role
+
+	const pathname = usePathname()
 
 	const handleLogout = () => {
 		setFavorites([])
@@ -24,48 +31,38 @@ export const NavbarUser = ({ session }: { session?: Session }) => {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Avatar className=" cursor-pointer ring-gray-200 ring-2 ring-offset-1">
-					<AvatarImage src="https://github.com/shadcn.png" />
-					<AvatarFallback>
-						{session?.user
-							?.name!.split(' ')
-							.slice(0, 2)
-							.map((part: string) => part[0])
-							.join('')
-							.toLocaleUpperCase()}
-					</AvatarFallback>
-				</Avatar>
+				<Button
+					variant="ghost"
+					className="cursor-pointer flex justify-center items-center w-full group px-2"
+				>
+					<AvatarCustom session={session} />
+					<p className="ml-2 font-medium truncate w-20 text-base hidden md:block">
+						{session?.user?.name}
+					</p>
+					<DropdownArrow className="text-gray-500 transition-[color] ease duration-300 group-hover:text-black hidden md:block" />
+				</Button>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent className="[&_a_div]:cursor-pointer">
-				{session?.user?.role === 'OWNER' && (
-					<Link href="/dashboard">
-						<DropdownMenuItem>Mi dashboard</DropdownMenuItem>
-					</Link>
-				)}
-				<Link href="/profile">
-					<DropdownMenuItem>Mi cuenta</DropdownMenuItem>
-				</Link>
-				<Link className="sm:hidden" href="/checkout">
-					<DropdownMenuItem>Mi pedido</DropdownMenuItem>
-				</Link>
-				<Link className="sm:hidden" href="/favorites">
-					<DropdownMenuItem>Mis favoritos</DropdownMenuItem>
-				</Link>
-				<Link href="/orders">
-					<DropdownMenuItem>Mis ordenes</DropdownMenuItem>
-				</Link>
-				<Separator className="my-1 w-[93%] mx-auto" />
-				<form action={handleLogout} className="w-full">
-					<Button
-						type="submit"
-						variant="ghost"
-						className="block justify-start bg-transparent hover:bg-transparent w-full h-fit p-0 m-0"
-					>
-						<DropdownMenuItem className="cursor-pointer">
-							Cerrar sesión
-						</DropdownMenuItem>
-					</Button>
-				</form>
+
+			<DropdownMenuContent className="w-36">
+				{NAVBAR_ITEMS.filter((item) => {
+					if (item.label === 'Mis favoritos') return false
+
+					return item.role.includes(userRole)
+				}).map((item) => (
+					<>
+						{item.label === 'Cerrar sesión' && (
+							<Separator className="my-1 w-[93%] mx-auto" />
+						)}
+						<NavbarLink
+							key={item.id}
+							href={item.href}
+							icon={item.icon}
+							label={item.label}
+							isActive={pathname === item.href}
+							onClick={() => item.label === 'Cerrar sesión' && handleLogout()}
+						/>
+					</>
+				))}
 			</DropdownMenuContent>
 		</DropdownMenu>
 	)

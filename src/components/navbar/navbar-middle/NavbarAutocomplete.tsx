@@ -30,7 +30,6 @@ interface AutocompleteInputProps {
 	onSelect: (value: number) => void
 	placeholder?: string
 	emptyMessage?: string
-	isTablet?: boolean
 }
 
 function AutocompleteInput({
@@ -38,7 +37,6 @@ function AutocompleteInput({
 	onSelect,
 	placeholder = 'Buscando...',
 	emptyMessage = 'Sin resultados',
-	isTablet,
 }: AutocompleteInputProps) {
 	const [open, setOpen] = useState(false)
 	const [value, setValue] = useState(0)
@@ -74,21 +72,18 @@ function AutocompleteInput({
 					role="combobox"
 					aria-expanded={open}
 					className={cn(
-						'w-full justify-end sm:justify-between border-picker-4 hover:ring-1 hover:ring-picker-4 transition-all ease-in-out text-base',
-            !isTablet && 'px-2 border-0 hover:ring-0 hover:border-0 hover:bg-transparent',
+						'w-full justify-end sm:justify-between hover:ring-picker-4 transition-all ease-in-out text-base px-2 sm:px-auto border-0 hover:ring-0 sm:hover:ring-1 sm:border sm:border-picker-4 sm:hover:border-picker-4 hover:bg-transparent sm:hover:bg-auto',
 					)}
 				>
-					{isTablet ? (
-						<>
-							{value ? (
-								<span className="hidden xs:block truncate capitalize">
-									{options.find((option) => option.id === value)?.name}
-								</span>
-							) : (
-								placeholder
-							)}
-						</>
-					) : null}
+					<p className="hidden sm:block">
+						{value ? (
+							<span className="hidden xs:block truncate capitalize">
+								{options.find((option) => option.id === value)?.name}
+							</span>
+						) : (
+							placeholder
+						)}
+					</p>
 					<SearchIcon className="sm:ml-2 size-5 shrink-0 text-picker-4" />
 				</Button>
 			</PopoverTrigger>
@@ -141,7 +136,7 @@ function AutocompleteInput({
 }
 
 // Ejemplo de uso
-export const NavbarAutocomplete = ({ isTablet }: { isTablet?: boolean }) => {
+export const NavbarAutocomplete = () => {
 	const [options, setOptions] = useState<ProductApiProps[]>([])
 
 	const router = useRouter()
@@ -156,13 +151,12 @@ export const NavbarAutocomplete = ({ isTablet }: { isTablet?: boolean }) => {
 	}, [])
 
 	return (
-		<div className="w-full max-w-fit xs:max-w-36 sm:max-w-52  md:max-w-xs xl:max-w-sm m-0">
+		<div className="w-full m-0">
 			<AutocompleteInput
 				options={options}
 				onSelect={(value) => router.push(`/products/${value}`)}
 				placeholder="Buscar productos..."
 				emptyMessage="No se encontraron resultados"
-				isTablet={isTablet}
 			/>
 		</div>
 	)

@@ -11,7 +11,7 @@ export const Navbar = async () => {
 	const { tipos, categories, subCategories } = await getCategoriesData()
 
 	return (
-		<header className="w-full bg-white top-0 fixed z-50">
+		<header className="w-full border-b bg-white top-0 fixed z-50">
 			<NavbarTopSeccion />
 			<NavbarMiddleSeccion session={session} />
 			<NavbarBottonSeccion
