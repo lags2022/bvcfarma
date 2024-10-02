@@ -72,7 +72,7 @@ function AutocompleteInput({
 					role="combobox"
 					aria-expanded={open}
 					className={cn(
-						'w-full justify-end sm:justify-between hover:ring-picker-4 transition-all ease-in-out text-base px-2 sm:px-auto border-0 hover:ring-0 sm:hover:ring-1 sm:border sm:border-picker-4 sm:hover:border-picker-4 hover:bg-transparent sm:hover:bg-auto',
+						'w-full justify-end sm:justify-between hover:ring-picker-4 transition-all ease-in-out text-base px-2 sm:px-auto border-0 hover:ring-0 sm:hover:ring-1 sm:border sm:border-picker-4 sm:hover:border-picker-4 hover:bg-transparent sm:hover:bg-auto dark:text-black dark:bg-transparent',
 					)}
 				>
 					<p className="hidden sm:block">
@@ -93,10 +93,11 @@ function AutocompleteInput({
 						placeholder={placeholder}
 						value={searchTerm}
 						onValueChange={setSearchTerm}
+						className="font-medium"
 					/>
-					<CommandList>
+					<CommandList className="h-60">
 						<CommandEmpty>{emptyMessage}</CommandEmpty>
-						<CommandGroup className="max-h-60 overflow-auto">
+						<CommandGroup className="max-h-60 overflow-auto menu-categories">
 							{filteredOptions.map((option) => (
 								<CommandItem
 									key={option.id}
@@ -116,13 +117,13 @@ function AutocompleteInput({
 										<Image
 											src={option.image}
 											alt={option.name}
-											className="mr-2 h-6 w-6 rounded-full"
+											className="mr-2 size-6 rounded-full"
 											width={24}
 											height={24}
 										/>
 										<div className="flex justify-between w-full">
-											<p>{option.name}</p>
-											<p className="ml-2">S./ {option.price}</p>
+											<p className="font-semibold">{option.name}</p>
+											<p className="mr-2 sm:mr-8 font-semibold">S./ {option.price}</p>
 										</div>
 									</div>
 								</CommandItem>

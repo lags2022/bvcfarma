@@ -14,8 +14,8 @@ export const CardProductCarousel = async ({
 	return (
 		<CardTitleWrapper
 			title="Lo más buscado"
-			className="p-0"
 			notTitle={type === 'homeOffer'}
+      typeComponent={type}
 		>
 			<CardProductContainer products={products} type={type} />
 		</CardTitleWrapper>

@@ -22,13 +22,13 @@ export const HomeCarousel = () => {
 	return (
 		<CarouselProvider type="homeHero">
 			{images.map(({ src, alt }, index) => (
-				<CarouselItem key={index} className="p-0 w-full h-[400px]">
+				<CarouselItem key={index} className="p-0 w-full h-[300px] sm:h-[400px]">
 					<Image
 						src={src}
 						alt={alt}
 						width={1000}
 						height={400}
-						className="w-full h-full object-cover"
+						className="aspect-[492/300] sm:aspect-[785/400] size-full object-cover"
 					/>
 				</CarouselItem>
 			))}

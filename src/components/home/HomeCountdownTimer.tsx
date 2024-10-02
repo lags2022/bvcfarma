@@ -24,19 +24,26 @@ export const HomeCountdownTimer = () => {
 	const seconds = timeLeft % 60
 
 	return (
-		<div className="max-w-7xl mx-auto relative cursor-pointer px-4 group">
-			<div className="w-full absolute">
+		<div className="contain mx-auto relative cursor-pointer group">
+			<div className='w-full group-hover:active:scale-[98%] group-hover:scale-[101%] transition-transform duration-500 ease-in-out rounded-md'>
 				<Image
 					src="https://images.ctfassets.net/buvy887680uc/5gPN27E87t8aoHdkorGOGb/fa8582d77e446c7fcf5b114bc3d24df9/Nosotras-CuidadoPersonal-mifarma-bx1-por-horas-web.jpg"
 					alt="oferta 4"
 					width={1280}
 					height={165}
-					className="aspect-[1280/165] px-10 mx-auto group-hover:active:scale-95 group-hover:scale-[102%] transition-transform duration-500 ease-in-out"
+					className="aspect-[1280/165] size-full hidden md:block object-cover rounded-md"
+				/>
+				<Image
+					src="https://images.ctfassets.net/buvy887680uc/2jVjFKFD1SaSkvfDM85rID/ee1c238465ede1b48b174773d17e2994/babysec-cuidadoinfantil-mifarma-bx1-por-horas-mob__2_.jpg"
+					alt="oferta 4"
+					width={600}
+					height={304}
+					className="aspect-[2/1] size-full block md:hidden object-cover rounded-md"
 				/>
 			</div>
 
-			<Card className="mx-auto bg-transparent border-none border-0 shadow-none">
-				<CardContent className="flex justify-end items-center py-6 pt-10 pr-20">
+			<Card className="bg-transparent border-none border-0 shadow-none absolute top-2 xs:top-6 sm:top-10 md:top-0 right-8 xs:right-10 lg:right-20 xl:right-28 flex items items-start md:items-center justify-center h-full">
+				<CardContent className="p-0 flex items-end">
 					<TimeUnit
 						value={hours}
 						label="Horas"
@@ -74,18 +81,18 @@ function TimeUnit({
 	return (
 		<div className="flex flex-col items-center z-0">
 			<div className={`${color} p-2 rounded-lg shadow-md`}>
-				<div className="text-4xl font-bold flex">
+				<div className="text-2xl xs:text-3xl lg:text-4xl font-bold flex">
 					<MotionNumber
-						className="tabular-nums w-[1ch]"
+						className="tabular-nums w-[0.75ch] xs:w-[1ch]"
 						value={formatNumber(value)[0]}
 					/>
 					<MotionNumber
-						className="tabular-nums w-[1ch]"
+						className="tabular-nums w-[0.75ch] xs:w-[1ch]"
 						value={formatNumber(value)[1]}
 					/>
 				</div>
 			</div>
-			<span className="mt-2 text-sm font-medium">{label}</span>
+			<span className="mt-0 lg:mt-2 text-xs xs:text-sm font-medium">{label}</span>
 		</div>
 	)
 }

@@ -19,7 +19,7 @@ export const CardProductContainer = ({
 	useFetchFavorites()
 
 	return (
-		<div className="w-full space-y-10 px-4">
+		<div className={cn(type !== 'homeOffer' && 'px-4 md:px-6')}>
 			<CarouselProvider type={type}>
 				{products
 					.map(({ id, image, name, typeOffer, price, stock }) => {
@@ -32,7 +32,7 @@ export const CardProductContainer = ({
 									'w-full h-[400px]',
 									type === 'homeProduct' &&
 										'md:basis-1/2 lg:basis-1/3 xl:basis-1/4',
-									type === 'homeOffer' && 'sm:basis-1/2 md:basis-1/3',
+									type === 'homeOffer' && 'sm:basis-1/2 md:basis-full lg:basis-1/2 xl:basis-1/3',
 								)}
 							>
 								<CardProduct

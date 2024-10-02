@@ -9,7 +9,7 @@ import { Visa } from '../svg/Visa'
 export const Footer = () => {
 	return (
 		<footer className="bg-picker-1 text-gray-600 py-8 px-4 text-sm">
-			<div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+			<div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
 				<div>
 					<h3 className="font-semibold mb-4">Sobre Bvcfarma</h3>
 					<ul className="space-y-2">

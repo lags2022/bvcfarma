@@ -105,8 +105,8 @@
   .menu-categories {
     --sb-track-color: #f1f7f9;
     --sb-thumb-color: #1471A4;
-    --sb-size: 7px;
-    --sb-size-navbar: 5px;
+    --sb-size: 10px;
+    --sb-size-navbar: 7px;
   }
 
   body::-webkit-scrollbar {

@@ -105,10 +105,10 @@ export const NavbarMenuBarCategories = ({
 			</SheetTrigger>
 			<SheetContent
 				side="left"
-				className="w-screen h-full flex sm:hidden flex-col justify-between rounded-none mt-0 py-2 px-0 bg-white text-base"
+				className="w-[calc(100vw-3rem)] h-full flex sm:hidden flex-col justify-between rounded-none mt-0 py-2 px-0 bg-white text-base"
 			>
-				<ScrollArea className="w-screen">
-					<section className="w-screen">
+				<ScrollArea className="w-[calc(100vw-3rem)]">
+					<section className="w-[calc(100vw-3rem)]">
 						{/* titulo */}
 						<div className="flex items-center justify-between h-10 px-6">
 							<div className="text-base flex items-center gap-3">
@@ -137,13 +137,13 @@ export const NavbarMenuBarCategories = ({
 						{/* multilevel */}
 						<div
 							className={cn(
-								'flex w-[300vw] transform duration-700 ease',
+								'flex w-[calc(300%)] transform duration-700 ease',
 								slideInCategories && '-translate-x-1/3',
 								slideInSubCategories && '-translate-x-2/3',
 							)}
 						>
 							{/* tipos */}
-							<div className="w-screen">
+							<div className="w-[calc(100vw-1rem)]">
 								<div className="px-4 pl-5">
 									{multilevel.map((item) => (
 										<div
@@ -182,7 +182,7 @@ export const NavbarMenuBarCategories = ({
 							</div>
 
 							{/* categorias */}
-							<div className="w-screen">
+							<div className="w-[calc(100vw-1rem)]">
 								<div className="px-4 pl-5">
 									{category?.items.map((item) => (
 										<div
@@ -214,7 +214,7 @@ export const NavbarMenuBarCategories = ({
 							</div>
 
 							{/* subCategories */}
-							<div className="w-screen">
+							<div className="w-[calc(100vw-1rem)]">
 								<div className="px-4 pl-5">
 									{subCategory?.items?.map((item) => (
 										<div

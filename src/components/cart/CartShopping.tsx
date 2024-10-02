@@ -36,7 +36,7 @@ export const CartShopping = () => {
 					) : null}
 				</Button>
 			</SheetTrigger>
-			<SheetContent side="right" className="pr-0 w-screen sm:max-w-md">
+			<SheetContent side="right" className="pr-0 w-[calc(100vw-3rem)] sm:max-w-md">
 				{productsCart.length > 0 ? (
 					<ProductsContainerCartOrCheckout typeComponentShopping="cart" />
 				) : (
