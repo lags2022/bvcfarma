@@ -24,7 +24,7 @@ export const CartShopping = () => {
 				<Button
 					variant={'ghost'}
 					className={cn(
-						'hover:bg-transparent sm:hover:bg-picker-1 transition-[background] duration-300 ease-in-out py-2 px-1 sm:pl-3.5 sm:pr-4 relative',
+						'hover:bg-transparent sm:hover:bg-picker-1 transition-[background] duration-300 ease-in-out py-2 px-1 pl-3.5 pr-4 relative',
 						productsCart.length && 'justify-start',
 					)}
 				>

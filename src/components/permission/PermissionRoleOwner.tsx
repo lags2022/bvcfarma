@@ -8,7 +8,7 @@ export const PermissionRoleOwner = async ({
 	const session = await auth()
 
 	if (session?.user?.role === 'OWNER') {
-		return <main>{children}</main>
+		return <>{children}</>
 	}
 
 	return <p>Tu no tienes permisos para ver este contenido</p>

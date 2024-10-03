@@ -11,12 +11,14 @@ export function SidebarItem({
 	isExpanded,
 	badge,
 	href,
+  onClick,
 }: {
 	icon: React.ReactNode
 	label: string
 	isExpanded: boolean
 	badge?: string
 	href?: string
+  onClick?: () => void
 }) {
 	const pathname = usePathname()
 
@@ -25,6 +27,7 @@ export function SidebarItem({
 			variant={pathname === href ? 'default' : 'ghost'}
 			className="w-full [&>button]:w-full !flex justify-start [&>button]:!flex [&>button]:gap-2 gap-2 [&>button]:justify-start"
 			href={href}
+      onClick={onClick}
 		>
 			<div className="shrink-0">{icon}</div>
 			<div

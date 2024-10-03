@@ -123,7 +123,9 @@ function AutocompleteInput({
 										/>
 										<div className="flex justify-between w-full">
 											<p className="font-semibold">{option.name}</p>
-											<p className="mr-2 sm:mr-8 font-semibold">S./ {option.price}</p>
+											<p className="mr-2 sm:mr-8 font-semibold">
+												S./ {option.price}
+											</p>
 										</div>
 									</div>
 								</CommandItem>

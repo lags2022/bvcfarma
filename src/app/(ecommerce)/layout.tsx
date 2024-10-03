@@ -8,7 +8,7 @@ export default function RootLayout({
 	children: React.ReactNode
 }>) {
 	return (
-		<div className="bg-white">
+		<div className="bg-gray-100">
 			<Navbar />
 			<main className="mt-[140px]">{children}</main>
 			<Footer />

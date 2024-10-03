@@ -21,7 +21,7 @@ export const CardTitleWrapper = ({
 			{!notTitle && (
 				<h4
 					id="lo-mas-buscado"
-					className="font-bold text-lg border-b border-picker-2 pb-1"
+					className="font-bold text-lg border-b border-gray-200 pb-1"
 				>
 					{title}
 				</h4>
