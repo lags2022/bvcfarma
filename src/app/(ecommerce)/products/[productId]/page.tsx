@@ -6,7 +6,7 @@ export default function PageProduct({
 	params: { productId: string }
 }) {
 	return (
-		<main>
+		<main className='py-4 md:py-6'>
 			<Product productId={params.productId} />
 		</main>
 	)

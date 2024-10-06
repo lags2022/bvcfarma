@@ -14,7 +14,7 @@ export const ProductSavingsScale = ({
 	savingsScale: SavingsScaleApi[]
 }) => {
 	return (
-		<div className="w-full text-xs">
+		<div className="w-full text-xs max-w-xs lg:max-w-none">
 			<p className="font-bold mb-2 uppercase">escala de ahorros</p>
 			<Table className="text-xs">
 				<TableHeader>

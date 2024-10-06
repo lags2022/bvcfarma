@@ -6,3 +6,4 @@ export type TypeComponentCarousel =
 	| 'homeOffer'
 	| 'homeLines'
 	| 'productHero'
+  export type TypeComponentPage = "productsFilter"

@@ -47,7 +47,7 @@ export const BreadCrumbShared = ({
 	const isTablet = useMediaQuery('(min-width: 640px)')
 
 	return (
-		<Breadcrumb>
+		<Breadcrumb className='contain'>
 			<BreadcrumbList>
 				<BreadcrumbItem>
 					<BreadcrumbLink
@@ -138,7 +138,7 @@ export const BreadCrumbShared = ({
 									</BreadcrumbLink>
 								</>
 							) : (
-								<BreadcrumbPage className="max-w-20 truncate md:max-w-none">
+								<BreadcrumbPage className="max-w-24 truncate md:max-w-none">
 									{item.label}
 								</BreadcrumbPage>
 							)}

@@ -7,7 +7,7 @@ import { useFilterStore } from '@/context/useFilterStore'
 import { FilterSection } from './FilterSection'
 import { Accordion } from '../ui/accordion'
 
-export function Filter() {
+export function Filter({ isMovil }: { isMovil?: boolean }) {
 	const { tipos, categories, subCategories, lines, toogleFilter, resetfilter } =
 		useFilterStore(
 			useShallow((state) => ({
@@ -50,7 +50,7 @@ export function Filter() {
 	})
 
 	return (
-		<div className="w-64 border rounded-md shadow-sm bg-white">
+		<div className="w-64 mx-auto border rounded-md shadow-sm bg-white">
 			<p
 				onClick={() => {
 					resetfilter('all')
@@ -59,9 +59,10 @@ export function Filter() {
 			>
 				Limpiar filtros
 			</p>
+			{/* @ts-ignore */}
 			<Accordion
-				type="multiple"
-				defaultValue={['categories', 'lines', 'subCategories', 'tipos']}
+				type={isMovil ? 'single' : 'multiple'}
+				defaultValue={isMovil ? [] : ['categories', 'lines', 'subCategories']}
 				className="w-full"
 			>
 				{/* <FilterSection

@@ -61,7 +61,7 @@ export function CarouselProvider({
 						'opacity-0 bg-picker-5 w-10 h-16 hover:bg-gray-700 hover:text-white text-white border-none rounded-l-none rounded-r-md transition-opacity ease-in-out duration-300 left-0 group-hover:opacity-100',
 					type === 'homeOffers' && '-left-4 xl:hidden',
 					type === 'homeProduct' && '-left-4 xl:-left-6',
-					type === 'homeOffer' && '-left-8',
+					type === 'homeOffer' && '-left-11',
 					type === 'productHero' && '-left-0',
 				)}
 			/>
@@ -72,7 +72,7 @@ export function CarouselProvider({
 						'opacity-0 bg-picker-5 w-10 h-16 hover:bg-gray-700 hover:text-white text-white border-none rounded-r-none rounded-l-md transition-opacity ease-in-out duration-300 right-0 group-hover:opacity-100',
 					type === 'homeOffers' && '-right-4 xl:hidden',
 					type === 'homeProduct' && '-right-4 xl:-right-6',
-					type === 'homeOffer' && '-right-8',
+					type === 'homeOffer' && '-right-11',
 					type === 'productHero' && '-right-0',
 				)}
 			/>

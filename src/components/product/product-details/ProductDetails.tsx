@@ -43,7 +43,7 @@ export const ProductDeilts = ({
 	useFetchFavorites()
 
 	return (
-		<section className="text-sm">
+		<section className="text-sm mx-auto md:mx-0">
 			{typeOffer && (
 				<Badge className="capitalize bg-picker-3 text-white">
 					{typeOffer} {TYPEOFFER[typeOffer]}
@@ -59,13 +59,14 @@ export const ProductDeilts = ({
 				</div>
 				<span className="ml-2 text-sm text-gray-500">4.8 (2345 reseñas)</span>
 			</div> */}
-			<div className="flex gap-8 mb-4">
+
+			<div className="flex flex-col lg:flex-row gap-4 xl:gap-6 mb-4">
 				<div className="">
 					<p className="text-xl font-bold mb-4">S./ {price}</p>
 					<p className="my-1">
 						{isStock ? 'Disponible en stock' : 'Sin stock'}
 					</p>
-					<div className="flex space-x-4 mb-6">
+					<div className="bg-white z-10 justify-center md:justify-normal overflow-hidden px-8 py-4 md:p-0 md:bg-transparent fixed bottom-0 w-screen right-0 md:right-auto md:w-auto md:bottom-auto md:relative flex space-x-4 mb-0 md:mb-6">
 						<QuantityControl
 							id={id}
 							name={name}
@@ -85,7 +86,8 @@ export const ProductDeilts = ({
 					</div>
 					<ProductSavingsScale savingsScale={savingsScale} />
 				</div>
-				<div className="text-xs max-w-md">
+
+				<div className="text-xs max-w-full lg:max-w-52">
 					<div className="space-y-4">
 						<div className="flex items-center space-x-3">
 							<FlaskConical className="size-5 text-gray-600" />
@@ -110,6 +112,7 @@ export const ProductDeilts = ({
 					</div>
 				</div>
 			</div>
+
 			<Tabs defaultValue="descripcion" className="">
 				<TabsList className="bg-gray-200">
 					<TabsTrigger value="descripcion">Descripción</TabsTrigger>

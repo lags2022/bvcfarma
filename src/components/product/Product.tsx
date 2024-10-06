@@ -53,29 +53,27 @@ export const Product = async ({ productId }: { productId: string }) => {
 	]
 
 	return (
-		<div className="container mx-auto px-4">
+		<div className="space-y-4 md:space-y-6">
 			<BreadCrumbShared breadcrumbItems={breadcrumbItems} />
 
-			<div className="flex flex-col md:flex-row gap-8">
-				<div className="md:w-1/2">
+			<div className="flex flex-col justify-center md:flex-row gap-6 xl:gap-8 contain">
+				<div className="max-w-md mx-auto md:mx-0 md:max-w-sm">
 					<ProductCarousel image={image} />
 				</div>
-				<div className="md:w-1/2">
-					<ProductDeilts
-						id={id}
-						name={name}
-						image={image}
-						price={price}
-						typeOffer={typeOffer}
-						stock={stock}
-						linea={linea}
-						masterpack={masterpack}
-						description={description}
-						expirationDate={expirationDate}
-						subCategory={subcategories}
-						savingsScale={savingsScale}
-					/>
-				</div>
+				<ProductDeilts
+					id={id}
+					name={name}
+					image={image}
+					price={price}
+					typeOffer={typeOffer}
+					stock={stock}
+					linea={linea}
+					masterpack={masterpack}
+					description={description}
+					expirationDate={expirationDate}
+					subCategory={subcategories}
+					savingsScale={savingsScale}
+				/>
 			</div>
 		</div>
 	)
