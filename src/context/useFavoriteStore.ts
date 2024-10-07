@@ -1,5 +1,4 @@
 import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
 
 import {
 	addFavoriteAction,
@@ -8,8 +7,14 @@ import {
 
 interface FavoriteStore {
 	favorites: number[]
-	addFavorite: (productId: number) => Promise<void>
-	removeFavorite: (productId: number) => Promise<void>
+	addFavorite: (productId: number) => Promise<void | {
+		message: string
+		status: string
+	}>
+	removeFavorite: (productId: number) => Promise<void | {
+		message: string
+		status: string
+	}>
 	setFavorites: (favorites: number[]) => void
 }
 
@@ -21,6 +26,13 @@ export const useFavoriteStore = create<FavoriteStore>((set) => ({
 		try {
 			const response = await addFavoriteAction(productId)
 
+			if (response?.status === 'errorLogin') {
+				return {
+					message: 'Inicia sesión o regístrate para agregar favorito',
+					status: 'errorLogin',
+				}
+			}
+
 			if (response?.status !== 'success') {
 				throw new Error('Error al agregar favorito')
 			}
@@ -28,14 +40,19 @@ export const useFavoriteStore = create<FavoriteStore>((set) => ({
 			set((state) => ({
 				favorites: [...state.favorites, productId],
 			}))
+
+			return {
+				message: response.message,
+				status: response.status,
+			}
 		} catch (error) {
 			console.log(error, 'Error al agregar favorito')
+			throw new Error('Error al agregar favorito')
 		}
 	},
 
 	removeFavorite: async (productId) => {
 		try {
-
 			const response = await removeFavoriteAction(productId)
 
 			if (response?.status !== 'success') {

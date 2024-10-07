@@ -1,6 +1,7 @@
 'use client'
 
 import { Heart } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useTransition, useOptimistic } from 'react'
 import toast from 'react-hot-toast'
 // import { useDebouncedCallback } from 'use-debounce'
@@ -27,6 +28,7 @@ export const FavoriteButton = ({
 		})),
 	)
 	const [isPending, startTransition] = useTransition()
+	const router = useRouter()
 
 	const [optmisticFavorites, modOptimisticFavorite] = useOptimistic(
 		favorites,
@@ -36,9 +38,7 @@ export const FavoriteButton = ({
 				: state.filter((id) => id !== productId),
 	)
 
-	const handleFavorite = (evt: any) => {
-		evt.stopPropagation()
-
+	const handleFavorite = async (evt: any) => {
 		startTransition(async () => {
 			start('FAVORITO')
 			if (isFavorite) {
@@ -52,7 +52,13 @@ export const FavoriteButton = ({
 					productId,
 					type: 'add',
 				})
-				await addFavorite(productId) // Optimistic update handled in Zustand
+				const response = await addFavorite(productId) // Optimistic update handled in Zustand
+				if (response?.status === 'errorLogin') {
+					toast('Inicia session o regístrate', {
+						icon: '👋',
+					})
+				}
+				router.push('/login')
 			}
 			end()
 		})
