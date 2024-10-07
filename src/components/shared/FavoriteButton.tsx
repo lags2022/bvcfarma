@@ -54,11 +54,11 @@ export const FavoriteButton = ({
 				})
 				const response = await addFavorite(productId) // Optimistic update handled in Zustand
 				if (response?.status === 'errorLogin') {
-					toast('Inicia session o regístrate', {
+					toast('Inicia sesión o regístrate', {
 						icon: '👋',
 					})
+					router.push('/login')
 				}
-				router.push('/login')
 			}
 			end()
 		})
