@@ -28,7 +28,6 @@ import {
 	URL_WHATSAPP,
 } from '@/constants/general'
 import { modDate } from '@/helpers/mod-date'
-import { pluralizeWord } from '@/helpers/plurize-word'
 
 export const EmailTemplateCheckoutSuccess = ({
 	order,
@@ -47,7 +46,7 @@ export const EmailTemplateCheckoutSuccess = ({
 			<Body style={main}>
 				<Container style={container}>
 					<Section style={track.container}>
-						<Row>
+						<Row align="center">
 							<Column align="center">
 								<Img
 									src={LOGO_NAME_2}
@@ -112,13 +111,8 @@ export const EmailTemplateCheckoutSuccess = ({
 										{item.name}
 									</Text>
 									<Text style={global.text}>
-										S./ {item.subtotalItem} (
-										{pluralizeWord({
-											quantity: item.quantity,
-											singular: 'item',
-											language: 'en',
-										})}
-										)
+										S./ {item.subtotalItem} ({item.quantity}{' '}
+										{item.quantity === 1 ? 'item' : 'items'})
 									</Text>
 								</Column>
 							</Row>
