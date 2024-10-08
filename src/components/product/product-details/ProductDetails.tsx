@@ -19,6 +19,7 @@ import { TYPEOFFER } from '@/constants/general'
 import { useFetchFavorites } from '@/hooks/useFetchFavorites'
 import { ProductPropsView } from '@/interfaces/products'
 
+import { ProductDescription } from './ProductDescription'
 import { ProductSavingsScale } from './ProductSavingsScale'
 
 export const ProductDeilts = ({
@@ -66,23 +67,27 @@ export const ProductDeilts = ({
 					<p className="my-1">
 						{isStock ? 'Disponible en stock' : 'Sin stock'}
 					</p>
-					<div className="bg-white z-10 justify-center md:justify-normal overflow-hidden px-8 py-4 md:p-0 md:bg-transparent fixed bottom-0 w-screen right-0 md:right-auto md:w-auto md:bottom-auto md:relative flex space-x-4 mb-0 md:mb-6">
-						<QuantityControl
-							id={id}
-							name={name}
-							image={image}
-							typeOffer={typeOffer}
-							price={price}
-							isStock={isStock}
-						/>
-						<FavoriteButton productId={id} />
-						<Button
-							variant="outline"
-							className="size-10 border-none hover:bg-white"
-							size="icon"
-						>
-							<Share2 className="size-4" />
-						</Button>
+					<div className="bg-white z-10 overflow-hidden md:bg-transparent fixed bottom-0 right-0 md:right-auto w-screen md:w-auto md:bottom-auto md:relative">
+						<div className="flex justify-between md:justify-normal px-8 py-3 md:p-0 gap-4 mb-0 md:mb-6 mx-auto max-w-lg md:max-w-none">
+							<QuantityControl
+								id={id}
+								name={name}
+								image={image}
+								typeOffer={typeOffer}
+								price={price}
+								isStock={isStock}
+							/>
+							<div className="order-first md:order-none">
+								<FavoriteButton productId={id} />
+							</div>
+							<Button
+								variant="outline"
+								className="size-10 border-none hover:bg-white"
+								size="icon"
+							>
+								<Share2 className="size-4" />
+							</Button>
+						</div>
 					</div>
 					<ProductSavingsScale savingsScale={savingsScale} />
 				</div>
@@ -113,26 +118,8 @@ export const ProductDeilts = ({
 				</div>
 			</div>
 
-			<Tabs defaultValue="descripcion" className="">
-				<TabsList className="bg-gray-200">
-					<TabsTrigger value="descripcion">Descripción</TabsTrigger>
-					<TabsTrigger value="especificaciones">Especificaciones</TabsTrigger>
-					<TabsTrigger value="resenas">Reseñas</TabsTrigger>
-					<TabsTrigger value="como-usar">Cómo usar</TabsTrigger>
-				</TabsList>
-				<TabsContent value="descripcion">
-					<p>{description}</p>
-				</TabsContent>
-				<TabsContent value="especificaciones">
-					<p>Especificaciones del producto...</p>
-				</TabsContent>
-				<TabsContent value="resenas">
-					<p>Reseñas de los clientes...</p>
-				</TabsContent>
-				<TabsContent value="como-usar">
-					<p>Instrucciones de uso...</p>
-				</TabsContent>
-			</Tabs>
+			{/* descripcion del producto */}
+			<ProductDescription description={description} />
 		</section>
 	)
 }

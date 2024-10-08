@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { useShallow } from 'zustand/react/shallow'
 
 import { useFilterStore } from '@/context/useFilterStore'
@@ -19,6 +20,10 @@ export function Filter({ isMovil }: { isMovil?: boolean }) {
 				resetfilter: state.resetfilter,
 			})),
 		)
+
+	const [openItem, setOpenItem] = useState<string | undefined>(
+		isMovil ? 'categories' : undefined,
+	)
 
 	const filteredCategories = categories.filter((item) =>
 		tipos.some((tipo) => tipo.isSelected && +item.idCategory === tipo.id),
@@ -64,6 +69,8 @@ export function Filter({ isMovil }: { isMovil?: boolean }) {
 				type={isMovil ? 'single' : 'multiple'}
 				defaultValue={isMovil ? [] : ['categories', 'lines', 'subCategories']}
 				className="w-full"
+				value={openItem}
+				onValueChange={setOpenItem}
 			>
 				{/* <FilterSection
 					title="Tipos"

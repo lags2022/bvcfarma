@@ -1,6 +1,6 @@
 import { Footer } from '@/components/footer/Footer'
 import { Navbar } from '@/components/navbar/Navbar'
-import { WhatsappLink } from '@/components/shared/WhatsappLink'
+import { WhatsappFloating } from '@/components/shared/WhatsappFloating'
 
 export default function RootLayout({
 	children,
@@ -12,7 +12,7 @@ export default function RootLayout({
 			<Navbar />
 			<main className="mt-[140px]">{children}</main>
 			<Footer />
-			<WhatsappLink className="size-14 fixed bottom-5 right-5 hover:scale-110 transition-transform ease-in-out duration-300 active:scale-90 cursor-pointer" />
+			<WhatsappFloating />
 		</div>
 	)
 }

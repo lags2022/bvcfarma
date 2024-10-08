@@ -112,7 +112,7 @@ export default function PageProducts() {
 				</div>
 				<Drawer>
 					<DrawerTrigger
-						className="mb-4 block rounded-lg sm:hidden p-3 bg-picker-3 text-white hover:bg-picker-4"
+						className="mb-4 block rounded-lg sm:hidden p-3 bg-picker-3 text-white hover:bg-picker-4 z-10"
 						aria-label="Toggle Menu"
 					>
 						Filtrar por

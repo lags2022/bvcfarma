@@ -42,13 +42,13 @@ export const ProductCarousel = ({ image }: { image: string }) => {
 				{images.map((image, index) => (
 					<CarouselItem key={index}>
 						<Card>
-							<CardContent className="flex aspect-video items-center justify-center p-6">
+							<CardContent className="flex w-full items-center justify-center p-4">
 								<Image
 									src={image.src}
 									alt={image.alt}
-									width={600}
-									height={400}
-									className="aspect-[600/400] size-full object-contain"
+									width={431}
+									height={431}
+									className="aspect-square size-48 md:size-80 object-contain"
 								/>
 							</CardContent>
 						</Card>

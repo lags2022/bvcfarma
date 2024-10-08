@@ -59,7 +59,7 @@ export const QuantityControl = ({
 	}
 
 	return (
-		<div className="min-w-44">
+		<div className="flex-1 max-w-64">
 			{existingProductIndex === -1 || !isStock ? (
 				<ButtonGeneral
 					disabled={!isStock}
