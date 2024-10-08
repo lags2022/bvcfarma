@@ -112,10 +112,12 @@ export default function PageProducts() {
 				</div>
 				<Drawer>
 					<DrawerTrigger
-						className="mb-4 block rounded-lg sm:hidden p-3 bg-picker-3 text-white hover:bg-picker-4 z-10"
+						className="fixed block sm:hidden px-8 py-3 z-10 bg-white  overflow-hidden border-none border-0 bottom-0 right-0 w-screen"
 						aria-label="Toggle Menu"
 					>
-						Filtrar por
+						<div className="rounded-md py-2 font-medium bg-picker-3 text-white hover:bg-picker-4 max-w-md mx-auto">
+							Filtrar por
+						</div>
 					</DrawerTrigger>
 					<DrawerContent className="max-h-[500px]">
 						<DrawerHeader className="text-center">

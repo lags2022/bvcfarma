@@ -68,7 +68,7 @@ export const ProductDeilts = ({
 						{isStock ? 'Disponible en stock' : 'Sin stock'}
 					</p>
 					<div className="bg-white z-10 overflow-hidden md:bg-transparent fixed bottom-0 right-0 md:right-auto w-screen md:w-auto md:bottom-auto md:relative">
-						<div className="flex justify-between md:justify-normal px-8 py-3 md:p-0 gap-3 mb-0 md:mb-6 mx-auto max-w-lg md:max-w-none">
+						<div className="flex justify-between md:justify-normal px-4 py-3 md:p-0 gap-4 mb-0 md:mb-6 mx-auto max-w-lg md:max-w-none">
 							<QuantityControl
 								id={id}
 								name={name}

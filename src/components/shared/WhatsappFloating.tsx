@@ -19,7 +19,7 @@ export const WhatsappFloating = ({
 		<WhatsappLink
 			className={cn(
 				'size-14 fixed bottom-5 right-5 hover:scale-110 transition-transform ease-in-out duration-300 active:scale-90 cursor-pointer z-30',
-				pathname.startsWith('/products/') && 'bottom-20 md:bottom-5',
+				pathname.startsWith('/products') && 'bottom-20 md:bottom-5',
 			)}
 		/>
 	)
