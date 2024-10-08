@@ -64,7 +64,7 @@ export const ChekoutSuccess = ({
 	const paymentMethodMod = PAYMENT_METHOD_MOD[paymentMethod]
 
 	return (
-		<div className="flex items-center justify-center min-h-screen bg-gray-100 text-sm">
+		<div className="flex items-center justify-center p-4 md:p-6 bg-gray-100 text-sm">
 			<Card className="w-full max-w-2xl">
 				<CardHeader className="text-center">
 					<CheckCircle className="w-16 h-16 mx-auto text-picker-3 mb-4" />
@@ -84,7 +84,7 @@ export const ChekoutSuccess = ({
 							Fecha de Solicitud de compra: {formattedDate}
 						</p>
 					</div>
-					<div className="grid grid-cols-3 gap-4 mb-6">
+					<div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-4 mb-6">
 						<div className="capitalize">
 							<h3 className="font-semibold mb-2">Dirección</h3>
 							<p>{address}</p>
@@ -94,7 +94,7 @@ export const ChekoutSuccess = ({
 							</p>
 							<p>{phone}</p>
 						</div>
-						<div>
+						<div className='xs:col-span-1'>
 							<h3 className="font-semibold mb-2">Medio de Pago</h3>
 							<p>
 								Pago {paymentMethodMod !== 'efectivo' ? 'con' : 'en'}{' '}
@@ -102,7 +102,7 @@ export const ChekoutSuccess = ({
 							</p>
 							<p>{deliveryTypeMod}</p>
 						</div>
-						<div>
+						<div className='xs:col-span-full sm:col-span-1'>
 							<h3 className="font-semibold mb-2">Resumen</h3>
 							<div className="flex justify-between text-sm">
 								<span>Subtotal</span>

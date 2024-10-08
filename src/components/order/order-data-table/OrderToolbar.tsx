@@ -18,17 +18,17 @@ export function OrderToolbar<TData>({ table }: DataTableToolbarProps<TData>) {
 	const isFiltered = table.getState().columnFilters.length > 0
 
 	return (
-		<div className="flex items-center justify-between">
+		<div className="flex flex-col sm:flex-row gap-3 sm:items-center justify-between">
 			<div className="flex flex-1 items-center space-x-2">
 				<Input
-					placeholder="Ingresa lo que buscas..."
+					placeholder="Ingresa lo que deseas buscar..."
 					// value={(table.getColumn('ocNumber')?.getFilterValue() as string) ?? ''}
 					// onChange={(event) =>
 					// 	table.getColumn('ocNumber')?.setFilterValue(event.target.value)
 					// }
           value={table.getState().globalFilter ?? ''} // Usa el filtro global del estado de la tabla
           onChange={(event) => table.setGlobalFilter(event.target.value)} // Cambia el filtro global en lugar de uno específico
-					className="h-8 w-[150px] lg:w-[250px]"
+					className="h-8 w-full sm:w-[250px]"
 				/>
 			</div>
 			<div className="flex items-center space-x-2">

@@ -164,7 +164,10 @@ export const CheckoutAddress = () => {
 						<div className="grid grid-cols-2 gap-4">
 							<div>
 								<Label htmlFor="typeDocument">
-									Documento de identificación
+									<span className="hidden sm:inline">Documento</span>
+									<span className="sm:hidden">Doc.</span> <span>de</span>{' '}
+									<span className="hidden sm:inline">identificación</span>
+									<span className="sm:hidden">iden.</span>
 								</Label>
 								<Controller
 									name="typeDocument"
@@ -218,8 +221,8 @@ export const CheckoutAddress = () => {
 							<h4 className="font-medium mb-2">
 								¿En dónde recibirás tu pedido?
 							</h4>
-							<div className="grid grid-cols-3 gap-4">
-								<div>
+							<div className="sm:grid sm:grid-cols-3 space-y-4 sm:space-y-0 sm:gap-4">
+								<div className="w-full sm:w-auto">
 									<Label htmlFor="department">Departamento</Label>
 									<Controller
 										name="department"
@@ -248,7 +251,7 @@ export const CheckoutAddress = () => {
 										</p>
 									)}
 								</div>
-								<div>
+								<div className="w-[calc(50%-8px)] mr-2 sm:mr-0 inline-block sm:w-auto">
 									<Label htmlFor="province">Provincia</Label>
 									<Controller
 										name="province"
@@ -276,7 +279,7 @@ export const CheckoutAddress = () => {
 										</p>
 									)}
 								</div>
-								<div>
+								<div className="w-[calc(50%-8px)] ml-2 sm:ml-0 inline-block sm:w-auto">
 									<Label htmlFor="district">Distrito</Label>
 									<Controller
 										name="district"
@@ -307,8 +310,8 @@ export const CheckoutAddress = () => {
 								</div>
 							</div>
 						</div>
-						<div className="grid grid-cols-7 gap-4">
-							<div className="col-span-3">
+						<div className="sm:grid sm:grid-cols-7 space-y-4 sm:space-y-0 sm:gap-4">
+							<div className="w-full sm:w-auto sm:col-span-3">
 								<Label htmlFor="address">Dirección</Label>
 								<Controller
 									name="address"
@@ -328,7 +331,7 @@ export const CheckoutAddress = () => {
 									</p>
 								)}
 							</div>
-							<div className="col-span-2">
+							<div className="w-[calc(50%-8px)] mr-2 sm:mr-0 inline-block sm:w-auto sm:col-span-2">
 								<Label htmlFor="reference">Referencia (opcional)</Label>
 								<Controller
 									name="reference"
@@ -343,7 +346,7 @@ export const CheckoutAddress = () => {
 									)}
 								/>
 							</div>
-							<div className="col-span-2">
+							<div className="w-[calc(50%-8px)] ml-2 sm:ml-0 inline-block sm:w-auto sm:col-span-2">
 								<Label htmlFor="postalCode">Código postal</Label>
 								<Controller
 									name="postalCode"

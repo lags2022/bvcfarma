@@ -144,6 +144,40 @@
     }
   }
 
+  /* ============= estilos para el scroll order ============= */
+  .table-order-scrollbar {
+    --sb-track-color: #f1f7f9;
+    --sb-thumb-color: #1471A4;
+    --sb-size-order: 8px;
+  }
+
+  .table-order-scrollbar::-webkit-scrollbar {
+    height: var(--sb-size-order)
+  }
+
+  .table-order-scrollbar::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+  }
+
+  .table-order-scrollbar::-webkit-scrollbar-track {
+    border-radius: 3px;
+  }
+
+  .table-order-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+  }
+
+  .table-order-scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+  }
+
+
+  @supports not selector(::-webkit-scrollbar) {
+    .table-order-scrollbar {
+      scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    }
+  }
+
   /* fin de estilos para el scroll del navbar bottom categories */
 
 

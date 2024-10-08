@@ -30,7 +30,6 @@ export async function POST(request: Request) {
 		}
 
 		if (order?.culqiCharge) {
-			console.log('El order ya tiene un culqi charge')
 			return NextResponse.json(
 				{ message: 'El order ya tiene un culqi charge' },
 				{ status: 200 },
@@ -70,13 +69,11 @@ export async function POST(request: Request) {
 		const data = await resend.emails.send({
 			from: 'melcabo954@lgdevs.com',
 			to: [order?.orderAddress?.email as string, 'melcabo954@gmail.com'],
-			subject: 'Prueba de email',
+			subject: `Orden de compra: ${order.ocNumber} - Bvcfarma - Cliente: ${order?.orderAddress?.firstName} ${order?.orderAddress?.lastName}`,
 			react: EmailTemplateCheckoutSuccess({
 				order,
 			}),
 		})
-
-		console.log(data)
 
 		// Send the message con twilio por whatsapp
 		const response = await clientTwilio.messages.create({
@@ -84,8 +81,6 @@ export async function POST(request: Request) {
 			from: 'whatsapp:+14155238886', // Your Twilio Sandbox Number
 			to: `whatsapp:+51932052849`, // Recipient's phone number
 		})
-
-		console.log(response)
 
 		return NextResponse.json({ message: 'ok' }, { status: 200 })
 	} catch (error) {

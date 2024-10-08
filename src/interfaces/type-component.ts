@@ -6,4 +6,4 @@ export type TypeComponentCarousel =
 	| 'homeOffer'
 	| 'homeLines'
 	| 'productHero'
-  export type TypeComponentPage = "productsFilter"
+export type TypeComponentPage = 'productsFilter' | 'favorites'

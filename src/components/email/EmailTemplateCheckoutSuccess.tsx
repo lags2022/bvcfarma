@@ -1,9 +1,4 @@
-import {
-	CulqiCharge,
-	Order,
-	OrderAddress,
-	OrderItemProduct,
-} from '@prisma/client'
+import { Order, OrderAddress, OrderItemProduct } from '@prisma/client'
 import {
 	Body,
 	Container,
@@ -29,10 +24,11 @@ import {
 	ICON_INSTAGRAM,
 	ICON_WHATSAPP,
 	ICON_YOUTUBE,
-	LOGO_NAME,
+	LOGO_NAME_2,
 	URL_WHATSAPP,
 } from '@/constants/general'
 import { modDate } from '@/helpers/mod-date'
+import { pluralizeWord } from '@/helpers/plurize-word'
 
 export const EmailTemplateCheckoutSuccess = ({
 	order,
@@ -52,11 +48,11 @@ export const EmailTemplateCheckoutSuccess = ({
 				<Container style={container}>
 					<Section style={track.container}>
 						<Row>
-							<Column align="left">
+							<Column align="center">
 								<Img
-									src={LOGO_NAME}
+									src={LOGO_NAME_2}
 									width="140"
-									height="50"
+									height="39"
 									alt="BvcFarma"
 									style={{ margin: '10px 20px' }}
 								/>
@@ -96,7 +92,7 @@ export const EmailTemplateCheckoutSuccess = ({
 							{`${order?.orderAddress?.firstName || ''} ${order?.orderAddress?.lastName || ''}`}
 						</Text>
 						<Text style={{ ...global.text, fontSize: 14 }}>
-							{order?.orderAddress?.address || ''}
+							Dirección: {order?.orderAddress?.address || ''}
 						</Text>
 					</Section>
 					<Hr style={global.hr} />
@@ -104,21 +100,25 @@ export const EmailTemplateCheckoutSuccess = ({
 						style={{ ...paddingX, paddingTop: '40px', paddingBottom: '40px' }}
 					>
 						{order?.orderItems?.map((item) => (
-							<Row key={item.id}>
+							<Row align="center" key={item.id}>
 								<Column>
-									<Img
-										src={item.image}
-										alt={item.name}
-										style={{ float: 'left' }}
-										width="40px"
-									/>
+									<Img src={item.image} alt={item.name} width="40px" />
 								</Column>
-								<Column style={{ verticalAlign: 'top', paddingLeft: '12px' }}>
+								<Column
+									align="left"
+									style={{ verticalAlign: 'top', paddingLeft: '12px' }}
+								>
 									<Text style={{ ...paragraph, fontWeight: '500' }}>
 										{item.name}
 									</Text>
 									<Text style={global.text}>
-										S./ {item.subtotalItem} ({item.quantity})
+										S./ {item.subtotalItem} (
+										{pluralizeWord({
+											quantity: item.quantity,
+											singular: 'item',
+											language: 'en',
+										})}
+										)
 									</Text>
 								</Column>
 							</Row>
@@ -143,8 +143,8 @@ export const EmailTemplateCheckoutSuccess = ({
 					</Section>
 					<Hr style={global.hr} />
 					<Section style={global.defaultPadding}>
-						<Row style={{ display: 'inline-flex', marginBottom: 40 }}>
-							<Column style={{ width: '170px' }}>
+						<Row style={{ display: 'flex', marginBottom: 20 }}>
+							<Column style={{ paddingRight: '20px' }}>
 								<Text style={global.paragraphWithBold}>Order Number</Text>
 								<Text style={track.number}>{order?.ocNumber || ''}</Text>
 							</Column>
@@ -158,8 +158,16 @@ export const EmailTemplateCheckoutSuccess = ({
 					</Section>
 					<Hr style={global.hr} />
 					<Section style={menu.container}>
-						<Row>
-							<Text style={menu.title}>Obtener ayuda</Text>
+						<Row align="center">
+							<Text
+								style={{
+									...menu.title,
+									marginTop: '0px',
+									textAlign: 'center',
+								}}
+							>
+								Obtener ayuda
+							</Text>
 						</Row>
 						<Row>
 							<Link
@@ -185,9 +193,9 @@ export const EmailTemplateCheckoutSuccess = ({
 							</Link>
 						</Row>
 						<Row>
-							<Column style={{ padding: '10px 20px', fontSize: '13.5px' }}>
-								Por favor contáctenos por whatsapp si tiene alguna pregunta. (Si
-								este correo electrónico, no podremos verlo).
+							<Column style={{ padding: '10px 20px', fontSize: '12px' }}>
+								Por favor contáctenos por whatsapp si tiene alguna pregunta. (No
+								responda a este correo electrónico, no podremos verlo).
 							</Column>
 						</Row>
 						<Hr style={global.hr} />
@@ -202,7 +210,7 @@ export const EmailTemplateCheckoutSuccess = ({
 									href={URL_BASE}
 									style={{
 										...global.heading,
-										fontSize: '20px',
+										fontSize: '16px',
 										textDecoration: 'none',
 										color: COLOR_PRIMARY,
 									}}
@@ -217,8 +225,8 @@ export const EmailTemplateCheckoutSuccess = ({
 											<Link href="/">
 												<Img
 													src={ICON_INSTAGRAM}
-													width="32"
-													height="32"
+													width="24"
+													height="24"
 													alt="Instagram"
 													style={socialMediaIcon}
 												/>
@@ -228,8 +236,8 @@ export const EmailTemplateCheckoutSuccess = ({
 											<Link href="/">
 												<Img
 													src={ICON_FACEBOOK}
-													width="32"
-													height="32"
+													width="24"
+													height="24"
 													alt="Facebook"
 													style={socialMediaIcon}
 												/>
@@ -239,8 +247,8 @@ export const EmailTemplateCheckoutSuccess = ({
 											<Link href="/">
 												<Img
 													src={ICON_YOUTUBE}
-													width="32"
-													height="32"
+													width="24"
+													height="24"
 													alt="Youtube"
 													style={socialMediaIcon}
 												/>

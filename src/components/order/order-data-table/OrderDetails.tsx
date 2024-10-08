@@ -6,7 +6,7 @@ import { useShallow } from 'zustand/react/shallow'
 import { getOrderItems } from '@/actions/order-items'
 import { ButtonGeneral } from '@/components/button/ButtonGeneral'
 import { DetailsOrder } from '@/components/shared/DetailsOrder'
-import { Loading } from '@/components/shared/Loader'
+import { LoaderComponent } from '@/components/shared/Loader'
 import { useOrderItemsStore } from '@/context/useOrderItemsStore'
 import { smoothScrollToTop } from '@/helpers/smooth-scroll-top'
 import { OrderGetAll } from '@/interfaces/orders/order-get-all'
@@ -42,20 +42,20 @@ export const OrderDetails = () => {
 	}, [details.orderId])
 
 	if (!orderItems || orderItems?.length === 0) {
-		return <Loading />
+		return <LoaderComponent />
 	}
 
 	return (
 		<div className="contain">
-			<div className="bg-white shadow-md rounded-lg flex justify-between w-full relative p-6 gap-10">
+			<div className="bg-white shadow-md rounded-lg flex justify-between flex-col sm:flex-row w-full relative p-6 gap-10">
 				<ButtonGeneral
 					onClick={() => setSlideIn(false)}
 					size="icon"
-					className="absolute right-4 top-4"
+					className="absolute !size-8 right-4 top-4"
 				>
 					X
 				</ButtonGeneral>
-				<div className="w-1/2">
+				<div className="sm:w-1/2">
 					<h3 className="font-semibold mb-4">Productos</h3>
 					<DetailsOrder
 						productsCart={orderItems}
@@ -67,7 +67,7 @@ export const OrderDetails = () => {
 						typeComponentShopping="checkout"
 					/>
 				</div>
-				<div className="w-1/2">
+				<div className="sm:w-1/2">
 					<h3 className="font-semibold mb-4">Order Tracking</h3>
 					<div className="space-y-6">
 						<OrderStatus status={details.status} />

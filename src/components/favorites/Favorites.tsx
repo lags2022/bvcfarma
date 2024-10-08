@@ -27,7 +27,7 @@ export const Favorites = ({ products }: { products: ProductApiProps[] }) => {
 	return (
 		<main className="py-4 md:py-6 space-y-4 md:space-y-6">
 			<BreadCrumbShared breadcrumbItems={breadcrumbItems} />
-			<ProductsContainer products={favoriteProducts} />
+			<ProductsContainer products={favoriteProducts} typeComponent='favorites' />
 		</main>
 	)
 }

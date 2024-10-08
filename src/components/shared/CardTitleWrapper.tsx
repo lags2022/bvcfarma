@@ -20,7 +20,6 @@ export const CardTitleWrapper = ({
 		<div className="contain mx-auto space-y-4">
 			{!notTitle && (
 				<h4
-					id="lo-mas-buscado"
 					className="font-bold text-lg border-b border-gray-200 pb-1"
 				>
 					{title}

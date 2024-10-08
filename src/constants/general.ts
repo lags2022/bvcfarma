@@ -23,6 +23,8 @@ export const LOGO =
 	'https://res.cloudinary.com/dvozbuwkx/image/upload/v1726866271/logo_bvcfarma_cwuz3p.webp'
 export const LOGO_NAME =
 	'https://res.cloudinary.com/dvozbuwkx/image/upload/v1727370338/logo_email_v0syin.webp'
+export const LOGO_NAME_2 =
+	'https://res.cloudinary.com/dvozbuwkx/image/upload/v1728366618/logo_email_2_znklzi.webp'
 export const NAME =
 	'https://res.cloudinary.com/dvozbuwkx/image/upload/v1727915308/image__4__1-removebg-preview_k2f4nk.webp'
 

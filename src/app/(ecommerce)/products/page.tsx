@@ -7,6 +7,7 @@ import { useShallow } from 'zustand/react/shallow'
 import { ButtonGeneral } from '@/components/button/ButtonGeneral'
 import { Filter } from '@/components/filter/Filter'
 import { BreadCrumbShared } from '@/components/shared/BreadCrumbShared'
+import { LoaderComponent } from '@/components/shared/Loader'
 import { ProductsContainer } from '@/components/shared/ProductsContainer'
 import {
 	Drawer,
@@ -36,7 +37,7 @@ export default function PageProducts() {
 				resetfilter: state.resetfilter,
 			})),
 		)
-	const breadcrumbItems = [{ href: '/products', label: 'Products' }]
+	const breadcrumbItems = [{ href: '/products', label: 'Productos' }]
 
 	// Obtiene los parámetros de búsqueda
 	const searchParams = useSearchParams()
@@ -73,6 +74,10 @@ export default function PageProducts() {
 		}
 
 		fetchAll()
+
+		return () => {
+			resetfilter('all')
+		}
 	}, [])
 
 	// useEffect(() => {
@@ -135,7 +140,11 @@ export default function PageProducts() {
 					</DrawerContent>
 				</Drawer>
 				<div className="mx-auto">
-					<ProductsContainer products={filteredProducts} />
+					{!filteredProducts.length ? (
+						<LoaderComponent />
+					) : (
+						<ProductsContainer products={filteredProducts} />
+					)}
 				</div>
 			</section>
 		</main>

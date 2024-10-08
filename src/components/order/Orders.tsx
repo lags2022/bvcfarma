@@ -29,8 +29,8 @@ export const Orders = ({ data }: { data: OrderSchemaType[] }) => {
 
 	return (
 		<>
-			<div className="flex flex-col justify-center items-start gap-4">
-				<h2 className="text-lg font-bold tracking-tight">
+			<div className="flex flex-col contain justify-center items-start gap-4">
+				<h2 className="text-lg font-bold flex flex-col gap-2 tracking-tight">
 					{slideIn
 						? `Orden ${order?.ocNumber} | ${pluralizeWord({
 								quantity: order?.quantityItems!,
@@ -39,23 +39,29 @@ export const Orders = ({ data }: { data: OrderSchemaType[] }) => {
 							})}`
 						: `Lista de pedidos (${data.length})`}
 				</h2>
-				{!slideIn && (
+				{!slideIn ? (
 					<p className="text-muted-foreground">
-						Aquí podras darle seguimiento a tus pedidos y sus estados.
+						Tabla de pedidos y sus estados
+					</p>
+				) : (
+					<p className="text-muted-foreground">
+						Detalles del pedido y seguimiento
 					</p>
 				)}
 			</div>
-			<div
-				className={cn(
-					'flex w-full transform duration-700 ease',
-					slideIn && '-translate-x-full',
-				)}
-			>
-				<div className="w-[calc(100vw-7px)] flex-shrink-0 ">
-					<Order data={data} columns={orderColumnsUser} />
-				</div>
-				<div className="w-[calc(100vw-7px)] flex-shrink-0">
-					<OrderDetails />
+			<div className="w-full overflow-hidden">
+				<div
+					className={cn(
+						'flex w-[200dvw] overflow-hidden transform duration-700 ease',
+						slideIn && '-translate-x-[50%]',
+					)}
+				>
+					<div className="w-[50%] flex-shrink-0 ">
+						<Order data={data} columns={orderColumnsUser} />
+					</div>
+					<div className="w-[50%] flex-shrink-0">
+						<OrderDetails />
+					</div>
 				</div>
 			</div>
 		</>

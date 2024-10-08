@@ -10,7 +10,7 @@ export default async function OrdersPage() {
 	const orderParse = z.array(orderSchema).parse(transformedOrders(orders))
 
 	return (
-		<div className="text-sm space-y-8 w-full">
+		<div className="text-sm space-y-6 py-4 md:py-6 w-full">
 			<Orders data={orderParse} />
 		</div>
 	)

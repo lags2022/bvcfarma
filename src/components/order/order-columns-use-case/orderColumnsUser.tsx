@@ -187,7 +187,7 @@ export const orderColumnsUser: CustomColumnDef<OrderSchemaType>[] = [
 	{
 		id: 'details',
 		header: ({ column }) => (
-			<OrderColumnHeader column={column} title="Detalles" />
+			<OrderColumnHeader column={column} className='font-bold' title="Detalles" />
 		),
 		cell: function Cell({ row }) {
 			const [setSlideIn, setDetails] = useOrderItemsStore(
