@@ -29,7 +29,7 @@ import {
 } from '@/constants/general'
 import { modDate } from '@/helpers/mod-date'
 
-export const EmailTemplateCheckoutSuccess = ({
+export const EmailTemplate = ({
 	order,
 }: {
 	order: Order & {
