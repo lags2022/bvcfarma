@@ -24,14 +24,12 @@ export const ProductsContainer = ({
 			<div className="contain m-auto flex flex-col justify-center items-center gap-6 py-6">
 				<div>No tienes favoritos.</div>
 
-				<ButtonGeneral href="/" className="!bg-transparent">
-					Ir a la página de inicio
-				</ButtonGeneral>
+				<ButtonGeneral href="/">Ir a la página de inicio</ButtonGeneral>
 			</div>
 		)
 
 	return (
-		<div className="flex flex-wrap gap-6 contain">
+		<div className="flex flex-wrap justify-center gap-6 contain [&>div]:m-0">
 			{products.map(({ id, image, name, typeOffer, price, stock }) => {
 				const isStock = parseInt(stock) >= 1
 

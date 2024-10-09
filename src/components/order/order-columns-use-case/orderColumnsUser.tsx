@@ -2,15 +2,14 @@
 
 import { ColumnDef } from '@tanstack/react-table'
 import { ArrowBigRight } from 'lucide-react'
-import { useShallow } from 'zustand/react/shallow'
 
 import { ButtonGeneral } from '@/components/button/ButtonGeneral'
-import { useOrderItemsStore } from '@/context/useOrderItemsStore'
 import { modDate } from '@/helpers/mod-date'
 import { pluralizeWord } from '@/helpers/plurize-word'
 import { OrderSchemaType } from '@/schemas/order-data-schema'
 
 import { OrderColumnHeader } from '../order-data-table/OrderColumnHeader'
+
 // import { Checkbox } from '@/components/ui/checkbox'
 // import { OrderRowActions } from './order-data-table/no-used/OrderRowActions'
 
@@ -90,7 +89,7 @@ export const orderColumnsUser: CustomColumnDef<OrderSchemaType>[] = [
 		cell: ({ row }) => {
 			return (
 				<div className="flex space-x-2">
-					<span className="max-w-sm truncate font-medium flex flex-col">
+					<span className="max-w-56 truncate font-medium flex flex-col">
 						{row.getValue('address')}
 						<span className="text-xs text-muted-foreground">
 							{row.original.deliveryType}
@@ -187,30 +186,16 @@ export const orderColumnsUser: CustomColumnDef<OrderSchemaType>[] = [
 	{
 		id: 'details',
 		header: ({ column }) => (
-			<OrderColumnHeader column={column} className='font-bold' title="Detalles" />
+			<OrderColumnHeader
+				column={column}
+				className="font-bold"
+				title="Detalles"
+			/>
 		),
-		cell: function Cell({ row }) {
-			const [setSlideIn, setDetails] = useOrderItemsStore(
-				useShallow((state) => [state.setSlideIn, state.setDetails]),
-			)
-
+		cell: ({ row }) => {
 			return (
 				<div className="flex space-x-2 items-center justify-center">
-					<ButtonGeneral
-						onClick={() => {
-							setSlideIn(true)
-							setDetails({
-								orderId: row.original.id,
-								discount: row.original.discount,
-								shippingCost: row.original.shippingCost,
-								subtotal: row.original.subtotal,
-								totalCart: row.original.totalCart,
-								totalCheckout: row.original.total,
-								status: row.original.status,
-							})
-						}}
-						size="icon"
-					>
+					<ButtonGeneral href={`/orders/${row.original.id}`} size="icon">
 						<ArrowBigRight className="size-4" />
 					</ButtonGeneral>
 				</div>

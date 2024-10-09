@@ -38,33 +38,33 @@ export const CheckoutFinish = () => {
 			</CardHeader>
 			<CardContent className="space-y-4">
 				<div className="flex items-center space-x-2">
-					<Truck className="text-muted-foreground" />
-					<p>Tipo de entrega: {DELIVERY_TYPE_MOD[deliveryType]}</p>
+					<Truck className="text-muted-foreground size-6" />
+					<p className='basis-0 flex-1'>Tipo de entrega: {DELIVERY_TYPE_MOD[deliveryType]}</p>
 				</div>
 
 				<div className="flex items-center space-x-2">
-					<Home className="text-muted-foreground" />
-					<p>
+					<Home className="text-muted-foreground size-6" />
+					<p className='basis-0 flex-1'>
 						Dirección: {address} - {department} - {province} - {district} -{' '}
 						{reference}
 					</p>
 				</div>
 
-				<div className="flex items-center space-x-2">
-					<Clock className="text-muted-foreground" />
-					<p>
+				<div className="flex items-center gap-2">
+					<Clock className="text-muted-foreground size-6" />
+					<p className='basis-0 flex-1'>
 						Fecha y hora de entrega: Hoy,{' '}
 						{format(new Date(), 'dddd D MMMM', 'es-PE')} entre las 11:51 am y
 						01:21 pm
 					</p>
 				</div>
 				<div className="flex items-center space-x-2">
-					<FileText className="text-muted-foreground" />
-					<p>Comprobante de pago: Boleta</p>
+					<FileText className="text-muted-foreground size-6" />
+					<p className='basis-0 flex-1'>Comprobante de pago: Boleta</p>
 				</div>
 				<div className="flex items-center space-x-2">
-					<Wallet className="text-muted-foreground" />
-					<p>Medio de pago: <span className='capitalize'>{PAYMENT_METHOD_MOD[paymentMethod]}</span></p>
+					<Wallet className="text-muted-foreground size-6" />
+					<p className='basis-0 flex-1'>Medio de pago: <span className='capitalize'>{PAYMENT_METHOD_MOD[paymentMethod]}</span></p>
 				</div>
 				<div className="w-full flex justify-center items-center">
 					<CulqiButton />

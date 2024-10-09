@@ -1,30 +1,67 @@
 import * as z from 'zod'
 
+const isNumber = (value: string) => /^\d+$/.test(value)
+
 export const checkoutPersonDataSchema = z.object({
 	firstName: z.string().min(1, 'El nombre es requerido'),
 	lastName: z.string().min(1, 'Los apellidos son requeridos'),
 	phone: z
 		.string()
 		// Eliminamos caracteres no numéricos y verificamos si lo que queda es un número válido
-		.refine((phone) => /^\d+$/.test(phone.replace(/\D/g, '')), {
-			message: 'El teléfono debe contener solo números',
+		.trim()
+		.refine(isNumber, {
+			message: 'Solo se permiten números',
 		})
 		// Validamos que tenga al menos 9 dígitos
-		.refine((phone) => phone.replace(/\D/g, '').length >= 9, {
-			message: 'El teléfono debe tener al menos 9 dígitos',
+		.refine((phone) => phone.length > 5, {
+			message: 'El teléfono debe tener mas de 5 caracteres',
+		})
+		.refine((phone) => phone.length < 15, {
+			message: 'El teléfono debe tener menos de 15 caracteres',
 		}),
 	email: z.string().email('Correo electrónico inválido'),
 	typeDocument: z.enum(['DNI', 'PASSPORT', 'FOREIGNER_CARD'], {
 		errorMap: () => ({ message: 'Seleccione un tipo de documento' }),
 	}),
 	countryId: z.number().min(1, 'Seleccione un país'),
-	numberDocument: z.string().min(1, 'El número de documento es requerido'),
+	numberDocument: z
+		.string()
+		.trim()
+		.min(1, 'El número de documento es requerido')
+		.refine(isNumber, {
+			message: 'Solo se permiten números',
+		})
+		// Validamos que tenga al menos 9 dígitos
+		.refine((phone) => phone.length <= 30, {
+			message: 'Debe tener menos de 30 dígitos',
+		}),
 	department: z.string().min(1, 'Seleccione un departamento'),
 	province: z.string().min(1, 'Seleccione una provincia'),
 	district: z.string().min(1, 'Seleccione un distrito'),
-	address: z.string().min(1, 'La dirección es requerida'),
+	address: z
+		.string()
+		.trim()
+		.refine((value) => value.length >= 5, {
+			message: 'Debe tener al menos 6 caracteres',
+		})
+		// Validamos que tenga al menos 9 dígitos
+		.refine((value) => value.length <= 100, {
+			message: 'La direccion es demasiado larga',
+		}),
 	reference: z.string().optional(),
-	postalCode: z.string().min(1, 'El código postal es requerido'),
+	postalCode: z
+		.string()
+		.trim()
+		.refine(isNumber, {
+			message: 'Solo se permiten números',
+		})
+		.refine((phone) => phone.length >= 1, {
+			message: 'Debe tener al menos 1 dígito',
+		})
+		// Validamos que tenga al menos 9 dígitos
+		.refine((phone) => phone.length <= 5, {
+			message: 'Debe tener menos de 5 dígitos',
+		}),
 })
 
 export const checkoutDeliveryTypeSchema = z.object({

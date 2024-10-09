@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 
-import { EmailTemplate } from '@/components/email/EmailTemplateCheckoutSuccess'
+import { EmailCheckoutTemplate } from '@/components/email/EmailCheckout'
 import { ChargeData } from '@/interfaces/culqi/culqi-webhook'
 import { culqiChargeController, orderController } from '@/lib/factoryController'
 import { resend } from '@/lib/resend'
@@ -70,7 +70,7 @@ export async function POST(request: Request) {
 			from: 'melcabo954@lgdevs.com',
 			to: [order?.orderAddress?.email as string, 'melcabo954@gmail.com'],
 			subject: `Orden de compra: ${order.ocNumber} - Bvcfarma - Cliente: ${order?.orderAddress?.firstName} ${order?.orderAddress?.lastName}`,
-			react: EmailTemplate({
+			react: EmailCheckoutTemplate({
 				order,
 			}),
 		})

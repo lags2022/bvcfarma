@@ -25,8 +25,6 @@ export const ProductCartOrCheckout = ({
 }: ProductCartOrCheckoutProps) => {
 	const removeProduct = useCartStore((state) => state.removeProduct)
 
-	console.log(subtotalItem, 'QQQQQQQQQQQQQQQQQQQQQQ')
-
 	return (
 		<div
 			className={cn(

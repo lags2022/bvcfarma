@@ -139,7 +139,7 @@ export default function PageProducts() {
 						</DrawerFooter>
 					</DrawerContent>
 				</Drawer>
-				<div className="mx-auto">
+				<div className="w-full">
 					{!filteredProducts.length ? (
 						<LoaderComponent />
 					) : (

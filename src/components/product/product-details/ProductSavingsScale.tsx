@@ -29,17 +29,17 @@ export const ProductSavingsScale = ({
 					{savingsScale.map((item) => (
 						<TableRow key={item.id} className="*:py-1 *:font-medium">
 							<TableCell className="px-0 w-[63px]">{item.units}</TableCell>
-							<TableCell>S./ {item.precio_lista}</TableCell>
-							<TableCell>{parseFloat(item.descuento) * 100}</TableCell>
-							<TableCell>S./ {item.precio_final}</TableCell>
+							<TableCell>
+								S./ {parseFloat(item.precio_lista).toFixed(2)}
+							</TableCell>
+							<TableCell>
+								{(parseFloat(item.descuento) * 100).toFixed(0)}%
+							</TableCell>
+							<TableCell>
+								S./ {parseFloat(item.precio_final).toFixed(2)}
+							</TableCell>
 						</TableRow>
 					))}
-					{/* <TableRow>
-						<TableCell>2 a más</TableCell>
-						<TableCell>S/ 3.40</TableCell>
-						<TableCell>16</TableCell>
-						<TableCell>S/ 2.86</TableCell>
-					</TableRow> */}
 				</TableBody>
 			</Table>
 		</div>

@@ -1,6 +1,7 @@
 import { OrderItemProduct } from '@prisma/client'
 
 import { executeAction } from '@/helpers/execute-action'
+import { selectTrueKeys } from '@/helpers/select-true-key-prisma'
 import {
 	OrderItemsModelConstructor,
 	OrderItemsModelImplements,
@@ -8,8 +9,6 @@ import {
 import { OrderGetAll } from '@/interfaces/orders/order-get-all'
 import prisma from '@/lib/prisma'
 import { staticImplements } from '@/lib/static'
-
-import { selectTrueKeys } from '../../helpers/select-true-key-prisma'
 
 @staticImplements<OrderItemsModelConstructor>()
 export class OrderItemsModelPrisma implements OrderItemsModelImplements {

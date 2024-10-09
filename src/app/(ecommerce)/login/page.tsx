@@ -1,11 +1,13 @@
 'use client'
 
+import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 import { AuthLogin } from '@/components/auth/AuthLogin'
 import { AuthRegister } from '@/components/auth/AuthRegister'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { LOGIN_GIRL } from '@/constants/general'
 import { getFirstSearchParam } from '@/helpers/getSearchParams'
 import { smoothScrollToTop } from '@/helpers/smooth-scroll-top'
 
@@ -25,7 +27,16 @@ export default function LoginPage() {
 	}, [params?.value])
 
 	return (
-		<div className="flex w-full justify-center items- p-4 bg-gray-50">
+		<div className="flex w-full justify-center items-start p-4 py-8 gap-6 bg-gray-50">
+			<div className='shadow-lg rounded-md overflow-hidden hidden lg:block'>
+				<Image
+					src={LOGIN_GIRL}
+					alt="Logo"
+					width={1024}
+					height={1024}
+					className="aspect-square size-[420px] object-contain"
+				/>
+			</div>
 			<Tabs
 				defaultValue="login"
 				value={activeTab}

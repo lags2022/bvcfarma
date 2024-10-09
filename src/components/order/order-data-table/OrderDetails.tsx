@@ -1,76 +1,69 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import { useShallow } from 'zustand/react/shallow'
+import { Order, OrderItemProduct } from '@prisma/client'
+import { ArrowLeft } from 'lucide-react'
+import { useEffect } from 'react'
 
-import { getOrderItems } from '@/actions/order-items'
 import { ButtonGeneral } from '@/components/button/ButtonGeneral'
 import { DetailsOrder } from '@/components/shared/DetailsOrder'
-import { LoaderComponent } from '@/components/shared/Loader'
-import { useOrderItemsStore } from '@/context/useOrderItemsStore'
+import { STATUS_ORDER_MOD } from '@/constants/enum-mod'
+import { pluralizeWord } from '@/helpers/plurize-word'
 import { smoothScrollToTop } from '@/helpers/smooth-scroll-top'
-import { OrderGetAll } from '@/interfaces/orders/order-get-all'
 
 import { OrderStatus } from './OrderStatus'
 
-export const OrderDetails = () => {
-	const [setSlideIn, details] = useOrderItemsStore(
-		useShallow((state) => [state.setSlideIn, state.details]),
-	)
-
-	let cancelScrollAnimationRef = useRef<() => void>()
-
-	const [orderItems, setOrderItems] = useState<OrderGetAll['orderItems']>([])
-
+export const OrderDetails = ({
+	order: order,
+}: {
+	order: Order & {
+		orderItems?: OrderItemProduct[]
+	}
+}) => {
 	useEffect(() => {
-		const getOrders = async () => {
-			const orderItems = await getOrderItems(details.orderId)
-			setOrderItems(orderItems)
-		}
-
-		if (details.orderId) {
-			getOrders()
-			cancelScrollAnimationRef.current = smoothScrollToTop()
-		}
+		const cancelScrollAnimation = smoothScrollToTop()
 
 		return () => {
-			if (cancelScrollAnimationRef.current) {
-				cancelScrollAnimationRef.current()
-			}
-			setOrderItems([])
+			cancelScrollAnimation()
 		}
-	}, [details.orderId])
-
-	if (!orderItems || orderItems?.length === 0) {
-		return <LoaderComponent />
-	}
+	}, [])
 
 	return (
-		<div className="contain">
-			<div className="bg-white shadow-md rounded-lg flex justify-between flex-col sm:flex-row w-full relative p-6 gap-10">
-				<ButtonGeneral
-					onClick={() => setSlideIn(false)}
-					size="icon"
-					className="absolute !size-8 right-4 top-4"
-				>
-					X
-				</ButtonGeneral>
+		<div className="w-full">
+			<div className="flex flex-col justify-center items-start gap-4">
+				<div className="flex justify-center items-center gap-2">
+					<ButtonGeneral href="/orders" size="icon" className="">
+						<ArrowLeft />
+					</ButtonGeneral>
+					<h2 className="text-lg font-bold flex flex-col gap-2 tracking-tight">
+						Orden {order.ocNumber} |{' '}
+						{pluralizeWord({
+							quantity: order.quantityItems,
+							singular: 'item',
+							language: 'en',
+						})}
+					</h2>
+				</div>
+				<p className="text-muted-foreground">
+					Detalles del pedido y seguimiento
+				</p>
+			</div>
+			<div className="bg-white shadow-md rounded-lg flex justify-between flex-col sm:flex-row w-full p-6 gap-6">
 				<div className="sm:w-1/2">
 					<h3 className="font-semibold mb-4">Productos</h3>
 					<DetailsOrder
-						productsCart={orderItems}
-						subtotal={details.subtotal}
-						totalCart={details.totalCart}
-						discount={details.discount}
-						shippingCost={details.shippingCost}
-						totalCheckout={details.totalCheckout}
+						productsCart={order.orderItems!}
+						subtotal={order.subtotal}
+						totalCart={order.totalCart}
+						discount={order.discount}
+						shippingCost={order.shippingCost}
+						totalCheckout={order.total}
 						typeComponentShopping="checkout"
 					/>
 				</div>
 				<div className="sm:w-1/2">
 					<h3 className="font-semibold mb-4">Order Tracking</h3>
 					<div className="space-y-6">
-						<OrderStatus status={details.status} />
+						<OrderStatus status={STATUS_ORDER_MOD[order.status]} />
 					</div>
 				</div>
 			</div>

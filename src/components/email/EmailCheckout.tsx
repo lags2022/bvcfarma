@@ -17,6 +17,7 @@ import {
 } from '@react-email/components'
 import { CSSProperties } from 'react'
 
+import { DELIVERY_TYPE_MOD, PAYMENT_METHOD_MOD } from '@/constants/enum-mod'
 import {
 	URL_BASE,
 	COLOR_PRIMARY,
@@ -29,7 +30,7 @@ import {
 } from '@/constants/general'
 import { modDate } from '@/helpers/mod-date'
 
-export const EmailTemplate = ({
+export const EmailCheckoutTemplate = ({
 	order,
 }: {
 	order: Order & {
@@ -73,17 +74,6 @@ export const EmailTemplate = ({
 							<Text style={{ margin: '0px' }}>Estado de Ordenes</Text>
 						</Button>
 					</Section>
-					{/* <Section style={track.container}>
-					<Row>
-						<Column>
-							<Text style={global.paragraphWithBold}>Tracking Number</Text>
-							<Text style={track.number}>1ZV218970300071628</Text>
-						</Column>
-						<Column align="right">
-							<Link style={global.button}>Track Package</Link>
-						</Column>
-					</Row>
-				</Section> */}
 					<Hr style={global.hr} />
 					<Section style={global.defaultPadding}>
 						<Text style={adressTitle}>
@@ -93,11 +83,29 @@ export const EmailTemplate = ({
 						<Text style={{ ...global.text, fontSize: 14 }}>
 							Dirección: {order?.orderAddress?.address || ''}
 						</Text>
+						<Text style={{ ...global.text, fontSize: 14 }}>
+							Teléfono: {order?.orderAddress?.phone || ''}
+						</Text>
+						<Text style={{ ...global.text, fontSize: 14 }}>
+							Forma de envío: {DELIVERY_TYPE_MOD[order?.deliveryType] || ''}
+						</Text>
+						<Text
+							style={{
+								...global.text,
+								fontSize: 14,
+								textTransform: 'capitalize',
+							}}
+						>
+							Método de pago: {PAYMENT_METHOD_MOD[order?.paymentMethod] || ''}
+						</Text>
 					</Section>
 					<Hr style={global.hr} />
+
+					{/* ordenes */}
 					<Section
 						style={{ ...paddingX, paddingTop: '40px', paddingBottom: '40px' }}
 					>
+						<Text style={adressTitle}>Detalles de la orden</Text>
 						{order?.orderItems?.map((item) => (
 							<Row align="center" key={item.id}>
 								<Column>
@@ -107,7 +115,13 @@ export const EmailTemplate = ({
 									align="left"
 									style={{ verticalAlign: 'top', paddingLeft: '12px' }}
 								>
-									<Text style={{ ...paragraph, fontWeight: '500' }}>
+									<Text
+										style={{
+											...paragraph,
+											fontWeight: '500',
+											textTransform: 'capitalize',
+										}}
+									>
 										{item.name}
 									</Text>
 									<Text style={global.text}>
@@ -117,33 +131,39 @@ export const EmailTemplate = ({
 								</Column>
 							</Row>
 						))}
-
-						{/* <Row>
-							<Column>
-								<Img
-									src={`${baseUrl}/static/nike-product.png`}
-									alt="ddd"
-									style={{ float: 'left' }}
-									width="60px"
-								/>
-							</Column>
-							<Column style={{ verticalAlign: 'top', paddingLeft: '12px' }}>
-								<Text style={{ ...paragraph, fontWeight: '500' }}>
-									Brazil 2022/23 Stadium Away Women's Nike Dri-FIT Soccer Jersey
-								</Text>
-								<Text style={global.text}>Size L (12–14)</Text>
-							</Column>
-						</Row> */}
 					</Section>
 					<Hr style={global.hr} />
 					<Section style={global.defaultPadding}>
 						<Row style={{ display: 'flex', marginBottom: 20 }}>
 							<Column style={{ paddingRight: '20px' }}>
-								<Text style={global.paragraphWithBold}>Order Number</Text>
+								<Text style={global.paragraphWithBold}>Subtotal</Text>
+								<Text style={track.number}>
+									S./ {order?.totalCart.toFixed(2) || ''}
+								</Text>
+							</Column>
+							<Column style={{ paddingRight: '20px' }}>
+								<Text style={global.paragraphWithBold}>Envio</Text>
+								<Text style={track.number}>
+									S./ {order?.shippingCost.toFixed(2) || ''}
+								</Text>
+							</Column>
+							<Column>
+								<Text style={global.paragraphWithBold}>Total</Text>
+								<Text style={track.number}>
+									S./ {order?.total.toFixed(2) || ''}
+								</Text>
+							</Column>
+						</Row>
+					</Section>
+					<Hr style={global.hr} />
+					<Section style={global.defaultPadding}>
+						<Row style={{ display: 'flex', marginBottom: 20 }}>
+							<Column style={{ paddingRight: '20px' }}>
+								<Text style={global.paragraphWithBold}>OC</Text>
 								<Text style={track.number}>{order?.ocNumber || ''}</Text>
 							</Column>
 							<Column>
-								<Text style={global.paragraphWithBold}>Order Date</Text>
+								<Text style={global.paragraphWithBold}>Fecha de compra</Text>
 								<Text style={track.number}>
 									{modDate(order?.paidAt as Date, 'full') || ''}
 								</Text>

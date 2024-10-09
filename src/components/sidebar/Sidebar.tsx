@@ -62,7 +62,9 @@ export const Sidebar = ({
 					icon={<LogOut />}
 					label="Cerrar sesión"
 					isExpanded={isExpanded}
-					onClick={() => logoutAction()}
+					onClick={async () => {
+						await logoutAction()
+					}}
 				/>
 			</div>
 		</div>

@@ -46,3 +46,6 @@ export const orderSchema = z.object({
 })
 
 export type OrderSchemaType = z.infer<typeof orderSchema>
+
+export const orderParsed = (orders: OrderGetAll[]) =>
+	z.array(orderSchema).parse(transformedOrders(orders))

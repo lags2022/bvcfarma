@@ -30,7 +30,6 @@ export const DetailsOrder = ({
 	typeComponentShopping,
 	setShowCart,
 }: DetailsOrderProps) => {
-
 	return (
 		<div
 			className={cn(

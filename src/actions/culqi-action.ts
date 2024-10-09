@@ -132,6 +132,8 @@ export async function createCharge(token: any, dataCheckout: DataCheckout) {
 				},
 			})
 
+			console.log('NEW ORDER', newOrder)
+
 			cookies().set({
 				name: 'success-order',
 				value: 'true',

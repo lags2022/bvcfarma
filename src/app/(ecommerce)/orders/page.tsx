@@ -1,17 +1,26 @@
-import { z } from 'zod'
-
 import { getOrders } from '@/actions/order-action'
-import { Orders } from '@/components/order/Orders'
-import { orderSchema, transformedOrders } from '@/schemas/order-data-schema'
+import { orderColumnsUser } from '@/components/order/order-columns-use-case/orderColumnsUser'
+import { Order } from '@/components/order/order-data-table/Order'
+import { orderParsed } from '@/schemas/order-data-schema'
 
 export default async function OrdersPage() {
 	const orders = await getOrders()
 
-	const orderParse = z.array(orderSchema).parse(transformedOrders(orders))
+	const orderParse = orderParsed(orders)
 
 	return (
-		<div className="text-sm space-y-6 py-4 md:py-6 w-full">
-			<Orders data={orderParse} />
-		</div>
+		<main className="text-sm space-y-6 py-4 md:py-6">
+			<div className="flex flex-col contain justify-center items-start gap-4">
+				<h2 className="text-lg font-bold flex flex-col gap-2 tracking-tight">
+					Lista de pedidos ({orderParse.length})
+				</h2>
+				<p className="text-muted-foreground">
+					Detalles del pedido y seguimiento
+				</p>
+			</div>
+			<div className="w-full overflow-hidden">
+				<Order data={orderParse} columns={orderColumnsUser} />
+			</div>
+		</main>
 	)
 }
