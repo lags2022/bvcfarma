@@ -1,5 +1,6 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
+import { AVATAR_FALLBACK } from '@/constants/general'
 import { cn } from '@/lib/utils'
 
 import { ThemeSwitch } from '../shared/ThemeSwitch'
@@ -53,7 +54,7 @@ export const DashboardMain = ({
 						</form> */}
 						<ThemeSwitch />
 						<Avatar>
-							<AvatarImage src="/placeholder-user.jpg" alt="User" />
+							<AvatarImage src={AVATAR_FALLBACK} alt="User" />
 							<AvatarFallback>U</AvatarFallback>
 						</Avatar>
 					</div>

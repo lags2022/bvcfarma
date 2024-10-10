@@ -1,4 +1,11 @@
-import { Prisma, User, Order, CulqiCharge, OrderAddress } from '@prisma/client'
+import {
+	Prisma,
+	User,
+	Order,
+	CulqiCharge,
+	OrderAddress,
+	UserAddress,
+} from '@prisma/client'
 
 import { ResponseStatus } from './general'
 import { CrudBasic } from './generic'
@@ -20,6 +27,9 @@ export interface UserModelConstructor
 		userId: string,
 		newFavorites: number[],
 	): Promise<ResponseStatus>
+	getUserWithUserAddress(
+		userId: string,
+	): Promise<User & { address: UserAddress }>
 }
 
 // Order Model
@@ -53,5 +63,5 @@ export interface CulqiChargeModelConstructor
 export interface OrderItemsModelImplements {}
 export interface OrderItemsModelConstructor {
 	new (): OrderItemsModelImplements
-  getAllByOrderId(orderId: string): Promise<OrderGetAll['orderItems']>
+	getAllByOrderId(orderId: string): Promise<OrderGetAll['orderItems']>
 }

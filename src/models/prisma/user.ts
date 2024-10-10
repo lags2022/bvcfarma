@@ -1,4 +1,4 @@
-import { Prisma, User } from '@prisma/client'
+import { Prisma, User, UserAddress } from '@prisma/client'
 
 import { executeAction } from '@/helpers/execute-action'
 import { ResponseStatus } from '@/interfaces/general'
@@ -72,6 +72,18 @@ export class UserModelPrisma implements UserModelImplements {
 		return executeAction(async () => {
 			const user = await prisma.user.findUnique({
 				where,
+				// select: {
+				// 	id: true,
+				// 	name: true,
+				// 	email: true,
+				// 	emailVerified: true,
+				// 	favorites: true,
+				// 	role: true,
+				// 	birthdate: true,
+				// 	ruc: true,
+				// 	colorTheme: true,
+				// 	isActive: true,
+				// },
 			})
 
 			if (!user) {
@@ -79,6 +91,27 @@ export class UserModelPrisma implements UserModelImplements {
 			}
 
 			return user
+		})
+	}
+
+	static async getUserWithUserAddress(
+		userId: string,
+	): Promise<User & { address: UserAddress }> {
+		return executeAction(async () => {
+			const user = await prisma.user.findUnique({
+				where: {
+					id: userId,
+				},
+				include: {
+					address: true,
+				},
+			})
+
+			if (!user) {
+				throw new Error('Usuario no encontrado')
+			}
+
+			return user as User & { address: UserAddress }
 		})
 	}
 }

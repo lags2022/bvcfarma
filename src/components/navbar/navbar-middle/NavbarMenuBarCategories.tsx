@@ -259,7 +259,7 @@ export const NavbarMenuBarCategories = ({
 							</ButtonGeneral>
 						</div>
 					) : (
-						<nav className="flex flex-col items-center [&>a>button]:gap-2 [&>a>button]:justify-start w-full [&>a]:w-full [&>a>button]:w-full [&>a>button]:text-base py-1 pb-2 [&>a>button]:rounded-sm text-gray-500 hover:text-gray-500">
+						<nav className="flex flex-col items-center [&>a>button]:gap-2 [&>a>button]:justify-start w-full [&>a]:w-full [&>a>button]:w-full [&>a>button]:text-base py-1 pb-2 [&>a>button]:rounded-sm gap-1 text-gray-500 hover:text-gray-500">
 							<div className="w-full px-4 py-2 flex items-center justify-between font-semibold text-base text-black">
 								<span className="truncate w-40">
 									{session?.user?.name || session?.user?.email}

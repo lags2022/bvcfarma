@@ -47,8 +47,8 @@ export const AuthLogin = () => {
 		<div className="p-4 sm:p-6 !pt-4 text-sm">
 			{/* <h2 className="text-2xl font-bold mb-4">Iniciar sesión</h2> */}
 			<p className="text-gray-600 mb-6">
-				Por favor, inicia sesión usando los detalles de la cuenta a
-				continuación.
+				Por favor, inicia sesión a continuación usando los detalles de la
+				cuenta.
 			</p>
 			<form action={handleSubmit} className="space-y-4">
 				<div>

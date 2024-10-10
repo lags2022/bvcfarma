@@ -44,3 +44,4 @@ export const COLOR_PRIMARY = '#0893CC'
 // Images
 export const LOGIN_GIRL =
 	'https://res.cloudinary.com/dvozbuwkx/image/upload/v1728512504/girl_login_easdgr.webp'
+export const AVATAR_FALLBACK ="https://github.com/shadcn.png"

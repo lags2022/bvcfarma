@@ -1,11 +1,13 @@
 import { Session } from 'next-auth'
 
+import { AVATAR_FALLBACK } from '@/constants/general'
+
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 
 export const AvatarCustom = ({ session }: { session?: Session | null }) => {
 	return (
 		<Avatar className="size-7">
-			<AvatarImage src="https://github.com/shadcn.png" />
+			<AvatarImage src={AVATAR_FALLBACK} />
 			<AvatarFallback>
 				{session?.user
 					?.name!.split(' ')
