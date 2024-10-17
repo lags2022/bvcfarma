@@ -1,27 +1,20 @@
-import { LogOut } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { logoutAction } from '@/actions/auth-action'
-import { SIDEBAR_ITEMS } from '@/constants/dashboard'
 import { LOGO, NAME } from '@/constants/general'
 import { cn } from '@/lib/utils'
 
-import { SidebarItem } from '../sidebar/SidebarItem'
-export const Sidebar = ({
-	isExpanded,
-	toggleSidebar,
-}: {
-	isExpanded: boolean
-	toggleSidebar: () => void
-}) => {
+import { SidebarContent } from './SidebarContent'
+
+export const Sidebar = ({ isExpanded }: { isExpanded: boolean }) => {
 	return (
 		<div
 			className={cn(
-				'bg-light dark:bg-dark transition-[width] ease duration-300 z-50 h-screen flex flex-col border-r',
+				'bg-light dark:bg-dark transition-[width] ease duration-300 z-50 h-dvh hidden lg:flex flex-col border-r',
 				isExpanded ? 'w-56' : 'w-[72px]',
 			)}
 		>
+			{/* logo de la empresa */}
 			<Link href="/" className="flex items-center gap-1 p-4">
 				{/* <Package2Icon className="h-8 w-8 flex-shrink-0" /> */}
 				<Image
@@ -42,31 +35,8 @@ export const Sidebar = ({
 					)}
 				/>
 			</Link>
-			<div className="flex-1 overflow-y-auto">
-				<nav className="flex flex-col gap-2 p-2">
-					{SIDEBAR_ITEMS.map((item) => (
-						<SidebarItem
-							key={item.label}
-							icon={item.icon}
-							label={item.label}
-							badge={item.badge}
-							isExpanded={isExpanded}
-							href={item.href}
-							onClick={() => isExpanded && toggleSidebar()}
-						/>
-					))}
-				</nav>
-			</div>
-			<div className="py-4 px-2">
-				<SidebarItem
-					icon={<LogOut />}
-					label="Cerrar sesión"
-					isExpanded={isExpanded}
-					onClick={async () => {
-						await logoutAction()
-					}}
-				/>
-			</div>
+
+			<SidebarContent isExpanded={isExpanded} />
 		</div>
 	)
 }

@@ -1,9 +1,12 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
 
-import { AVATAR_FALLBACK } from '@/constants/general'
+import { AVATAR_FALLBACK, LOGO, LOGO_NAME } from '@/constants/general'
 import { cn } from '@/lib/utils'
 
 import { ThemeSwitch } from '../shared/ThemeSwitch'
+import { SiderbarMenuBar } from '../sidebar/SiderbarMenuBar'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
@@ -27,13 +30,30 @@ export const DashboardMain = ({
 			)}
 		>
 			<header className="bg-light dark:bg-dark">
-				<div className="flex items-center justify-between pr-4 py-3">
-					<div className="flex items-center justify-center gap-1">
+				<div className="flex items-center justify-between px-4 lg:pl-0 lg:pr-4 py-3">
+					<div className="flex items-center justify-center gap-x-4 lg:gap-x-0">
+						<SiderbarMenuBar />
+						<Link href="/">
+							<Image
+								src={LOGO}
+								alt="Logo"
+								width={384}
+								height={321}
+								className="aspect-[384/321] w-9 object-contain block sm:hidden"
+							/>
+							<Image
+								src={LOGO_NAME}
+								alt="Logo"
+								width={946}
+								height={264}
+								className="aspect-[946/264] w-28 h-9 hidden sm:block lg:hidden object-contain"
+							/>
+						</Link>
 						<Button
 							variant="ghost"
 							size="icon"
 							onClick={toggleSidebar}
-							className="flex-shrink-0"
+							className="hidden lg:flex flex-shrink-0"
 						>
 							{isExpanded ? (
 								<ChevronLeft className="size-4" />
@@ -41,17 +61,19 @@ export const DashboardMain = ({
 								<ChevronRight className="size-4" />
 							)}
 						</Button>
-						<h1 className="text-2xl font-semibold">{nameSidebar}</h1>
+						<h1 className="text-2xl hidden lg:block font-semibold">
+							{nameSidebar}
+						</h1>
 					</div>
 
 					<div className="flex items-center space-x-4">
-						{/* <form>
+						<form>
 							<Input
 								type="search"
 								placeholder="Search orders..."
-								className="w-64"
+								className="max-w-36 sm:max-w-64"
 							/>
-						</form> */}
+						</form>
 						<ThemeSwitch />
 						<Avatar>
 							<AvatarImage src={AVATAR_FALLBACK} alt="User" />
