@@ -7,8 +7,10 @@ import { SidebarItem } from './SidebarItem'
 
 export const SidebarContent = ({
 	isExpanded = true,
+	handleClose,
 }: {
 	isExpanded?: boolean
+	handleClose?: () => void
 }) => {
 	return (
 		<>
@@ -23,6 +25,7 @@ export const SidebarContent = ({
 							badge={item.badge}
 							isExpanded={isExpanded}
 							href={item.href}
+							onClick={handleClose}
 						/>
 					))}
 				</nav>
@@ -35,6 +38,7 @@ export const SidebarContent = ({
 					label="Cerrar sesión"
 					isExpanded={isExpanded}
 					onClick={async () => {
+						handleClose && handleClose()
 						await logoutAction()
 					}}
 				/>

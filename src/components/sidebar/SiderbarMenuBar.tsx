@@ -14,9 +14,13 @@ export const SiderbarMenuBar = () => {
 	const [open, setOpen] = useState(false)
 	const isDesktop = useMediaQuery('(min-width: 1024px)')
 
+	const handleClose = () => {
+		setOpen(false)
+	}
+
 	useEffect(() => {
 		if (isDesktop) {
-			setOpen(false)
+			handleClose()
 		}
 	}, [isDesktop])
 
@@ -42,8 +46,8 @@ export const SiderbarMenuBar = () => {
 					</Link>
 
 					{/* Content of the sidebar */}
-					<div className="h-[calc(100%-32px)] flex flex-col pt-1 justify-between">
-						<SidebarContent />
+					<div className="h-[calc(100%-32px)] flex flex-col pt-2 justify-between">
+						<SidebarContent handleClose={handleClose} />
 					</div>
 
 					<ScrollBar orientation="vertical" />

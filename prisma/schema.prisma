@@ -28,6 +28,9 @@ model User {
   colorTheme    String    @default("#0274AE") @map("color_theme") @db.VarChar(7)
   isActive      Boolean   @default(true) @map("is_active")
 
+  // for test before in production, remove this field
+  testField Boolean? @map("test_field")
+
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
@@ -237,23 +240,3 @@ enum TypeDocument {
   PASSPORT
   FOREIGNER_CARD
 }
-
-// model CulqiCharge {
-//   id                 String   @id @default(cuid()) // ID único
-//   creationDate       Int      // Fecha de creación
-//   amount             Int      // Monto total
-//   amountRefunded     Int      // Monto reembolsado
-//   currentAmount      Int      // Monto actual
-//   currencyCode       String   // Código de moneda
-//   description        String   // Descripción del pago
-//   installments       Int      // Número de cuotas
-//   statementDescriptor String   // Descriptor del estado de cuenta
-//   paid               Boolean   // Estado de pago
-//   dispute            Boolean   // Indica si hay una disputa
-//   referenceCode      String   // Código de referencia
-//   sourceId           String   // ID del token de la fuente
-//   sourceType         String   // Tipo de fuente (ej. tarjeta)
-//   fraudScore         Int      // Puntuación de fraude
-//   userMessage        String   // Mensaje para el usuario
-//   merchantMessage     String   // Mensaje para el comerciante
-// }

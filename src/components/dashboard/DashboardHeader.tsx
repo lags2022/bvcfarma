@@ -14,12 +14,10 @@ import { Input } from '../ui/input'
 export const DashboardMain = ({
 	toggleSidebar,
 	isExpanded,
-	nameSidebar,
 	children,
 }: {
 	toggleSidebar: () => void
 	isExpanded: boolean
-	nameSidebar?: string
 	children: React.ReactNode
 }) => {
 	return (
@@ -31,7 +29,7 @@ export const DashboardMain = ({
 		>
 			<header className="bg-light dark:bg-dark">
 				<div className="flex items-center justify-between px-4 lg:pl-0 lg:pr-4 py-3">
-					<div className="flex items-center justify-center gap-x-4 lg:gap-x-0">
+					<div className="flex items-center justify-center gap-x-6 lg:gap-x-0">
 						<SiderbarMenuBar />
 						<Link href="/">
 							<Image
@@ -61,9 +59,6 @@ export const DashboardMain = ({
 								<ChevronRight className="size-4" />
 							)}
 						</Button>
-						<h1 className="text-2xl hidden lg:block font-semibold">
-							{nameSidebar}
-						</h1>
 					</div>
 
 					<div className="flex items-center space-x-4">
