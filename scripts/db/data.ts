@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client'
+import { Prisma, Role } from '@prisma/client'
 import { hashSync } from 'bcryptjs'
 
 export const COUNTRIES_SEED: Prisma.CountryCreateInput = {
@@ -147,6 +147,37 @@ const ORDERS_SEED_2: Prisma.OrderCreateNestedManyWithoutUserInput = {
 	],
 }
 
+export const USERS_CREDENTIALS_TEST = [
+	{
+		email: 'lguzman.58erb@outlook.com',
+		password: 'usuario1pass',
+		role: 'CUSTOMER',
+	},
+	{
+		email: 'cesac90.mro@gmail.com',
+		password: 'usuario2pass',
+		role: 'OWNER',
+	},
+]
+
+export const USERS_FIELD_TEST: Prisma.UserCreateInput[] = [
+	{
+		name: 'Usuario 1',
+		email: USERS_CREDENTIALS_TEST[0].email,
+		password: hashSync(USERS_CREDENTIALS_TEST[0].password, 10),
+		favorites: [7, 4, 2, 10],
+		orders: ORDERS_SEED_1,
+		testField: true,
+	},
+	{
+		name: 'Propietario 1',
+		email: USERS_CREDENTIALS_TEST[1].email,
+		password: hashSync(USERS_CREDENTIALS_TEST[1].password, 10),
+		role: USERS_CREDENTIALS_TEST[1].role as Role,
+		testField: true,
+	},
+]
+
 export const USERS: Prisma.UserCreateInput[] = [
 	{
 		name: 'Luchex Admin',
@@ -161,19 +192,7 @@ export const USERS: Prisma.UserCreateInput[] = [
 		ruc: '12345678901',
 		role: 'MERCHANT',
 	},
-	{
-		name: 'Propietario 1',
-		email: 'cesac90.mro@gmail.com',
-		password: hashSync('emulnor1865owner', 10),
-		role: 'OWNER',
-	},
-	{
-		name: 'Luis Angel User 1',
-		email: 'lguzman.58erb@outlook.com',
-		password: hashSync('emulnor1865', 10),
-		favorites: [7, 4, 2, 10],
-		orders: ORDERS_SEED_1,
-	},
+	...USERS_FIELD_TEST,
 	{
 		name: 'User 2',
 		email: 'user2@gmail.com',

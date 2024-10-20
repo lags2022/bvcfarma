@@ -1,9 +1,12 @@
 'use server'
 
+import bcrypt from 'bcryptjs'
 import { redirect } from 'next/navigation'
 
 import { auth } from '@/auth'
 import { userController } from '@/lib/factoryController'
+
+import { USERS_FIELD_TEST } from '../../scripts/db/data'
 
 async function getUserIdBySession(shouldRedirect: boolean = true) {
 	try {

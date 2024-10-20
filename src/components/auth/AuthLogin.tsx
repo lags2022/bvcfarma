@@ -1,5 +1,6 @@
 'use client'
 
+import { User } from '@prisma/client'
 import { EyeIcon, EyeOffIcon } from 'lucide-react'
 import { useState, useTransition } from 'react'
 import toast from 'react-hot-toast'
@@ -8,17 +9,27 @@ import { loginAction } from '@/actions/auth-action'
 import { ButtonGeneral } from '@/components/button/ButtonGeneral'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+
+import { AuthTestOwner } from './AuthTestOwner'
+import { USERS_CREDENTIALS_TEST } from '../../../scripts/db/data'
 // import { useLastRouteStore } from '@/context/useLastRouteStore'
 
 export const AuthLogin = () => {
 	const [showPassword, setShowPassword] = useState(false)
 	const [isPending, startTransition] = useTransition()
+	const [isOwner, setIsOwner] = useState(false)
 	// const { lastRoute, setLastRoute } = useLastRouteStore(
 	// 	useShallow((state) => ({
 	// 		lastRoute: state.lastRoute,
 	// 		setLastRoute: state.setLastRoute,
 	// 	})),
 	// )
+
+	const handleOwner = () => setIsOwner(!isOwner)
+
+	const userTest = USERS_CREDENTIALS_TEST.find((user) =>
+		isOwner ? user.role === 'OWNER' : user.role === 'CUSTOMER',
+	)
 
 	const handleSubmit = (formData: FormData) => {
 		if (!formData.get('email') && !formData.get('password')) return
@@ -59,6 +70,7 @@ export const AuthLogin = () => {
 						placeholder="Dirección de correo electrónico"
 						className="focus-visible:ring-picker-3"
 						disabled={isPending}
+						value={userTest?.email}
 					/>
 				</div>
 				<div>
@@ -70,6 +82,7 @@ export const AuthLogin = () => {
 							placeholder="Contraseña"
 							className="focus-visible:ring-picker-3"
 							disabled={isPending}
+							value={userTest?.password}
 						/>
 						<Button
 							type="button"
@@ -93,6 +106,7 @@ export const AuthLogin = () => {
 				<a href="#" className="text-picker-3 hover:underline">
 					¿Olvidaste tu contraseña?
 				</a>
+				<AuthTestOwner isOwner={isOwner} handleToggle={handleOwner} />
 				<ButtonGeneral type="submit" disabled={isPending}>
 					Iniciar sesión
 				</ButtonGeneral>

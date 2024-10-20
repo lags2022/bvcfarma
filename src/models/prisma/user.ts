@@ -66,6 +66,27 @@ export class UserModelPrisma implements UserModelImplements {
 		})
 	}
 
+	static async getUserWithUserAddress(
+		userId: string,
+	): Promise<User & { address: UserAddress }> {
+		return executeAction(async () => {
+			const user = await prisma.user.findUnique({
+				where: {
+					id: userId,
+				},
+				include: {
+					address: true,
+				},
+			})
+
+			if (!user) {
+				throw new Error('Usuario no encontrado')
+			}
+
+			return user as User & { address: UserAddress }
+		})
+	}
+
 	private static async getUser(
 		where: Prisma.UserWhereUniqueInput,
 	): Promise<User> {
@@ -91,27 +112,6 @@ export class UserModelPrisma implements UserModelImplements {
 			}
 
 			return user
-		})
-	}
-
-	static async getUserWithUserAddress(
-		userId: string,
-	): Promise<User & { address: UserAddress }> {
-		return executeAction(async () => {
-			const user = await prisma.user.findUnique({
-				where: {
-					id: userId,
-				},
-				include: {
-					address: true,
-				},
-			})
-
-			if (!user) {
-				throw new Error('Usuario no encontrado')
-			}
-
-			return user as User & { address: UserAddress }
 		})
 	}
 }
