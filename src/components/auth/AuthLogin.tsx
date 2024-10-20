@@ -106,7 +106,7 @@ export const AuthLogin = () => {
 				<a href="#" className="text-picker-3 hover:underline">
 					¿Olvidaste tu contraseña?
 				</a>
-				<AuthTestOwner isOwner={isOwner} handleToggle={handleOwner} />
+				<AuthTestOwner isPending={isPending} isOwner={isOwner} handleToggle={handleOwner} />
 				<ButtonGeneral type="submit" disabled={isPending}>
 					Iniciar sesión
 				</ButtonGeneral>
