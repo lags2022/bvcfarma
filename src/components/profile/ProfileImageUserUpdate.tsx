@@ -35,6 +35,7 @@ export const ProfileImageUserUpdate = () => {
 				throw new Error(data?.message)
 			}
 
+			console.log(data?.url, 'URL de la imagen')
 		} catch (error: any) {
 			console.error(error)
 			toast.error(error.message)
