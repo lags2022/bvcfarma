@@ -49,19 +49,18 @@ export const NavbarUser = ({ session }: { session?: Session }) => {
 
 					return item.role.includes(userRole)
 				}).map((item) => (
-					<>
+					<div key={item.id}>
 						{item.label === 'Cerrar sesión' && (
 							<Separator className="my-1 w-[93%] mx-auto" />
 						)}
 						<NavbarLink
-							key={item.id}
 							href={item.href}
 							icon={item.icon}
 							label={item.label}
 							isActive={pathname === item.href}
 							onClick={() => item.label === 'Cerrar sesión' && handleLogout()}
 						/>
-					</>
+					</div>
 				))}
 			</DropdownMenuContent>
 		</DropdownMenu>

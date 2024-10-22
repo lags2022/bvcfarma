@@ -1,6 +1,9 @@
+'use client'
+
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
 import { AVATAR_FALLBACK, LOGO, LOGO_NAME } from '@/constants/general'
 import { cn } from '@/lib/utils'
@@ -20,6 +23,17 @@ export const DashboardMain = ({
 	isExpanded: boolean
 	children: React.ReactNode
 }) => {
+	const [urlImage, setUrlImage] = useState('')
+
+	// useEffect(() => {
+	// 	const fetchData = async () => {
+	// 		const response = await fetch(URL_BASE + 'api/cloudinary')
+	// 		const data = await response.json()
+	// 		setUrlImage(data.url)
+	// 	}
+	// 	fetchData()
+	// }, [])
+
 	return (
 		<div
 			className={cn(

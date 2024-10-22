@@ -10,14 +10,14 @@ export const Visa = ({
 		focusable={focusable}
 		{...props}
 	>
-		<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+		<g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
 		<g
 			id="SVGRepo_tracerCarrier"
-			stroke-linecap="round"
-			stroke-linejoin="round"
+			strokeLinecap="round"
+			strokeLinejoin="round"
 		></g>
 		<g id="SVGRepo_iconCarrier">
-			<g fill-rule="evenodd" clip-rule="evenodd">
+			<g fillRule="evenodd" clipRule="evenodd">
 				<path
 					d="M189.922 50.809c0-8.986-4.67-13.444-13.729-13.444H16.562c-4.528 0-7.854 1.203-10.048 3.679-2.476 2.477-3.68 5.661-3.68 9.765v91.138c0 4.104 1.204 7.217 3.68 9.764 2.548 2.477 5.803 3.68 10.048 3.68h159.631c9.059 0 13.729-4.527 13.729-13.443V50.809zm-13.729-11.321c7.5 0 11.322 3.821 11.322 11.321v91.138c0 7.57-3.822 11.32-11.322 11.32H16.562c-3.609 0-6.368-1.061-8.42-3.184-2.123-2.053-3.184-4.883-3.184-8.137V50.809c0-7.5 3.75-11.321 11.604-11.321h159.631z"
 					fill="#315881"

@@ -29,6 +29,8 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { AVATAR_FALLBACK } from '@/constants/general'
 
+import { ProfileImageUserUpdate } from './ProfileImageUserUpdate'
+
 export const Profile = ({
 	user,
 }: {
@@ -36,18 +38,16 @@ export const Profile = ({
 		address: UserAddress
 	}
 }) => {
-	const [avatar, setAvatar] = useState(AVATAR_FALLBACK)
-
-	const handleAvatarChange = (e: any) => {
-		const file = e.target.files[0]
-		if (file) {
-			const reader = new FileReader()
-			reader.onloadend = () => {
-				setAvatar(reader.result as string)
-			}
-			reader.readAsDataURL(file)
-		}
-	}
+	// const handleAvatarChange = (e: any) => {
+	// 	const file = e.target.files[0]
+	// 	if (file) {
+	// 		const reader = new FileReader()
+	// 		reader.onloadend = () => {
+	// 			setAvatar(reader.result as string)
+	// 		}
+	// 		reader.readAsDataURL(file)
+	// 	}
+	// }
 
 	return (
 		<div className="container mx-auto text-sm p-4">
@@ -59,28 +59,8 @@ export const Profile = ({
 					</CardDescription>
 				</CardHeader>
 				<CardContent>
-					<form className="space-y-8">
-						<div className="flex flex-col sm:flex-row items-center gap-4">
-							<Avatar className="w-24 h-24">
-								<AvatarImage src={avatar} alt="Avatar" />
-								<AvatarFallback>UN</AvatarFallback>
-							</Avatar>
-							<div>
-								<Label
-									htmlFor="avatar"
-									className="cursor-pointer inline-flex items-center px-4 py-2 text-primary-foreground rounded-md bg-picker-3 hover:bg-picker-4"
-								>
-									Cambiar foto
-								</Label>
-								<Input
-									id="avatar"
-									type="file"
-									accept="image/*"
-									className="hidden"
-									onChange={handleAvatarChange}
-								/>
-							</div>
-						</div>
+					<form className="space-y-6">
+						<ProfileImageUserUpdate />
 
 						<div className="grid gap-4 sm:grid-cols-2">
 							<div className="space-y-2">
@@ -92,11 +72,11 @@ export const Profile = ({
 								<Input id="email" type="email" placeholder="john@example.com" />
 							</div>
 							<div className="space-y-2">
-								<Label htmlFor="firstName">Nombre</Label>
+								<Label htmlFor="firstName">Nombres</Label>
 								<Input id="firstName" placeholder="John" />
 							</div>
 							<div className="space-y-2">
-								<Label htmlFor="lastName">Apellido</Label>
+								<Label htmlFor="lastName">Apellidos</Label>
 								<Input id="lastName" placeholder="Doe" />
 							</div>
 							<div className="space-y-2 sm:col-span-2">
@@ -105,6 +85,9 @@ export const Profile = ({
 									id="address"
 									placeholder="123 Calle Principal, Ciudad, País"
 								/>
+
+								<Label htmlFor="lastName">Apellidos</Label>
+								<Input id="lastName" placeholder="Doe" />
 							</div>
 							<div className="space-y-2">
 								<Label htmlFor="password">Nueva contraseña</Label>
@@ -120,10 +103,15 @@ export const Profile = ({
 					</form>
 				</CardContent>
 				<CardFooter className="flex flex-col sm:flex-row justify-between items-center gap-4">
-					<Button className="w-full sm:w-auto bg-picker-3 hover:bg-picker-4">Guardar cambios</Button>
+					<Button className="w-full sm:w-auto bg-picker-3 hover:bg-picker-4">
+						Guardar cambios
+					</Button>
 					<AlertDialog>
 						<AlertDialogTrigger asChild>
-							<Button variant="destructive" className="w-full focus-visible:ring-red-500 focus-visible:ring-offset-red-500 sm:w-auto">
+							<Button
+								variant="destructive"
+								className="w-full focus-visible:ring-red-500 focus-visible:ring-offset-red-500 sm:w-auto"
+							>
 								Borrar cuenta
 							</Button>
 						</AlertDialogTrigger>
