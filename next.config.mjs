@@ -22,6 +22,9 @@ const nextConfig = {
 			pathname: `/**`,
 		})),
 	},
+  // env: {
+  //   API_URL: process.env.API_URL,
+  // },
 }
 
 export default nextConfig

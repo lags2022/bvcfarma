@@ -44,4 +44,13 @@ export const COLOR_PRIMARY = '#0893CC'
 // Images
 export const LOGIN_GIRL =
 	'https://res.cloudinary.com/dvozbuwkx/image/upload/v1728512504/girl_login_easdgr.webp'
-export const AVATAR_FALLBACK ="https://github.com/shadcn.png"
+export const AVATAR_FALLBACK = 'https://github.com/shadcn.png'
+
+// cloudinary
+export const CLOUDINARY_UPLOAD_PRESET = 'ml_default'
+
+// env
+export const GOOGLE_API_IMAGE_SEARCH =
+	process.env.NEXT_PUBLIC_CLOUDINARY_API_GOOGLE_IMAGE_SEARCH
+export const CLOUDINARY_CLOUD_NAME =
+	process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME!
