@@ -1,4 +1,3 @@
-import bcrypt from 'bcryptjs'
 import NextAuth from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
 import { ZodError } from 'zod'
@@ -6,7 +5,13 @@ import { ZodError } from 'zod'
 import { userController } from './lib/factoryController'
 import { loginSchema } from './schemas/auth-schema'
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
+export const {
+	handlers,
+	signIn,
+	signOut,
+	auth,
+	unstable_update: updateSession,
+} = NextAuth({
 	pages: {
 		signIn: '/login',
 	},
@@ -21,13 +26,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 				try {
 					const { email, password } = await loginSchema.parseAsync(credentials)
 
-					const user = await userController().getByEmail(email)
-
-					if (!user) throw new Error('User not found')
-
-					const validatePassword = await bcrypt.compare(password, user.password)
-
-					if (!validatePassword) throw new Error('Invalid password')
+					const user = await userController().getByEmail(email, password)
 
 					return user
 				} catch (error) {
@@ -42,19 +41,30 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 		}),
 	],
 	callbacks: {
-		jwt({ token, user }) {
+		jwt({ token, user, session }) {
 			if (user) {
 				token.role = user.role
-				token.colorTheme = user.colorTheme
+				// token.colorTheme = user.colorTheme
 				token.id = user.id
+				token.image = user?.address?.image ?? ''
 			}
+
+			// esto es para que se actualice el name y la image en la session y se muestre en el header
+			if (session?.user?.name) {
+				token.name = session.user.name
+			}
+			if (session?.user?.image || session?.user?.image === '') {
+				token.image = session.user.image
+			}
+
 			return token
 		},
 		session({ session, token }) {
 			if (session?.user) {
 				session.user.role = token.role
-				session.user.colorTheme = token.colorTheme
+				// session.user.colorTheme = token.colorTheme
 				session.user.id = token.id as string
+				session.user.image = token.image
 			}
 			return session
 		},

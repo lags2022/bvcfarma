@@ -36,6 +36,7 @@ export class OrderModelPrisma implements OrderModelImplements {
 			const order = await prisma.order.findUnique({
 				where: {
 					id,
+					isActive: true,
 				},
 				include: {
 					orderAddress: true,
@@ -50,12 +51,12 @@ export class OrderModelPrisma implements OrderModelImplements {
 		value: string,
 		orderAddress?: boolean,
 		culqiCharge?: boolean,
-    orderItems?: boolean,
+		orderItems?: boolean,
 	): Promise<
 		| (Order & {
 				orderAddress?: OrderAddress | null
 				culqiCharge?: CulqiCharge | null
-        orderItems?: OrderItemProduct[]
+				orderItems?: OrderItemProduct[]
 		  })
 		| null
 	> {
@@ -63,11 +64,12 @@ export class OrderModelPrisma implements OrderModelImplements {
 			const order = await prisma.order.findFirst({
 				where: {
 					[field]: value,
+					isActive: true,
 				},
 				include: {
 					orderAddress,
 					culqiCharge,
-          orderItems,
+					orderItems,
 				},
 			})
 			return order
@@ -76,7 +78,11 @@ export class OrderModelPrisma implements OrderModelImplements {
 
 	static async getAll(): Promise<Order[]> {
 		return executeAction(async () => {
-			const orders = await prisma.order.findMany()
+			const orders = await prisma.order.findMany({
+				where: {
+					isActive: true,
+				},
+			})
 			return orders
 		})
 	}
@@ -117,6 +123,7 @@ export class OrderModelPrisma implements OrderModelImplements {
 			const orders = await prisma.order.findMany({
 				where: {
 					userId,
+					isActive: true,
 				},
 				orderBy: {
 					paidAt: 'desc',

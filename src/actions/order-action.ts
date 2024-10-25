@@ -2,17 +2,13 @@
 
 import { orderController } from '@/lib/factoryController'
 
-import { getUserAction } from './user-action'
+import { getIdFromSession } from './session-action'
 
 export async function getOrders() {
 	try {
-		const user = await getUserAction()
+		const userId = await getIdFromSession()
 
-		if (!user) {
-			throw new Error('No hay usuario autenticado')
-		}
-
-		const orders = await orderController().getAllByUserId(user.id)
+		const orders = await orderController().getAllByUserId(userId!)
 
 		return orders
 	} catch (error) {

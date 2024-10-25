@@ -8,13 +8,14 @@ async function main() {
 	try {
 		// Borrar todos los registros de las tablas respetando las relaciones
 
-		await prisma.user.deleteMany({})
-		await prisma.userAddress.deleteMany({})
-		await prisma.country.deleteMany({})
-		await prisma.fieldsAddProduct.deleteMany({})
-		await prisma.order.deleteMany({})
 		await prisma.orderItemProduct.deleteMany({})
+		await prisma.userAddress.deleteMany({})
+		await prisma.culqiCharge.deleteMany({})
 		await prisma.orderAddress.deleteMany({})
+		await prisma.country.deleteMany({})
+		await prisma.order.deleteMany({})
+		await prisma.user.deleteMany({})
+		await prisma.fieldsAddProduct.deleteMany({})
 
 		console.log('All records deleted.')
 
@@ -26,13 +27,12 @@ async function main() {
 		console.log('Country created:', countryCreated)
 
 		// Crear nuevos registros users
-		USERS.forEach(async (user) => {
+		for (const user of USERS) {
 			const userCreated = await prisma.user.create({
 				data: user,
 			})
-
 			console.log('User created:', userCreated)
-		})
+		}
 	} catch (err) {
 		console.error('Error deleting records or creating users:', err)
 		process.exit(1)

@@ -1,35 +1,16 @@
 'use server'
 
-import bcrypt from 'bcryptjs'
 import { redirect } from 'next/navigation'
 
-import { auth } from '@/auth'
+import { auth, updateSession } from '@/auth'
 import { userController } from '@/lib/factoryController'
+import { UserUpdateProfileSchemaType } from '@/schemas/profile-schema'
 
-import { USERS_FIELD_TEST } from '../../scripts/db/data'
+import { logoutAction } from './auth-action'
+import { getIdFromSession } from './session-action'
 
-async function getUserIdBySession(shouldRedirect: boolean = true) {
-	try {
-		const session = await auth()
-		const userId = session?.user.id
-
-		if (!userId) {
-			if (shouldRedirect) {
-				redirect('/login')
-			} else {
-				// throw new Error('No hay usuario autenticado')
-				return
-			}
-		}
-
-		return userId
-	} catch (error) {
-		console.log(error, 'Error en el getUserIdBySession')
-		throw error
-	}
-}
-
-export async function getUserByIdAction({ userId }: { userId: string }) {
+// obtener el usuario por id
+async function getUserById({ userId }: { userId: string }) {
 	try {
 		const user = await userController().getById(userId)
 
@@ -39,27 +20,12 @@ export async function getUserByIdAction({ userId }: { userId: string }) {
 	}
 }
 
-export async function getUserAction(shouldRedirect: boolean = true) {
+// obtener el usuario desde la id de la sesion
+export async function getUser(shouldRedirect: boolean = true) {
 	try {
-		const session = await auth()
-		const userId = session?.user.id
+		const userId = await getIdFromSession(shouldRedirect)
 
-		if (!userId) {
-			if (shouldRedirect) {
-				redirect('/login')
-			} else {
-				// throw new Error('No hay usuario autenticado')
-				return
-			}
-		}
-
-		// const userId = await getUserIdBySession(shouldRedirect)
-
-		// if (!userId) {
-		// 	return
-		// }
-
-		const user = await getUserByIdAction({ userId })
+		const user = await getUserById({ userId: userId! })
 
 		return user
 	} catch (error) {
@@ -67,19 +33,51 @@ export async function getUserAction(shouldRedirect: boolean = true) {
 	}
 }
 
-export async function getUserWithUserAddressAction(
-	shouldRedirect: boolean = true,
-) {
+// obtener el usuario con el address desde la id de la sesion
+export async function getUserWithAddress() {
 	try {
-		const userId = await getUserIdBySession(shouldRedirect)
+		const userId = await getIdFromSession()
 
-		if (!userId) {
-			return
-		}
-
-		const user = await userController().getUserWithUserAddress(userId)
+		const user = await userController().getByIdWithAddress(userId!)
 
 		return user
+	} catch (error) {
+		throw error
+	}
+}
+
+// update user
+export async function updateUser(dataUpdate: UserUpdateProfileSchemaType) {
+	try {
+		const userId = await getIdFromSession()
+
+		const userUpdate = await userController().update(userId!, dataUpdate)
+
+		if (userUpdate.status === 'success') {
+			await updateSession({
+				user: {
+					name: userUpdate.data.name,
+					image: userUpdate.data.address.image || '',
+				},
+			})
+		}
+
+		redirect('/profile')
+	} catch (error) {
+		throw error
+	}
+}
+
+// delete user: change active
+export async function deleteUser() {
+	try {
+		const userId = await getIdFromSession()
+
+		const userDelete = await userController().delete(userId!)
+
+		if (userDelete.status === 'success') {
+			await logoutAction()
+		}
 	} catch (error) {
 		throw error
 	}

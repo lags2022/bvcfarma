@@ -1,9 +1,9 @@
-import { getUserWithUserAddressAction } from '@/actions/user-action'
+import { getUserWithAddress } from '@/actions/user-action'
 import { ButtonGeneral } from '@/components/button/ButtonGeneral'
 import { Profile } from '@/components/profile/Profile'
 
 export default async function PageProfile() {
-	const user = await getUserWithUserAddressAction()
+	const user = await getUserWithAddress()
 
 	if (!user)
 		return (

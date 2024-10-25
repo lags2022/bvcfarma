@@ -3,7 +3,7 @@
 import { X, Image as ImageIcon, User } from 'lucide-react'
 import Image from 'next/image'
 import { CldUploadButton } from 'next-cloudinary'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import toast from 'react-hot-toast'
 
@@ -21,14 +21,22 @@ type PreviewImage = {
 	name: string
 }
 
-const INITIAL_PREVIEW = {
-	file: null,
-	url: '',
-	previewUrl: '',
-	name: '',
-}
+export const ProfileImageUserUpdate = ({
+	handleSetValueImage,
+	isSubmitting,
+	image,
+}: {
+	isSubmitting: boolean
+	handleSetValueImage: (urlImage: string) => void
+	image: string
+}) => {
+	const INITIAL_PREVIEW = {
+		file: null,
+		url: image,
+		previewUrl: image,
+		name: '',
+	}
 
-export const ProfileImageUserUpdate = () => {
 	const [preview, setPreview] = useState<PreviewImage>(INITIAL_PREVIEW)
 
 	// Handler para cuando se carga una imagen usando Cloudinary
@@ -82,10 +90,17 @@ export const ProfileImageUserUpdate = () => {
 	})
 
 	const removeImage = () => {
-		setPreview(INITIAL_PREVIEW)
+		setPreview({
+			file: null,
+			url: '',
+			previewUrl: '',
+			name: '',
+		})
 	}
 
-	console.log('preview', preview)
+	useEffect(() => {
+		handleSetValueImage(preview.url)
+	}, [preview])
 
 	return (
 		<div className="relative w-full max-w-xs h-52 flex flex-col justify-start items-center mx-auto">
@@ -93,10 +108,10 @@ export const ProfileImageUserUpdate = () => {
 			{preview.previewUrl && (
 				<button
 					onClick={(e) => {
-						e.stopPropagation()
+						e.preventDefault()
 						removeImage()
 					}}
-					className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors z-"
+					className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors z-10"
 					aria-label="Eliminar imagen"
 				>
 					<X className="w-4 h-4" />
@@ -176,7 +191,10 @@ export const ProfileImageUserUpdate = () => {
 							<div className="text-center p-4">
 								<User className="size-10 mx-auto text-gray-400 mb-2" />
 								<p className="text-sm font-semibold text-gray-500">
-									Subir foto
+									Subir foto{' '}
+									<span className="text-gray-400 font-normal text-xs">
+										(Opcional)
+									</span>
 								</p>
 								<p className="text-xs text-gray-400 mt-2">
 									Haz clic para seleccionar o arrastra una imagen

@@ -29,11 +29,6 @@ export async function loginAction({
 			password,
 			redirectTo,
 		})
-
-		// return {
-		// 	message: 'Inicio de sesión exitoso',
-		// 	status: 'success',
-		// }
 	} catch (error) {
 		if (error instanceof AuthError) {
 			clientTwilio.messages.create({
@@ -43,10 +38,6 @@ export async function loginAction({
 			})
 
 			throw new Error(error.message)
-			// return {
-			// 	message: 'Error al iniciar sesión',
-			// 	error: error.type,
-			// }
 		}
 
 		await clientTwilio.messages.create({
@@ -82,8 +73,6 @@ export async function registerAction(formData: FormData) {
 				from: 'whatsapp:+14155238886', // Your Twilio Sandbox Number
 				to: `whatsapp:+51932052849`, // Recipient's phone number
 			})
-
-			console.log(response)
 		}
 
 		await signIn('credentials', {
@@ -100,9 +89,4 @@ export async function registerAction(formData: FormData) {
 		}
 		throw error
 	}
-
-	// return {
-	// 	message: 'Error al registrarse',
-	// 	error: true,
-	// }
 }

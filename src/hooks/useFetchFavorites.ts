@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react'
 
-import { getUserAction } from '@/actions/user-action'
+import { getUser } from '@/actions/user-action'
 import { useFavoriteStore } from '@/context/useFavoriteStore'
 
 export const useFetchFavorites = () => {
 	const setFavorites = useFavoriteStore((state) => state.setFavorites)
-  const [isLoading, setIsLoading] = useState(true) // Para manejar la carga inicial
+	const [isLoading, setIsLoading] = useState(true) // Para manejar la carga inicial
 
 	useEffect(() => {
 		const syncFavorites = async () => {
 			try {
-				const favorites = (await getUserAction(false))?.favorites
+				const favorites = (await getUser(false))?.favorites
 
 				if (!favorites?.length) {
 					setFavorites([])
@@ -28,7 +28,7 @@ export const useFetchFavorites = () => {
 		syncFavorites()
 	}, [])
 
-  return isLoading
+	return isLoading
 }
 
 // export const useFetchFavorites = (isPageFavorites: boolean = false) => {

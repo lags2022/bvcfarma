@@ -7,7 +7,6 @@ import toast from 'react-hot-toast'
 // import { useDebouncedCallback } from 'use-debounce'
 import { useShallow } from 'zustand/react/shallow'
 
-import { getUserAction } from '@/actions/user-action'
 import { Button } from '@/components/ui/button'
 import { useFavoriteStore } from '@/context/useFavoriteStore'
 import { end, start } from '@/helpers/performance'

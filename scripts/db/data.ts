@@ -1,5 +1,7 @@
-import { Prisma, Role } from '@prisma/client'
+import { Prisma, PrismaClient, Role } from '@prisma/client'
 import { hashSync } from 'bcryptjs'
+
+const prisma = new PrismaClient()
 
 export const COUNTRIES_SEED: Prisma.CountryCreateInput = {
 	name: 'Peru',
@@ -67,7 +69,11 @@ const ORDERS_SEED_1: Prisma.OrderCreateNestedManyWithoutUserInput = {
 					district: 'Surco',
 					email: 'lguzman.58erb@outlook.com',
 					// city: 'Trujillo',
-					countryId: 1,
+					country: {
+						connect: {
+							id: 1,
+						},
+					},
 					typeDocument: 'DNI',
 					numberDocument: '46568033',
 					reference: 'Colegio Industrial de la Costa',
@@ -208,7 +214,11 @@ export const USERS: Prisma.UserCreateInput[] = [
 				postalCode: '12345',
 				phone: '123456789',
 				city: 'Trujillo',
-				countryId: 1,
+				country: {
+					connect: {
+						id: 1,
+					},
+				},
 			},
 		},
 	},

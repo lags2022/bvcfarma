@@ -9,7 +9,7 @@ import { fetchUrl } from '@/helpers/fetchUrl'
 import { CulqiCharge } from '@/interfaces/culqi/culqi-cargo'
 import { orderController } from '@/lib/factoryController'
 
-import { getUserAction } from './user-action'
+import { getUser } from './user-action'
 
 export async function createCharge(token: any, dataCheckout: DataCheckout) {
 	try {
@@ -77,7 +77,7 @@ export async function createCharge(token: any, dataCheckout: DataCheckout) {
 		if (response.outcome.type === 'venta_exitosa') {
 			const lastOrder = await orderController().getLastOrder()
 
-			const user = await getUserAction()
+			const user = await getUser()
 
 			if (!user) {
 				throw new Error('No hay usuario autenticado')
@@ -132,8 +132,6 @@ export async function createCharge(token: any, dataCheckout: DataCheckout) {
 				},
 			})
 
-			console.log('NEW ORDER', newOrder)
-
 			cookies().set({
 				name: 'success-order',
 				value: 'true',
@@ -145,7 +143,6 @@ export async function createCharge(token: any, dataCheckout: DataCheckout) {
 			redirect(`/checkout/success?id=${newOrder.id}`)
 		}
 	} catch (error) {
-		console.log(error, 'FUCKING ERROR')
 		throw error
 	}
 }

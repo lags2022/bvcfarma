@@ -7,29 +7,42 @@ import {
 	UserAddress,
 } from '@prisma/client'
 
-import { ResponseStatus } from './general'
+import { UserUpdateProfileSchemaType } from '@/schemas/profile-schema'
+
+import { ResponseStatus, ResponseStatusUserUpdated } from './general'
 import { CrudBasic } from './generic'
 import { OrderGetAll } from './orders/order-get-all'
 
 // aqui solo tendrias que cambiar Prisma.UserCreateInput, User por otro modelo de base de datos osea solo cambiarias los tipos
 // User Model
+export type UserWithSelectedAddressFields = Prisma.UserGetPayload<{
+	select: {
+		id: true
+		name: true
+		email: true
+		favorites: true
+		role: true
+		address: true
+	}
+}>
+
 export interface UserModelImplements {}
-export interface UserModelConstructor
-	extends Omit<
-		CrudBasic<Prisma.UserCreateInput, User>,
-		'getAll',
-		'delete' | 'update'
-	> {
+export interface UserModelConstructor {
 	new (): UserModelImplements
-	getByEmail(email: string): Promise<User>
+	getByEmail(
+		email: string,
+		password: string,
+	): Promise<UserWithSelectedAddressFields>
+	create(data: Prisma.UserCreateInput): Promise<UserWithSelectedAddressFields>
+	getById(id: string): Promise<Omit<UserWithSelectedAddressFields, 'address'>>
 	addFavorite(userId: string, productId: number): Promise<ResponseStatus>
 	removeFavorite(
 		userId: string,
 		newFavorites: number[],
 	): Promise<ResponseStatus>
-	getUserWithUserAddress(
-		userId: string,
-	): Promise<User & { address: UserAddress }>
+	getByIdWithAddress(userId: string): Promise<UserWithSelectedAddressFields>
+	update(id:string, data: UserUpdateProfileSchemaType): Promise<ResponseStatusUserUpdated>
+	delete(id: string): Promise<ResponseStatus>
 }
 
 // Order Model

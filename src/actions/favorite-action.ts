@@ -1,11 +1,11 @@
 'use server'
 
-import { getUserAction } from '@/actions/user-action'
+import { getUser } from '@/actions/user-action'
 import { userController } from '@/lib/factoryController'
 
 export async function addFavoriteAction(productId: number) {
 	try {
-		const userId = (await getUserAction(false))?.id
+		const userId = (await getUser(false))?.id
 
 		if (!userId) {
 			return {
@@ -30,7 +30,7 @@ export async function addFavoriteAction(productId: number) {
 
 export async function removeFavoriteAction(productId: number) {
 	try {
-		const user = await getUserAction()
+		const user = await getUser()
 
 		if (!user) {
 			return {

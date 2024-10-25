@@ -1,6 +1,6 @@
 import * as z from 'zod'
 
-const isNumber = (value: string) => /^\d+$/.test(value)
+export const isNumber = (value: string) => /^\d+$/.test(value)
 
 export const checkoutPersonDataSchema = z.object({
 	firstName: z.string().min(1, 'El nombre es requerido'),

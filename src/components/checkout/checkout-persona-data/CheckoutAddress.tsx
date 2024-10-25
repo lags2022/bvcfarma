@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { useShallow } from 'zustand/react/shallow'
 
-import { getUserAction } from '@/actions/user-action'
+import { getUser } from '@/actions/user-action'
 import {
 	AccordionContent,
 	AccordionItem,
@@ -45,7 +45,7 @@ export const CheckoutAddress = () => {
 
 	useEffect(() => {
 		const fetchGetUser = async () => {
-			const user = await getUserAction()
+			const user = await getUser()
 			if (!user) {
 				setPersonDataEmail('')
 				return

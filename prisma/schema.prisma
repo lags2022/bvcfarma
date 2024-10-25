@@ -17,10 +17,10 @@ datasource db {
 
 model User {
   id            String    @id @default(uuid()) @db.Uuid
-  name          String    @db.VarChar(50)
+  name          String?   @db.VarChar(50)
   email         String    @unique @db.VarChar(150)
   emailVerified DateTime? @map("email_verified") @db.Timestamptz(6)
-  password      String
+  password      String?
   favorites     Int[] //Todo revisar para cambiar cuando es uuid
   role          Role      @default(CUSTOMER)
   birthdate     DateTime? @db.Date
@@ -119,7 +119,7 @@ model Order {
   userId String @map("user_id") @db.Uuid
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  // Relación con el modelo 'CulqiCharge'
+  // Relación con el modelo 'CulqiCharge', 'OrderItemProduct' y 'OrderAddress'
   culqiCharge  CulqiCharge?
   orderItems   OrderItemProduct[]
   orderAddress OrderAddress?

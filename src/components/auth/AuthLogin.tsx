@@ -1,8 +1,7 @@
 'use client'
 
-import { User } from '@prisma/client'
 import { EyeIcon, EyeOffIcon } from 'lucide-react'
-import { useState, useTransition } from 'react'
+import { useEffect, useState, useTransition } from 'react'
 import toast from 'react-hot-toast'
 
 import { loginAction } from '@/actions/auth-action'
@@ -30,6 +29,24 @@ export const AuthLogin = () => {
 	const userTest = USERS_CREDENTIALS_TEST.find((user) =>
 		isOwner ? user.role === 'OWNER' : user.role === 'CUSTOMER',
 	)
+
+	const INITIAL_VALUES = {
+		email: userTest?.email ?? '',
+		password: userTest?.password ?? '',
+	}
+
+	const [form, setForm] = useState(INITIAL_VALUES)
+
+	useEffect(() => {
+		setForm(INITIAL_VALUES)
+	}, [isOwner])
+
+	const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+		setForm({
+			...form,
+			[evt.target.name]: evt.target.value,
+		})
+	}
 
 	const handleSubmit = (formData: FormData) => {
 		if (!formData.get('email') && !formData.get('password')) return
@@ -70,7 +87,8 @@ export const AuthLogin = () => {
 						placeholder="Dirección de correo electrónico"
 						className="focus-visible:ring-picker-3"
 						disabled={isPending}
-						value={userTest?.email}
+						value={form?.email}
+						onChange={handleChange}
 					/>
 				</div>
 				<div>
@@ -82,7 +100,8 @@ export const AuthLogin = () => {
 							placeholder="Contraseña"
 							className="focus-visible:ring-picker-3"
 							disabled={isPending}
-							value={userTest?.password}
+							value={form?.password}
+							onChange={handleChange}
 						/>
 						<Button
 							type="button"
@@ -106,7 +125,11 @@ export const AuthLogin = () => {
 				<a href="#" className="text-picker-3 hover:underline">
 					¿Olvidaste tu contraseña?
 				</a>
-				<AuthTestOwner isPending={isPending} isOwner={isOwner} handleToggle={handleOwner} />
+				<AuthTestOwner
+					isPending={isPending}
+					isOwner={isOwner}
+					handleToggle={handleOwner}
+				/>
 				<ButtonGeneral type="submit" disabled={isPending}>
 					Iniciar sesión
 				</ButtonGeneral>

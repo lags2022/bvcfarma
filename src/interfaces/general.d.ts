@@ -1,3 +1,9 @@
+import { User, UserAddress } from '@prisma/client'
+
+import { UserWithSelectedAddressFields } from '@/models/prisma/user-model'
+
+import { UserModelMod } from './models'
+
 export interface CategoryApi {
 	id: number
 	icon: string // Ejemplo de valor: "U+1F48A"
@@ -23,6 +29,13 @@ export interface BrandsApi {
 }
 
 export interface ResponseStatus {
-  message: string
-  status: string
+	message: string
+	data?: any
+	status: string
+}
+
+export interface ResponseStatusUserUpdated {
+	message: string
+	data: UserWithSelectedAddressFields
+	status: string
 }

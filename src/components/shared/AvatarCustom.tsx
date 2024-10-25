@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 export const AvatarCustom = ({ session }: { session?: Session | null }) => {
 	return (
 		<Avatar className="size-7">
-			<AvatarImage src={AVATAR_FALLBACK} />
+			<AvatarImage src={session?.user.image || ""} />
 			<AvatarFallback>
 				{session?.user
 					?.name!.split(' ')

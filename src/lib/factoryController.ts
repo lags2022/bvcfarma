@@ -1,7 +1,7 @@
-import { CulqiChargeModelPrisma } from '@/models/prisma/culqi-charge'
-import { OrderModelPrisma } from '@/models/prisma/order'
-import { OrderItemsModelPrisma } from '@/models/prisma/orderItem'
-import { UserModelPrisma } from '@/models/prisma/user'
+import { CulqiChargeModelPrisma } from '@/models/prisma/culqi-charge-model'
+import { OrderModelPrisma } from '@/models/prisma/order-model'
+import { OrderItemsModelPrisma } from '@/models/prisma/orderItem-model'
+import { UserModelPrisma } from '@/models/prisma/user-model'
 
 export const userController = () => UserModelPrisma
 export const orderController = () => OrderModelPrisma
