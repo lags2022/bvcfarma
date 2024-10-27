@@ -63,8 +63,8 @@ export const Profile = ({ user }: { user: UserWithSelectedAddressFields }) => {
 	const onSubmit = async (data: UserUpdateProfileSchemaType) => {
 		try {
 			if (!Object.keys(errors).length) {
-				// await updateUser(data)
-				await new Promise((resolve) => setTimeout(resolve, 20000))
+				await updateUser(data)
+				// await new Promise((resolve) => setTimeout(resolve, 20000))
 
 				toast.success('Cambios realizados')
 				return
