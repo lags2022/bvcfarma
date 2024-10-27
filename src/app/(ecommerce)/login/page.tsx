@@ -11,7 +11,7 @@ import { AuthRegister } from '@/components/auth/AuthRegister'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { LOGIN_GIRL, LOGO_NAME } from '@/constants/general'
 import { getFirstSearchParam } from '@/helpers/getSearchParams'
-import { smoothScrollToTop } from '@/helpers/smooth-scroll-top'
+// import { smoothScrollToTop } from '@/helpers/smooth-scroll-top'
 
 export default function LoginPage() {
 	const [activeTab, setActiveTab] = useState('login') // El valor por defecto es 'login'
@@ -19,11 +19,10 @@ export default function LoginPage() {
 	const params = getFirstSearchParam(searchParams)
 
 	useEffect(() => {
-		const cancelScrollAnimation = smoothScrollToTop() // Inicia la animación de scroll
+		// const cancelScrollAnimation = smoothScrollToTop() // Inicia la animación de scroll
 		setActiveTab(params?.value ?? 'login')
 		return () => {
-			cancelScrollAnimation() // Cancela la animación al desmontar o cuando cambie params.value
-
+			// cancelScrollAnimation() // Cancela la animación al desmontar o cuando cambie params.value
 			setActiveTab('login')
 		}
 	}, [params?.value])

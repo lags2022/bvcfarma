@@ -76,6 +76,29 @@ export const UserUpdateProfileSchema = z.object({
 // 	message: 'Las contraseñas no coinciden',
 // 	path: ['confirmPassword'], // Esto indicará el error en el campo confirmPassword
 
+export const UserUpdatePasswordSchema = z
+	.object({
+		password: z.string().optional(),
+		confirmPassword: z.string().optional(),
+	})
+	.refine(
+		(data) => {
+			// Si newPassword tiene valor, confirmPassword también debe tenerlo
+			if (data.password) {
+				return data.confirmPassword && data.password === data.confirmPassword
+			}
+			return true // Si newPassword no tiene valor, confirmPassword es opcional
+		},
+		{
+			message: 'La confirmación es obligatoria y debe coincidir.',
+			path: ['confirmPassword'], // Marca el error en el campo confirmPassword
+		},
+	)
+
 export type UserUpdateProfileSchemaType = z.infer<
 	typeof UserUpdateProfileSchema
+>
+
+export type UserUpdatePasswordSchemaType = z.infer<
+	typeof UserUpdatePasswordSchema
 >

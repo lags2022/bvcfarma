@@ -82,3 +82,18 @@ export async function deleteUser() {
 		throw error
 	}
 }
+
+// update password
+export async function updatePassword(password: string) {
+	try {
+		const userId = await getIdFromSession()
+
+		const userUpdate = await userController().updatePassword(userId!, password)
+
+		if (userUpdate.status === 'success') {
+			return userUpdate
+		}
+	} catch (error) {
+		throw error
+	}
+}

@@ -1,4 +1,4 @@
-import { Prisma, User, UserAddress } from '@prisma/client'
+import { Prisma } from '@prisma/client'
 import bcrypt from 'bcryptjs'
 
 import { executeAction } from '@/helpers/execute-action'
@@ -272,4 +272,28 @@ export class UserModelPrisma implements UserModelImplements {
 			}
 		})
 	}
+
+  static async updatePassword(
+    id: string,
+    password: string,
+  ): Promise<ResponseStatus> {
+    return executeAction(async () => {
+      const hashedPassword = await bcrypt.hash(password, 10)
+
+      await prisma.user.update({
+        where: {
+          id,
+          isActive: true,
+        },
+        data: {
+          password: hashedPassword,
+        },
+      })
+
+      return {
+        message: 'Contraseña actualizada',
+        status: 'success',
+      }
+    })
+  }
 }

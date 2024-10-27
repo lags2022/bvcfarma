@@ -41,8 +41,12 @@ export interface UserModelConstructor {
 		newFavorites: number[],
 	): Promise<ResponseStatus>
 	getByIdWithAddress(userId: string): Promise<UserWithSelectedAddressFields>
-	update(id:string, data: UserUpdateProfileSchemaType): Promise<ResponseStatusUserUpdated>
+	update(
+		id: string,
+		data: UserUpdateProfileSchemaType,
+	): Promise<ResponseStatusUserUpdated>
 	delete(id: string): Promise<ResponseStatus>
+	updatePassword(id: string, password: string): Promise<ResponseStatus>
 }
 
 // Order Model
