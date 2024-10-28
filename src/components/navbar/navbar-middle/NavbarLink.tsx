@@ -29,11 +29,12 @@ export const NavbarLink = ({
 			className={cn(
 				'bg-transparent w-full h-fit p-0 m-0 [&>button]:bg-transparent [&>button]:w-full [&>button]:h-fit [&>button]:p-0 [&>button]:m-0 [&>button]:justify-start [&>button]:mb-1',
 				className,
-				isActive && '[&>button]:bg-accent [&_span]:text-black [&_svg]:text-black',
+				isActive &&
+					'[&>button]:bg-accent [&_span]:text-black [&_svg]:text-black',
 			)}
 		>
-			<DropdownMenuItem className="w-full flex items-center gap-2 font-medium text-gray-500 group hover:text-black transition-[color] ease duration-300 cursor-pointer">
-				<div className="[&>svg]:size-4 [&>svg]:text-gray-500  group-hover:[&>svg]:text-black">
+			<DropdownMenuItem className="w-full flex items-center gap-2 font-medium text-gray-500 group hover:text-black cursor-pointer">
+				<div className="[&>svg]:size-4 [&>svg]:text-gray-500 group-hover:[&>svg]:text-black dark:group-hover:[&>svg]:text-white">
 					{icon}
 				</div>
 				<span>{label}</span>
@@ -57,44 +58,3 @@ export const NavbarLink = ({
 		</ButtonGeneral>
 	)
 }
-
-// import Link from 'next/link'
-
-// import { Button } from '@/components/ui/button'
-// import { DropdownMenuItem } from '@/components/ui/dropdown-menu'
-
-// export const NavbarLink = ({
-// 	href,
-// 	icon,
-// 	label,
-// 	type = 'link',
-// 	onClick,
-// }: {
-// 	href: string
-// 	icon: React.ReactNode
-// 	label: string
-// 	type?: 'link' | 'button'
-// 	onClick?: () => void
-// }) => {
-// 	return (
-// 		<>
-// 			{type === 'link' ? (
-// 				<Link href={href}>
-// 					<DropdownMenuItem className="flex items-center gap-2 font-medium text-gray-500 group hover:text-black transition-[color] ease duration-300 ">
-// 						<div className="[&>svg]:size-4 [&>svg]:text-gray-500  group-hover:[&>svg]:text-black">
-// 							{icon}
-// 						</div>
-// 						{label}
-// 					</DropdownMenuItem>
-// 				</Link>
-// 			) : (
-// 				<Button onClick={onClick} variant={'ghost'} className="bg-transparent w-full h-fit p-0 m-0">
-// 					<DropdownMenuItem className="flex items-center gap-2 font-medium text-gray-500 group hover:text-black transition-[color] ease duration-300 [&>svg]:size-4 [&>svg]:text-gray-500 group-hover:[&>svg]:text-black">
-// 						{icon}
-// 						{label}
-// 					</DropdownMenuItem>
-// 				</Button>
-// 			)}
-// 		</>
-// 	)
-// }

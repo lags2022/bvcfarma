@@ -1,11 +1,18 @@
 'use client'
 
+import { Session } from 'next-auth'
 import { useState } from 'react'
 
-import { DashboardMain } from './DashboardHeader'
+import { DashboardHeader } from './DashboardHeader'
 import { Sidebar } from '../sidebar/Sidebar'
 
-export const Dashboard = ({ children }: { children: React.ReactNode }) => {
+export const Dashboard = ({
+	children,
+	session,
+}: {
+	children: React.ReactNode
+	session: Session
+}) => {
 	const [isExpanded, setIsExpanded] = useState(true)
 
 	const toggleSidebar = () => {
@@ -19,9 +26,13 @@ export const Dashboard = ({ children }: { children: React.ReactNode }) => {
 			<Sidebar isExpanded={isExpanded} />
 
 			{/* Main content */}
-			<DashboardMain isExpanded={isExpanded} toggleSidebar={toggleSidebar}>
+			<DashboardHeader
+				session={session}
+				isExpanded={isExpanded}
+				toggleSidebar={toggleSidebar}
+			>
 				{children}
-			</DashboardMain>
+			</DashboardHeader>
 		</div>
 	)
 }

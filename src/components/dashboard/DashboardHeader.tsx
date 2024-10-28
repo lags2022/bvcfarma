@@ -1,46 +1,35 @@
-'use client'
-
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { Session } from 'next-auth'
 
-import { AVATAR_FALLBACK, LOGO, LOGO_NAME } from '@/constants/general'
+import { logoutAction } from '@/actions/auth-action'
+import { LOGO, LOGO_NAME } from '@/constants/general'
+import { NAVBAR_ITEMS_DASHBOARD } from '@/constants/navbar-link'
 import { cn } from '@/lib/utils'
 
+import { NavbarUserContent } from '../shared/NavbarUserContent'
 import { ThemeSwitch } from '../shared/ThemeSwitch'
 import { SiderbarMenuBar } from '../sidebar/SiderbarMenuBar'
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
-
-export const DashboardMain = ({
+export const DashboardHeader = ({
 	toggleSidebar,
 	isExpanded,
 	children,
+	session,
 }: {
 	toggleSidebar: () => void
 	isExpanded: boolean
 	children: React.ReactNode
+	session: Session
 }) => {
-	const [urlImage, setUrlImage] = useState('')
-
-	// useEffect(() => {
-	// 	const fetchData = async () => {
-	// 		const response = await fetch(URL_BASE + 'api/cloudinary')
-	// 		const data = await response.json()
-	// 		setUrlImage(data.url)
-	// 	}
-	// 	fetchData()
-	// }, [])
+	const handleLogout = () => {
+		logoutAction()
+	}
 
 	return (
-		<div
-			className={cn(
-				'flex-1 overflow-x-hidden overflow-y-auto',
-				// isExpanded && 'pl-0',
-			)}
-		>
+		<div className={cn('flex-1 overflow-x-hidden overflow-y-auto')}>
 			<header className="bg-light dark:bg-dark">
 				<div className="flex items-center justify-between px-4 lg:pl-0 lg:pr-4 py-3">
 					<div className="flex items-center justify-center gap-x-6 lg:gap-x-0">
@@ -84,10 +73,12 @@ export const DashboardMain = ({
 							/>
 						</form>
 						<ThemeSwitch />
-						<Avatar>
-							<AvatarImage src={AVATAR_FALLBACK} alt="User" />
-							<AvatarFallback>U</AvatarFallback>
-						</Avatar>
+						<NavbarUserContent
+							session={session}
+							navbarItems={NAVBAR_ITEMS_DASHBOARD}
+							pathname={'/dashboard'}
+							handleLogout={handleLogout}
+						/>
 					</div>
 				</div>
 			</header>
