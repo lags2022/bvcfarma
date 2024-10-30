@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Separator } from '@/components/ui/separator'
 import { NavbarItemType } from '@/constants/navbar-link'
+import { cn } from '@/lib/utils'
 
 import { AvatarCustom } from './AvatarCustom'
 import { NavbarLink } from '../navbar/navbar-middle/NavbarLink'
@@ -19,18 +20,23 @@ export const NavbarUserContent = ({
 	navbarItems,
 	pathname,
 	handleLogout,
+	isPageDashboard,
 }: {
 	session?: Session
 	navbarItems: NavbarItemType[]
 	pathname: string
 	handleLogout: () => void
+	isPageDashboard?: boolean
 }) => {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
 				<Button
 					variant="ghost"
-					className="hidden sm:flex cursor-pointer justify-center items-center group px-2"
+					className={cn(
+						'hidden sm:flex cursor-pointer justify-center items-center group px-2',
+						isPageDashboard && 'flex',
+					)}
 				>
 					<AvatarCustom session={session} />
 					<p className="ml-2 font-medium truncate w-20 text-base hidden md:block">
@@ -40,7 +46,9 @@ export const NavbarUserContent = ({
 				</Button>
 			</DropdownMenuTrigger>
 
-			<DropdownMenuContent className="hidden sm:block w-36">
+			<DropdownMenuContent
+				className={cn('hidden sm:block w-36', isPageDashboard && 'block')}
+			>
 				{navbarItems
 					.filter((item) => {
 						if (item.label === 'Mis favoritos') return false

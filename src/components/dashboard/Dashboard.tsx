@@ -3,10 +3,10 @@
 import { Session } from 'next-auth'
 import { useState } from 'react'
 
-import { DashboardHeader } from './DashboardHeader'
+import { Dashboard } from './DashboardHeader'
 import { Sidebar } from '../sidebar/Sidebar'
 
-export const Dashboard = ({
+export const DashboardProvider = ({
 	children,
 	session,
 }: {
@@ -26,13 +26,13 @@ export const Dashboard = ({
 			<Sidebar isExpanded={isExpanded} />
 
 			{/* Main content */}
-			<DashboardHeader
+			<Dashboard
 				session={session}
 				isExpanded={isExpanded}
 				toggleSidebar={toggleSidebar}
 			>
 				{children}
-			</DashboardHeader>
+			</Dashboard>
 		</div>
 	)
 }

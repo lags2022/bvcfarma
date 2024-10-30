@@ -1,6 +1,7 @@
-import { Dashboard } from '@/components/dashboard/Dashboard'
+import { DashboardProvider } from '@/components/dashboard/Dashboard'
 import { PermissionRoleOwnerSharedSession } from '@/components/permission/PermissionRoleOwnerSharedSession'
 import { ThemeProvider } from '@/providers/Theme.provider'
+import 'react-datepicker/dist/react-datepicker.css'
 
 export default async function LayoutDashboard({
 	children,
@@ -11,7 +12,7 @@ export default async function LayoutDashboard({
 		<PermissionRoleOwnerSharedSession>
 			{(session) => (
 				<ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-					<Dashboard session={session}>{children}</Dashboard>
+					<DashboardProvider session={session}>{children}</DashboardProvider>
 				</ThemeProvider>
 			)}
 		</PermissionRoleOwnerSharedSession>

@@ -25,7 +25,7 @@ export function SidebarItem({
 	return (
 		<ButtonGeneral
 			variant={pathname === href ? 'default' : 'ghost'}
-			className="w-full [&>button]:w-full !flex justify-start [&>button]:!flex [&>button]:gap-2 gap-2 [&>button]:justify-start"
+			className="w-full [&>button]:w-full !flex justify-start [&>button]:!flex [&>button]:gap-2 gap-2 [&>button]:justify-start group"
 			href={href}
 			onClick={onClick}
 		>
@@ -37,7 +37,17 @@ export function SidebarItem({
 				)}
 			>
 				<span>{label}</span>
-				{badge && <Badge variant="secondary">{badge}</Badge>}
+				{badge && (
+					<Badge
+						className={cn(
+							'group-hover:bg-picker-4 hover:bg-picker-4 group-hover:text-white hover:text-white',
+							pathname === href ? 'bg-picker-4 text-white' : '',
+						)}
+						variant="secondary"
+					>
+						{badge}
+					</Badge>
+				)}
 			</div>
 		</ButtonGeneral>
 	)

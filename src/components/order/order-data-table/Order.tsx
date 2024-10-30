@@ -95,7 +95,7 @@ export function Order<TData, TValue>({
 		<div className="space-y-4 contain">
 			<OrderToolbar table={table} />
 			<div className="rounded-md border [&>div]:table-order-scrollbar">
-				<Table className='bg-white rounded-lg'>
+				<Table className='bg-white dark:bg-black rounded-lg'>
 					<TableHeader>
 						{table.getHeaderGroups().map((headerGroup) => (
 							<TableRow key={headerGroup.id}>

@@ -52,7 +52,7 @@ export interface UserModelConstructor {
 // Order Model
 export interface OrderModelImplements {}
 export interface OrderModelConstructor
-	extends Omit<CrudBasic<Prisma.OrderCreateInput, Order>, 'delete'> {
+	extends Omit<CrudBasic<Prisma.OrderCreateInput, Order>, 'delete', 'getAll'> {
 	new (): OrderModelImplements
 	getLastOrder(): Promise<Order | null>
 	getAllByUserId(userId: string): Promise<OrderGetAll[]>
@@ -66,6 +66,7 @@ export interface OrderModelConstructor
 		  })
 		| null
 	>
+  getAllForDashboard(): Promise<OrderGetAll[]>
 }
 
 export interface CulqiChargeModelImplements {}

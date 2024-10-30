@@ -1,6 +1,5 @@
 'use client'
 
-import { User } from '@prisma/client'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
@@ -42,7 +41,7 @@ export default function LoginPage() {
 				<Tabs
 					defaultValue="login"
 					value={activeTab}
-					onValueChange={(val) => setActiveTab(val)} // Maneja cambios en el tab
+					onValueChange={setActiveTab}
 					className="max-w-lg w-auto lg:w-1/2 py-4 px-6 flex flex-col justify-center items-center"
 				>
 					<Link className="sm:!ml-0 my-8" href="/">

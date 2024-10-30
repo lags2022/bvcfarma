@@ -13,7 +13,7 @@ import { ThemeSwitch } from '../shared/ThemeSwitch'
 import { SiderbarMenuBar } from '../sidebar/SiderbarMenuBar'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
-export const DashboardHeader = ({
+export const Dashboard = ({
 	toggleSidebar,
 	isExpanded,
 	children,
@@ -29,8 +29,18 @@ export const DashboardHeader = ({
 	}
 
 	return (
-		<div className={cn('flex-1 overflow-x-hidden overflow-y-auto')}>
-			<header className="bg-light dark:bg-dark">
+		<div
+			className={cn(
+				'flex-1 overflow-x-hidden overflow-y-auto',
+				isExpanded ? 'lg:ml-56' : 'lg:ml-[72px]',
+			)}
+		>
+			<header
+				className={cn(
+					'fixed w-full z-50 top-0 border-border/40 bg-white/80 dark:bg-dark/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-dark/60',
+					isExpanded ? 'lg:w-[calc(100%-224px)]' : 'lg:w-[calc(100%-72px)]',
+				)}
+			>
 				<div className="flex items-center justify-between px-4 lg:pl-0 lg:pr-4 py-3">
 					<div className="flex items-center justify-center gap-x-6 lg:gap-x-0">
 						<SiderbarMenuBar />
@@ -64,7 +74,7 @@ export const DashboardHeader = ({
 						</Button>
 					</div>
 
-					<div className="flex items-center space-x-4">
+					<div className="flex items-center space-x-2">
 						<form>
 							<Input
 								type="search"
@@ -78,12 +88,15 @@ export const DashboardHeader = ({
 							navbarItems={NAVBAR_ITEMS_DASHBOARD}
 							pathname={'/dashboard'}
 							handleLogout={handleLogout}
+							isPageDashboard
 						/>
 					</div>
 				</div>
 			</header>
 
-			<main className="bg-light dark:bg-dark">{children}</main>
+			<main className="mt-16 bg-light dark:bg-dark p-4 sm:px-6">
+				{children}
+			</main>
 		</div>
 	)
 }

@@ -10,7 +10,7 @@ export const Sidebar = ({ isExpanded }: { isExpanded: boolean }) => {
 	return (
 		<div
 			className={cn(
-				'bg-light dark:bg-dark transition-[width] ease duration-300 z-50 h-dvh hidden lg:flex flex-col border-r',
+				'bg-light dark:bg-dark transition-[width] ease duration-300 z-50 h-dvh hidden fixed lg:flex flex-col border-r',
 				isExpanded ? 'w-56' : 'w-[72px]',
 			)}
 		>

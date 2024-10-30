@@ -24,7 +24,10 @@ export async function addFavoriteAction(productId: number) {
 			status,
 		}
 	} catch (error) {
-		throw error
+		return {
+			message: 'No tienes sesión iniciada',
+			status: 'errorLogin',
+		}
 	}
 }
 

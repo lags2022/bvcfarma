@@ -9,7 +9,6 @@ import { useShallow } from 'zustand/react/shallow'
 
 import { Button } from '@/components/ui/button'
 import { useFavoriteStore } from '@/context/useFavoriteStore'
-import { end, start } from '@/helpers/performance'
 import { cn } from '@/lib/utils'
 
 export const FavoriteButton = ({
@@ -39,7 +38,6 @@ export const FavoriteButton = ({
 
 	const handleFavorite = async (evt: any) => {
 		startTransition(async () => {
-			start('FAVORITO')
 			if (isFavorite) {
 				modOptimisticFavorite({
 					productId,
@@ -51,6 +49,7 @@ export const FavoriteButton = ({
 					productId,
 					type: 'add',
 				})
+
 				const response = await addFavorite(productId) // Optimistic update handled in Zustand
 				if (response?.status === 'errorLogin') {
 					toast('Inicia sesión o regístrate', {
@@ -59,7 +58,6 @@ export const FavoriteButton = ({
 					router.push('/login')
 				}
 			}
-			end()
 		})
 	}
 

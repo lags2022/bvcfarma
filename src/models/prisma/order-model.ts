@@ -19,6 +19,33 @@ import { selectTrueKeys } from '../../helpers/select-true-key-prisma'
 
 @staticImplements<OrderModelConstructor>()
 export class OrderModelPrisma implements OrderModelImplements {
+	private static readonly keysOrderGetAllTrue: (keyof Order)[] = [
+		'id',
+		'ocNumber',
+		'status',
+		'paidAt',
+		// 'isPaid',
+		'paymentMethod',
+		'deliveryType',
+		'quantityItems',
+		'total',
+		'totalCart',
+		'discount',
+		'subtotal',
+		'shippingCost',
+		// 'transactionId',
+		// 'documentUrl',
+		// 'userId',
+	]
+
+	private static readonly keysOrderAddressGetAllTrue: (keyof OrderAddress)[] = [
+		'firstName',
+		'lastName',
+		'address',
+		// 'district',
+		// 'province',
+		// 'department',
+	]
 	static async create(data: Prisma.OrderCreateInput): Promise<Order> {
 		return executeAction(async () => {
 			const orderCreated = await prisma.order.create({
@@ -76,44 +103,30 @@ export class OrderModelPrisma implements OrderModelImplements {
 		})
 	}
 
-	static async getAll(): Promise<Order[]> {
+	static async getAllForDashboard(): Promise<OrderGetAll[]> {
 		return executeAction(async () => {
 			const orders = await prisma.order.findMany({
 				where: {
 					isActive: true,
 				},
+				orderBy: {
+					paidAt: 'desc',
+				},
+				select: {
+					...selectTrueKeys(this.keysOrderGetAllTrue),
+					orderAddress: {
+						select: selectTrueKeys(this.keysOrderAddressGetAllTrue),
+					},
+					user: {
+						select: {
+							email: true,
+						},
+					},
+				},
 			})
-			return orders
+			return orders as OrderGetAll[]
 		})
 	}
-
-	private static readonly keysOrderGetAllTrue: (keyof Order)[] = [
-		'id',
-		'ocNumber',
-		'status',
-		'paidAt',
-		// 'isPaid',
-		'paymentMethod',
-		'deliveryType',
-		'quantityItems',
-		'total',
-		'totalCart',
-		'discount',
-		'subtotal',
-		'shippingCost',
-		// 'transactionId',
-		// 'documentUrl',
-		// 'userId',
-	]
-
-	private static readonly keysOrderAddressGetAllTrue: (keyof OrderAddress)[] = [
-		'firstName',
-		'lastName',
-		'address',
-		// 'district',
-		// 'province',
-		// 'department',
-	]
 
 	// private static readonly keysOrderItemGetAllTrue: (keyof OrderItemProduct)[] =
 	// 	['id', 'price', 'quantity', 'name', 'image', 'subtotalItem']
