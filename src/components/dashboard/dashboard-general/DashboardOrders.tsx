@@ -11,18 +11,8 @@ export const DashboardOrders = async () => {
 	const ordersParse = orderParsed(orders)
 
 	return (
-		<DashboardWrapperItem>
-			<div className="flex flex-col contain justify-center items-start gap-4">
-				<h2 className="text-lg font-bold flex flex-col gap-2 tracking-tight">
-					Lista de pedidos ({ordersParse.length})
-				</h2>
-				<p className="text-muted-foreground">
-					Detalles del pedido y seguimiento
-				</p>
-			</div>
-			<div className="w-full overflow-hidden">
-				<Order data={ordersParse} columns={orderColumnsUser} />
-			</div>
+		<DashboardWrapperItem isTable>
+			<Order typeTableDashboard="view" data={ordersParse} columns={orderColumnsUser} />
 		</DashboardWrapperItem>
 	)
 }

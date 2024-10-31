@@ -48,48 +48,78 @@ const chartConfig = {
 export function DashboardCustomerRate() {
 	return (
 		<DashboardWrapperItem>
-			<div className="flex flex-col justify-between">
+			<div className="flex flex-col gap-3 h-full justify-between">
 				<div className="flex justify-between">
 					<div>
-						<h4>Line Chart - Multiple</h4>
-						<p>January - June 2024</p>
+						<h4 className="font-semibold">Tasa de Clientes Recurrentes</h4>
+						<h5 className="text-sm font-medium">Enero - Junio 2024</h5>
 					</div>
 					<DataPickerShared />
 				</div>
 				<div>
-					<ChartContainer config={chartConfig}>
+					<ChartContainer config={chartConfig} className='aspect-auto w-full h-[250px]'>
 						<AreaChart
 							accessibilityLayer
-							data={chartData}
 							margin={{
-								left: 12,
+								left: -20,
 								right: 12,
 							}}
+							data={chartData}
 						>
-							<CartesianGrid vertical={false} />
+							<CartesianGrid
+								vertical={false}
+								stroke="hsl(var(--border))"
+								strokeDasharray={'5 5'}
+							/>
 							<XAxis
 								dataKey="month"
 								// tickLine={false}
-								axisLine={false}
+								// axisLine={false}
 								tickMargin={8}
 								tickFormatter={(value) => value.slice(0, 3)}
 							/>
-							<YAxis />
+							<YAxis tickMargin={8} tickCount={5} />
 							<ChartTooltip
 								cursor={false}
 								content={<ChartTooltipContent indicator="dot" />}
 							/>
 							<ChartLegend content={<ChartLegendContent />} />
+							<defs>
+								<linearGradient id="fillDesktop" x1="0" y1="0" x2="0" y2="1">
+									<stop
+										offset="5%"
+										stopColor="var(--color-desktop)"
+										stopOpacity={0.8}
+									/>
+									<stop
+										offset="95%"
+										stopColor="var(--color-desktop)"
+										stopOpacity={0.1}
+									/>
+								</linearGradient>
+								<linearGradient id="fillMobile" x1="0" y1="0" x2="0" y2="1">
+									<stop
+										offset="5%"
+										stopColor="var(--color-mobile)"
+										stopOpacity={0.8}
+									/>
+									<stop
+										offset="95%"
+										stopColor="var(--color-mobile)"
+										stopOpacity={0.1}
+									/>
+								</linearGradient>
+							</defs>
 							<Area
 								dataKey="mobile"
 								type="natural"
-								fill="hsl(var(--chart-5))"
-								fillOpacity={0.1}
-								stroke="hsl(var(--chart-5))"
+								fill="url(#fillMobile)"
+								fillOpacity={0.4}
+								stroke="var(--color-mobile)"
 								stackId="a"
 								strokeWidth={2}
 								dot={{
-									fill: 'var(--picker-1)',
+									fill: 'var(--color-mobile)',
 								}}
 								activeDot={{
 									r: 6,
@@ -98,13 +128,13 @@ export function DashboardCustomerRate() {
 							<Area
 								dataKey="desktop"
 								type="natural"
-								fill="hsl(var(--chart-2))"
-								fillOpacity={0.1}
-								stroke="hsl(var(--chart-2))"
+								fill="url(#fillDesktop)"
+								fillOpacity={0.4}
+								stroke="var(--color-desktop)"
 								stackId="a"
 								strokeWidth={2}
 								dot={{
-									fill: 'hsl(var(--chart-5))',
+									fill: 'var(--color-desktop)',
 								}}
 								activeDot={{
 									r: 6,

@@ -37,9 +37,11 @@ export const Dashboard = ({
 		>
 			<header
 				className={cn(
-					'fixed w-full z-50 top-0 border-border/40 bg-white/80 dark:bg-dark/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-dark/60',
+					// 'fixed w-full z-50 top-0 border-picker-5/40 bg-white/80 dark:bg-dark/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-dark/60',
+          "fixed top-0 z-50 w-full border border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60",
 					isExpanded ? 'lg:w-[calc(100%-224px)]' : 'lg:w-[calc(100%-72px)]',
 				)}
+
 			>
 				<div className="flex items-center justify-between px-4 lg:pl-0 lg:pr-4 py-3">
 					<div className="flex items-center justify-center gap-x-6 lg:gap-x-0">
@@ -74,8 +76,8 @@ export const Dashboard = ({
 						</Button>
 					</div>
 
-					<div className="flex items-center space-x-2">
-						<form>
+					<div className="flex items-center space-x-1">
+						<form className='mr-2'>
 							<Input
 								type="search"
 								placeholder="Search orders..."

@@ -16,6 +16,7 @@ import {
 } from '@tanstack/react-table'
 import * as React from 'react'
 
+import { NoData } from '@/components/svg/Icons'
 import {
 	Table,
 	TableBody,
@@ -24,6 +25,7 @@ import {
 	TableHeader,
 	TableRow,
 } from '@/components/ui/table'
+import { cn } from '@/lib/utils'
 
 import { OrderPagination } from './OrderPagination'
 import { OrderToolbar } from './OrderToolbar'
@@ -31,11 +33,13 @@ import { OrderToolbar } from './OrderToolbar'
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[]
 	data: TData[]
+	typeTableDashboard?: 'view' | 'all'
 }
 
 export function Order<TData, TValue>({
 	columns,
 	data,
+	typeTableDashboard,
 }: DataTableProps<TData, TValue>) {
 	// const [rowSelection, setRowSelection] = React.useState({})
 	const [columnVisibility, setColumnVisibility] =
@@ -92,10 +96,32 @@ export function Order<TData, TValue>({
 	})
 
 	return (
-		<div className="space-y-4 contain">
-			<OrderToolbar table={table} />
-			<div className="rounded-md border [&>div]:table-order-scrollbar">
-				<Table className='bg-white dark:bg-black rounded-lg'>
+		<div
+			className={
+				typeTableDashboard !== 'view' ? 'contain space-y-4' : 'space-y-3'
+			}
+		>
+			{/* cabecera */}
+			<div
+				className={cn(
+					'flex gap-3 items-center justify-between',
+					typeTableDashboard === 'view' && 'mx-4 md:mx-6',
+				)}
+			>
+				{typeTableDashboard === 'view' ? (
+					<h4 className="font-semibold">Lista de Órdenes ({data.length})</h4>
+				) : null}
+				<OrderToolbar typeTableDashboard={typeTableDashboard} table={table} />
+			</div>
+
+			{/* tabla */}
+			<div
+				className={cn(
+					'rounded-md border [&>div]:table-order-scrollbar',
+					typeTableDashboard === 'view' && 'rounded-none border-x-0',
+				)}
+			>
+				<Table className="bg-white dark:bg-black rounded-lg">
 					<TableHeader>
 						{table.getHeaderGroups().map((headerGroup) => (
 							<TableRow key={headerGroup.id}>
@@ -115,36 +141,33 @@ export function Order<TData, TValue>({
 						))}
 					</TableHeader>
 					<TableBody>
-						{table.getRowModel().rows?.length ? (
-							table.getRowModel().rows.map((row) => (
-								<TableRow
-									key={row.id}
-									// data-state={row.getIsSelected() && 'selected'}
-								>
-									{row.getVisibleCells().map((cell) => (
-										<TableCell key={cell.id}>
-											{flexRender(
-												cell.column.columnDef.cell,
-												cell.getContext(),
-											)}
-										</TableCell>
-									))}
-								</TableRow>
-							))
-						) : (
-							<TableRow>
-								<TableCell
-									colSpan={columns.length}
-									className="h-24 text-center"
-								>
-									No hay resultados.
-								</TableCell>
-							</TableRow>
-						)}
+						{table.getRowModel().rows?.length
+							? table.getRowModel().rows.map((row) => (
+									<TableRow
+										key={row.id}
+										// data-state={row.getIsSelected() && 'selected'}
+									>
+										{row.getVisibleCells().map((cell) => (
+											<TableCell key={cell.id}>
+												{flexRender(
+													cell.column.columnDef.cell,
+													cell.getContext(),
+												)}
+											</TableCell>
+										))}
+									</TableRow>
+								))
+							: null}
 					</TableBody>
 				</Table>
+				{!table.getRowModel().rows?.length && (
+					<div className="m-auto flex flex-col text-center gap-2 items-center justify-center text-xs py-2">
+						<NoData className="size-36" />
+						No hay resultados.
+					</div>
+				)}
 			</div>
-			<OrderPagination table={table} />
+			<OrderPagination typeTableDashboard={typeTableDashboard} table={table} />
 		</div>
 	)
 }

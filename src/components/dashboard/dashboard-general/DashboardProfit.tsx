@@ -1,7 +1,14 @@
 'use client'
 
 import { TrendingUp } from 'lucide-react'
-import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from 'recharts'
+import {
+	Area,
+	AreaChart,
+	CartesianGrid,
+	LabelList,
+	XAxis,
+	YAxis,
+} from 'recharts'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
@@ -65,12 +72,15 @@ const chartConfig = {
 export const DashboardProfit = () => {
 	return (
 		<DashboardWrapperItem>
-			<div className="flex flex-col justify-between gap-3">
-				<div className="text-base font-normal">
-					<h4 className="font-medium">Total Ganancias</h4>
+			<div className="flex flex-col h-full justify-between gap-3">
+				<div>
+					<h4 className="font-semibold">Total Ganancias</h4>
 					<h5 className="text-lg font-bold">S./ 8,950.00</h5>
 				</div>
-				<Tabs defaultValue="5D" className="space-y-4 w-full">
+				<Tabs
+					defaultValue="5D"
+					className="flex flex-col flex-1 justify-between w-full"
+				>
 					<TabsList className="w-full flex justify-around">
 						<TabsTrigger value="5D">5 D</TabsTrigger>
 						<TabsTrigger value="2W">2 W</TabsTrigger>
@@ -79,17 +89,13 @@ export const DashboardProfit = () => {
 						<TabsTrigger value="1Y">1 Y</TabsTrigger>
 					</TabsList>
 					{Object.entries(timePeriodsData).map(([period, data]) => (
-						<TabsContent
-							key={period}
-							value={period}
-							className="space-y-4 w-full"
-						>
-							<ChartContainer config={chartConfig} className="h-[200px] w-full">
+						<TabsContent key={period} value={period} className="w-full">
+							<ChartContainer config={chartConfig} className="aspect-auto w-full h-[250px]">
 								<AreaChart
 									data={data}
 									margin={{ top: 5, right: 20, left: 20, bottom: 5 }}
 								>
-									<CartesianGrid vertical={false} />
+									<CartesianGrid vertical={false} strokeDasharray={'3 3'} />
 									<XAxis
 										dataKey="date"
 										tickLine={false}
@@ -106,14 +112,41 @@ export const DashboardProfit = () => {
 										cursor={false}
 										content={<ChartTooltipContent indicator="line" />}
 									/>
+									<defs>
+										<linearGradient id="fillColor" x1="0" y1="0" x2="0" y2="1">
+											<stop
+												offset="5%"
+												stopColor="var(--picker-3)"
+												stopOpacity={0.8}
+											/>
+											<stop
+												offset="95%"
+												stopColor="var(--picker-3)"
+												stopOpacity={0.1}
+											/>
+										</linearGradient>
+									</defs>
 									<Area
 										type="natural"
 										dataKey="profit"
 										stroke="var(--picker-3)"
-										fill="var(--picker-3)"
+										fill="url(#fillColor)"
 										fillOpacity={0.4}
 										strokeWidth={2}
-									/>
+										dot={{
+											fill: 'var(--picker-1)',
+										}}
+										activeDot={{
+											r: 6,
+										}}
+									>
+										<LabelList
+											position="top"
+											offset={12}
+											className="fill-foreground"
+											fontSize={12}
+										/>
+									</Area>
 								</AreaChart>
 							</ChartContainer>
 							<div className="flex flex-col gap-2 text-xs text-muted-foreground">

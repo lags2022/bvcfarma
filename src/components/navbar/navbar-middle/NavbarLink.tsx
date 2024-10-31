@@ -33,10 +33,8 @@ export const NavbarLink = ({
 					'[&>button]:bg-accent [&_span]:text-black [&_svg]:text-black',
 			)}
 		>
-			<DropdownMenuItem className="w-full flex items-center gap-2 font-medium text-gray-500 group hover:text-black cursor-pointer">
-				<div className="[&>svg]:size-4 [&>svg]:text-gray-500 group-hover:[&>svg]:text-black dark:group-hover:[&>svg]:text-white">
-					{icon}
-				</div>
+			<DropdownMenuItem className="w-full flex items-center gap-2 group cursor-pointer">
+				<div className="[&>svg]:size-4">{icon}</div>
 				<span>{label}</span>
 			</DropdownMenuItem>
 		</ButtonGeneral>

@@ -43,18 +43,18 @@ const chartConfig = {
 export const DashboardPromotions = () => {
 	return (
 		<DashboardWrapperItem>
-			<div className="flex flex-col">
+			<div className="flex flex-col gap-3 justify-between">
 				<div className="flex justify-between">
 					<div className="text-sm items-center pb-0">
-						<h4>Gráfica radial - Promociones</h4>
-						<h6>Enero - Junio 2024</h6>
+						<h4 className="font-semibold">Gráfica radial - Promociones</h4>
+						<h5 className="text-sm font-medium">Enero - Junio 2024</h5>
 					</div>
 					<DataPickerShared />
 				</div>
 				<div className="flex-1 pb-0">
 					<ChartContainer
 						config={chartConfig}
-						className="mx-auto aspect-square"
+						className="aspect-auto w-full h-[250px]"
 					>
 						<RadialBarChart
 							data={chartData}
@@ -70,7 +70,7 @@ export const DashboardPromotions = () => {
 							<RadialBar dataKey="orders" background>
 								<LabelList
 									position="insideStart"
-									dataKey="promotion"
+									dataKey="orders"
 									className="fill-white capitalize mix-blend-luminosity"
 									fontSize={11}
 								/>

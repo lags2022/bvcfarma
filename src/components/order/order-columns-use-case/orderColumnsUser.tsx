@@ -66,7 +66,7 @@ export const orderColumnsUser: CustomColumnDef<OrderSchemaType>[] = [
 		id: 'customer',
 		accessorKey: 'customer',
 		header: ({ column }) => (
-			<OrderColumnHeader column={column} title="Comprador" />
+			<OrderColumnHeader  column={column} title="Comprador" />
 		),
 		alias: 'Comprador',
 		cell: ({ row }) => {

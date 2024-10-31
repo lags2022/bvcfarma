@@ -50,44 +50,61 @@ const chartConfig = {
 export const DashboardSales = () => {
 	return (
 		<DashboardWrapperItem>
-			<div className="flex flex-col justify-between">
+			<div className="flex flex-col gap-3 h-full justify-between">
 				<div className="flex justify-between">
 					<div>
-						<h4>Bar Chart - Stacked + Legend</h4>
-						<p>January - June 2024</p>
+						<h4 className="font-semibold">Informe de ingresos por ventas</h4>
+						<h5 className="text-sm font-medium">Enero - Junio 2024</h5>
 					</div>
 					<DataPickerShared />
 				</div>
 				<div>
-					<ChartContainer config={chartConfig}>
-						<ComposedChart data={chartData}>
-							<CartesianGrid vertical={false} />
+					<ChartContainer config={chartConfig} className='aspect-auto w-full h-[250px]'>
+						<ComposedChart
+							accessibilityLayer
+							margin={{
+								left: -20,
+								right: 12,
+							}}
+							data={chartData}
+						>
+							<CartesianGrid
+								vertical={false}
+								// strokeWidth={2}
+								stroke="hsl(var(--border))"
+								strokeDasharray={'5 5'}
+							/>
 							<XAxis
 								dataKey="month"
-								// tickLine={false}
+								// tickLine={false} // la linea vertical de cada label del eje no se visualiza
 								tickMargin={10}
-								axisLine={false}
+								// axisLine={false} // la linea horizontal del eje no se visualiza
 								tickFormatter={(value) => value.slice(0, 3)}
 							/>
-							<YAxis />
-							<ChartTooltip content={<ChartTooltipContent hideLabel />} />
+							<YAxis tickMargin={8} tickCount={5} />
+							<ChartTooltip
+								cursor={false} // la linea vertical de cada barra del eje no se visualiza
+								content={<ChartTooltipContent hideLabel />}
+							/>
 							<ChartLegend content={<ChartLegendContent />} />
 							<Bar
 								dataKey="desktop"
 								stackId="a"
 								fill="var(--picker-2)"
 								radius={[0, 0, 4, 4]}
+                barSize={50}
 							/>
 							<Bar
 								dataKey="mobile"
 								stackId="a"
 								fill="var(--picker-3)"
 								radius={[4, 4, 0, 0]}
+                barSize={50}
 							/>
 							<Line
 								dataKey="desktop"
 								type="natural"
-								stroke="hsl(var(--chart-1))"
+								stroke="var(--picker-5)"
 								strokeWidth={2}
 								dot={{
 									fill: 'var(--picker-1)',

@@ -60,7 +60,7 @@ export const DashboardUserLocation = () => {
 
 	return (
 		<DashboardWrapperItem>
-			<div className="flex flex-col justify-between items-center">
+			<div className="flex flex-col gap-3 justify-between items-center">
 				<div className="flex justify-between w-full">
 					<div>
 						<h4>Ubicación de Usuarios</h4>
@@ -74,7 +74,7 @@ export const DashboardUserLocation = () => {
 						scale: 1800, // Ajusta el zoom (puedes experimentar con este valor)
 						center: [-75.0152, -9.1899], // Centra el mapa en Perú
 					}}
-					style={{ width: '100%', height: 'auto' }}
+          className='aspect-auto w-full h-[250px]'
 				>
 					<Geographies geography={geoUrl}>
 						{({ geographies }) =>
