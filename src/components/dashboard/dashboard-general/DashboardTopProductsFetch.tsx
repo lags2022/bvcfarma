@@ -1,7 +1,8 @@
+import { Star } from 'lucide-react'
+import Image from 'next/image'
+
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { getProducts } from '@/services/getProducts'
-import Image from 'next/image'
-import { Star } from 'lucide-react'
 
 function getRandomRating() {
 	// Calificación aleatoria entre 1 y 5

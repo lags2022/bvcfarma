@@ -1,9 +1,10 @@
 import { DataPickerShared } from '@/components/shared/dashboard/DataPickerShared'
-import { DashboardWrapperItem } from '../DashboardWrapperItem'
+
 import { DashboardTopProductsFetch } from './DashboardTopProductsFetch'
+import { DashboardWrapperItem } from '../DashboardWrapperItem'
 
 export const DashboardTopProducts = () => {
-return (
+	return (
 		<DashboardWrapperItem>
 			<div className="flex flex-col gap-3 h-full justify-between">
 				<div className="flex justify-between">
@@ -13,7 +14,7 @@ return (
 					</div>
 					<p className="text-sm font-medium">Ver todos</p>
 				</div>
-        <DashboardTopProductsFetch />
+				<DashboardTopProductsFetch />
 			</div>
 		</DashboardWrapperItem>
 	)

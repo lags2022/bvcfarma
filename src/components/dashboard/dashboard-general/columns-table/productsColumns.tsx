@@ -1,22 +1,21 @@
-"use client"
+'use client'
 
+// import { modDate } from '@/helpers/mod-date'
+// import { pluralizeWord } from '@/helpers/plurize-word'
 import { ColumnDef } from '@tanstack/react-table'
 import { EyeIcon, Trash2 } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 
+import { OrderColumnHeader } from '@/components/order/order-data-table/OrderColumnHeader'
+import { Checkbox } from '@/components/ui/checkbox'
 import {
 	Tooltip,
 	TooltipContent,
 	TooltipProvider,
 	TooltipTrigger,
 } from '@/components/ui/tooltip'
-// import { modDate } from '@/helpers/mod-date'
-// import { pluralizeWord } from '@/helpers/plurize-word'
-
-import { Checkbox } from '@/components/ui/checkbox'
 import { ProductsSchemaType } from '@/schemas/products-table-schema'
-import { OrderColumnHeader } from '@/components/order/order-data-table/OrderColumnHeader'
-import Image from 'next/image'
 
 type CustomColumnDef<TData extends object> = ColumnDef<TData> & {
 	alias?: string
@@ -50,7 +49,7 @@ export const productsColumns: CustomColumnDef<ProductsSchemaType>[] = [
 				</div>
 			)
 		},
-    filterFn: (row, id, value) => {
+		filterFn: (row, id, value) => {
 			return value.includes(row.getValue(id))
 		},
 		enableGlobalFilter: true,
@@ -68,9 +67,7 @@ export const productsColumns: CustomColumnDef<ProductsSchemaType>[] = [
 		cell: ({ row }) => {
 			return (
 				<div className="flex">
-					<span className="max-w-56 font-medium">
-						{row.getValue('price')}
-					</span>
+					<span className="max-w-56 font-medium">{row.getValue('price')}</span>
 				</div>
 			)
 		},
@@ -94,7 +91,7 @@ export const productsColumns: CustomColumnDef<ProductsSchemaType>[] = [
 		},
 		enableGlobalFilter: false,
 	},
-  {
+	{
 		accessorKey: 'typeOffer',
 		header: ({ column, table }) => (
 			<OrderColumnHeader
@@ -112,12 +109,12 @@ export const productsColumns: CustomColumnDef<ProductsSchemaType>[] = [
 				</div>
 			)
 		},
-    filterFn: (row, id, value) => {
+		filterFn: (row, id, value) => {
 			return value.includes(row.getValue(id))
 		},
 		enableGlobalFilter: true,
 	},
-  {
+	{
 		accessorKey: 'typeProduct',
 		header: ({ column, table }) => (
 			<OrderColumnHeader
@@ -135,7 +132,7 @@ export const productsColumns: CustomColumnDef<ProductsSchemaType>[] = [
 				</div>
 			)
 		},
-    filterFn: (row, id, value) => {
+		filterFn: (row, id, value) => {
 			return value.includes(row.getValue(id))
 		},
 		enableGlobalFilter: true,
@@ -180,31 +177,32 @@ export const productsColumns: CustomColumnDef<ProductsSchemaType>[] = [
 	},
 ]
 
-export const productsColumnsDashboardProduct: CustomColumnDef<ProductsSchemaType>[] = [
-	{
-		id: 'select',
-		header: ({ table }) => (
-			<Checkbox
-				checked={
-					table.getIsAllPageRowsSelected() ||
-					(table.getIsSomePageRowsSelected() && 'indeterminate')
-				}
-				onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-				aria-label="Select all"
-				className="translate-y-[2px]"
-			/>
-		),
-		cell: ({ row }) => (
-			<Checkbox
-				checked={row.getIsSelected()}
-				onCheckedChange={(value) => row.toggleSelected(!!value)}
-				aria-label="Select row"
-				className="translate-y-[2px]"
-			/>
-		),
-		enableSorting: false,
-		enableHiding: false,
-		enableGlobalFilter: false,
-	},
-	...productsColumns,
-]
+export const productsColumnsDashboardProduct: CustomColumnDef<ProductsSchemaType>[] =
+	[
+		{
+			id: 'select',
+			header: ({ table }) => (
+				<Checkbox
+					checked={
+						table.getIsAllPageRowsSelected() ||
+						(table.getIsSomePageRowsSelected() && 'indeterminate')
+					}
+					onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+					aria-label="Select all"
+					className="translate-y-[2px]"
+				/>
+			),
+			cell: ({ row }) => (
+				<Checkbox
+					checked={row.getIsSelected()}
+					onCheckedChange={(value) => row.toggleSelected(!!value)}
+					aria-label="Select row"
+					className="translate-y-[2px]"
+				/>
+			),
+			enableSorting: false,
+			enableHiding: false,
+			enableGlobalFilter: false,
+		},
+		...productsColumns,
+	]

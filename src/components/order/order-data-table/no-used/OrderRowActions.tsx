@@ -48,13 +48,13 @@ export function OrderRowActions<TData>({
 				<DropdownMenuSub>
 					<DropdownMenuSubTrigger>Labels</DropdownMenuSubTrigger>
 					<DropdownMenuSubContent>
-						<DropdownMenuRadioGroup value={task.label}>
+						{/* <DropdownMenuRadioGroup value={task.}>
 							{labels.map((label) => (
 								<DropdownMenuRadioItem key={label.value} value={label.value}>
 									{label.label}
 								</DropdownMenuRadioItem>
 							))}
-						</DropdownMenuRadioGroup>
+						</DropdownMenuRadioGroup> */}
 					</DropdownMenuSubContent>
 				</DropdownMenuSub>
 				<DropdownMenuSeparator />

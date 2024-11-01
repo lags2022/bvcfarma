@@ -1,23 +1,21 @@
 'use client'
 
+// import { modDate } from '@/helpers/mod-date'
+// import { pluralizeWord } from '@/helpers/plurize-word'
 import { ColumnDef } from '@tanstack/react-table'
 import { EyeIcon, Trash2 } from 'lucide-react'
 import Link from 'next/link'
 
+import { OrderColumnHeader } from '@/components/order/order-data-table/OrderColumnHeader'
+import { AvatarCustom } from '@/components/shared/AvatarCustom'
+import { Checkbox } from '@/components/ui/checkbox'
 import {
 	Tooltip,
 	TooltipContent,
 	TooltipProvider,
 	TooltipTrigger,
 } from '@/components/ui/tooltip'
-// import { modDate } from '@/helpers/mod-date'
-// import { pluralizeWord } from '@/helpers/plurize-word'
-
-import { Checkbox } from '@/components/ui/checkbox'
-import { OrderColumnHeader } from '@/components/order/order-data-table/OrderColumnHeader'
-import Image from 'next/image'
 import { UsersSchemaType } from '@/schemas/users-table-schema'
-import { AvatarCustom } from '@/components/shared/AvatarCustom'
 
 type CustomColumnDef<TData extends object> = ColumnDef<TData> & {
 	alias?: string
@@ -118,7 +116,7 @@ export const usersColumns: CustomColumnDef<UsersSchemaType>[] = [
 		},
 		enableGlobalFilter: true,
 	},
-  {
+	{
 		accessorKey: 'role',
 		header: ({ column, table }) => (
 			<OrderColumnHeader

@@ -4,6 +4,7 @@ import { ColumnDef } from '@tanstack/react-table'
 import { EyeIcon, Trash2 } from 'lucide-react'
 import Link from 'next/link'
 
+import { Checkbox } from '@/components/ui/checkbox'
 import {
 	Tooltip,
 	TooltipContent,
@@ -15,8 +16,6 @@ import { pluralizeWord } from '@/helpers/plurize-word'
 import { OrderSchemaType } from '@/schemas/order-data-schema'
 
 import { OrderColumnHeader } from '../order-data-table/OrderColumnHeader'
-
-import { Checkbox } from '@/components/ui/checkbox'
 
 type CustomColumnDef<TData extends object> = ColumnDef<TData> & {
 	alias?: string
@@ -265,7 +264,7 @@ export const orderColumnsDashboardOrders: CustomColumnDef<OrderSchemaType>[] = [
 		),
 		enableSorting: false,
 		enableHiding: false,
-    enableGlobalFilter: false,
+		enableGlobalFilter: false,
 	},
 	...orderColumnsUser,
 ]

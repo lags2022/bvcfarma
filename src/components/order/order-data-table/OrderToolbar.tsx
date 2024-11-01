@@ -6,11 +6,11 @@ import { Table } from '@tanstack/react-table'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { formatPaymentMethod, formatStatusOrder } from '@/helpers/enum-mod'
+import { TypeTableDashboard } from '@/interfaces/general'
 import { cn } from '@/lib/utils'
 
 import { OrderFacetedFilter } from './OrderFacetedFilter'
 import { OrderViewOptions } from './OrderViewOptions'
-import { TypeTableDashboard } from '@/interfaces/general'
 
 interface DataTableToolbarProps<TData> {
 	table: Table<TData>

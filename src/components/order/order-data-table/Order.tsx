@@ -26,11 +26,11 @@ import {
 	TableHeader,
 	TableRow,
 } from '@/components/ui/table'
+import { RouteTable, TypeTableDashboard } from '@/interfaces/general'
 import { cn } from '@/lib/utils'
 
 import { OrderPagination } from './OrderPagination'
 import { OrderToolbar } from './OrderToolbar'
-import { RouteTable, TypeTableDashboard } from '@/interfaces/general'
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[]

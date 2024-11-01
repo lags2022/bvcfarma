@@ -5,13 +5,13 @@ import { ArrowLeft } from 'lucide-react'
 import { useEffect } from 'react'
 
 import { ButtonGeneral } from '@/components/button/ButtonGeneral'
+import { DashboardWrapperItem } from '@/components/dashboard/DashboardWrapperItem'
 import { DetailsOrder } from '@/components/shared/DetailsOrder'
 import { STATUS_ORDER_MOD } from '@/constants/enum-mod'
 import { pluralizeWord } from '@/helpers/plurize-word'
 import { smoothScrollToTop } from '@/helpers/smooth-scroll-top'
 
 import { OrderStatus } from './OrderStatus'
-import { DashboardWrapperItem } from '@/components/dashboard/DashboardWrapperItem'
 
 export const OrderDetails = ({
 	order: order,
@@ -34,7 +34,10 @@ export const OrderDetails = ({
 		<div className="w-full space-y-4">
 			<div className="flex flex-col justify-center items-start gap-4">
 				<div className="flex justify-center items-center gap-2">
-					<ButtonGeneral href={isPageDashboard ? '/dashboard/orders' : "/orders"} size="icon">
+					<ButtonGeneral
+						href={isPageDashboard ? '/dashboard/orders' : '/orders'}
+						size="icon"
+					>
 						<ArrowLeft />
 					</ButtonGeneral>
 					<h2 className="text-lg font-bold flex flex-col gap-2 tracking-tight">

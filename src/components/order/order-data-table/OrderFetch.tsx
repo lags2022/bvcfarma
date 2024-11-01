@@ -1,7 +1,8 @@
-import { ButtonGeneral } from '@/components/button/ButtonGeneral'
-import { OrderDetails } from './OrderDetails'
 import { getOrderItems } from '@/actions/order-items'
+import { ButtonGeneral } from '@/components/button/ButtonGeneral'
 import { cn } from '@/lib/utils'
+
+import { OrderDetails } from './OrderDetails'
 
 export const OrderFetch = async ({
 	orderId,
@@ -23,10 +24,7 @@ export const OrderFetch = async ({
 
 	return (
 		<main
-			className={cn(
-				'text-sm',
-				isPageDashboard ? '' : 'py-4 md:py-6 contain',
-			)}
+			className={cn('text-sm', isPageDashboard ? '' : 'py-4 md:py-6 contain')}
 		>
 			<OrderDetails isPageDashboard={isPageDashboard} order={order} />
 		</main>

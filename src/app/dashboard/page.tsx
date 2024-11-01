@@ -3,11 +3,11 @@ import { DashboardCustomerRate } from '@/components/dashboard/dashboard-general/
 import { DashboardHero } from '@/components/dashboard/dashboard-general/DashboardHero'
 import { DashboardIndicatorsContainer } from '@/components/dashboard/dashboard-general/DashboardIndicators'
 import { DashboardOrders } from '@/components/dashboard/dashboard-general/DashboardOrders'
-import { DashboardTopProducts } from '@/components/dashboard/dashboard-general/DashboardTopProducts'
 import { DashboardProfit } from '@/components/dashboard/dashboard-general/DashboardProfit'
 import { DashboardPromotions } from '@/components/dashboard/dashboard-general/DashboardPromotions'
 import { DashboardSales } from '@/components/dashboard/dashboard-general/DashboardSales'
 import { DashboardStock } from '@/components/dashboard/dashboard-general/DashboardStock'
+import { DashboardTopProducts } from '@/components/dashboard/dashboard-general/DashboardTopProducts'
 import { DashboardUserLocation } from '@/components/dashboard/dashboard-general/DashboardUserLocation'
 
 export default async function PageDashboard() {

@@ -23,7 +23,7 @@ export default async function OrdersPage() {
 					data={orderParse}
 					columns={orderColumnsUser}
 					meta={{
-						typeTableDashboard: 'all',
+						typeTableDashboard: 'customerOrders',
 						route: '/orders',
 					}}
 				/>

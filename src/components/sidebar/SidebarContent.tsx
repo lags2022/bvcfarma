@@ -1,11 +1,11 @@
 import { LogOut } from 'lucide-react'
+import { useEffect, useState } from 'react'
 
 import { logoutAction } from '@/actions/auth-action'
+import { getAllOrders } from '@/actions/order-action'
 import { SIDEBAR_ITEMS } from '@/constants/dashboard'
 
 import { SidebarItem } from './SidebarItem'
-import { useEffect, useState } from 'react'
-import { getAllOrders } from '@/actions/order-action'
 
 export const SidebarContent = ({
 	isExpanded = true,

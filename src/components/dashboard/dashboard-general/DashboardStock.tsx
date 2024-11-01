@@ -1,8 +1,9 @@
-import { getProducts } from '@/services/getProducts'
-import { DashboardWrapperItem } from '../DashboardWrapperItem'
 import { Order } from '@/components/order/order-data-table/Order'
 import { productsParsed } from '@/schemas/products-table-schema'
+import { getProducts } from '@/services/getProducts'
+
 import { productsColumns } from './columns-table/productsColumns'
+import { DashboardWrapperItem } from '../DashboardWrapperItem'
 
 export const DashboardStock = async () => {
 	const products = await getProducts()
