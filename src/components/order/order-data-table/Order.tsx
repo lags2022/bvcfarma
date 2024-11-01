@@ -41,6 +41,13 @@ interface DataTableProps<TData, TValue> {
 	}
 }
 
+const title = {
+	'/orders': 'Listado de Órdenes',
+	'/dashboard/orders': 'Listado de Órdenes',
+	'/dashboard/products': 'Listado de Productos',
+	'/dashboard/customers': 'Listado de Clientes',
+} as const
+
 export function Order<TData, TValue>({
 	columns,
 	data,
@@ -122,7 +129,9 @@ export function Order<TData, TValue>({
 				)}
 			>
 				{isDashboard ? (
-					<h4 className="font-semibold">Lista de Órdenes ({data.length})</h4>
+					<h4 className="font-semibold">
+						{title[meta.route]} ({data.length})
+					</h4>
 				) : null}
 				<OrderToolbar
 					typeTableDashboard={meta.typeTableDashboard}

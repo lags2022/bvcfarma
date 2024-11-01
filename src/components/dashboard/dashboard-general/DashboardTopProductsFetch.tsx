@@ -1,5 +1,6 @@
 import { Star } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { getProducts } from '@/services/getProducts'
@@ -37,33 +38,32 @@ export const DashboardTopProductsFetch = async () => {
 	const products = await getProducts()
 
 	return (
-		<ScrollArea className="h-96 px-4 py-2">
-			<ul className="flex flex-col gap-4">
+		<ScrollArea className="h-96 pr-2">
+			<ul className="flex flex-col gap-2">
 				{products.map((product) => {
 					const { rating, reviews } = getRandomRating() // Obtener calificación y reseñas aleatorias
 
 					return (
-						<li
-							key={product.id}
-							className="flex items-center gap-2 text-sm justify-between"
-						>
-							<div className="flex gap-2">
-								<Image
-									src={product.image}
-									alt={product.name}
-									width={50}
-									height={50}
-									className="rounded-lg aspect-square size-12 object-cover"
-								/>
-								<div className="flex flex-col">
-									<p className="capitalize font-medium">{product.name}</p>
-									<p>S./ {product.price}</p>
+						<Link href={`/dashboard/products/${product.id}`} className='hover:bg-gray-100 p-2 rounded-sm' key={product.id}>
+							<li className="flex items-center gap-2 text-sm justify-between">
+								<div className="flex gap-2">
+									<Image
+										src={product.image}
+										alt={product.name}
+										width={50}
+										height={50}
+										className="rounded-lg aspect-square size-12 object-cover"
+									/>
+									<div className="flex flex-col">
+										<p className="capitalize font-medium">{product.name}</p>
+										<p>S./ {product.price}</p>
+									</div>
 								</div>
-							</div>
-							<div>
-								<Rating rating={rating} reviews={reviews} />
-							</div>
-						</li>
+								<div>
+									<Rating rating={rating} reviews={reviews} />
+								</div>
+							</li>
+						</Link>
 					)
 				})}
 			</ul>
