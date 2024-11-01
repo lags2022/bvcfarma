@@ -44,7 +44,7 @@ export const DashboardTopProductsFetch = async () => {
 					const { rating, reviews } = getRandomRating() // Obtener calificación y reseñas aleatorias
 
 					return (
-						<Link href={`/dashboard/products/${product.id}`} className='hover:bg-gray-100 p-2 rounded-sm' key={product.id}>
+						<Link href={`/dashboard/products/${product.id}`} className='hover:bg-gray-100 dark:hover:bg-picker-5 p-2 rounded-sm' key={product.id}>
 							<li className="flex items-center gap-2 text-sm justify-between">
 								<div className="flex gap-2">
 									<Image
