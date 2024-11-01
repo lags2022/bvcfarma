@@ -1,5 +1,5 @@
-import { ProductApiProps } from '@/interfaces/products'
 import { z } from 'zod'
+import { ProductApiProps } from '@/interfaces/products'
 
 export const transformedProducts = (products: ProductApiProps[]) =>
 	products.map((product) => ({
