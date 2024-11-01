@@ -89,15 +89,17 @@ export async function updateUser(
 }
 
 // delete user: change active
-export async function deleteUser() {
+export async function deleteUser(userIdFromClient?: string) {
 	try {
-		const userId = await getIdFromSession()
+		const userId = userIdFromClient || (await getIdFromSession())
 
 		const userDelete = await userController().delete(userId!)
 
-		if (userDelete.status === 'success') {
+		if (userDelete.status === 'success' && !userIdFromClient) {
 			await logoutAction()
 		}
+
+    redirect('/dashboard/customers')
 	} catch (error) {
 		throw error
 	}

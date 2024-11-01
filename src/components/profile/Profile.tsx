@@ -85,7 +85,7 @@ export const Profile = ({
 	const handleDeleteUser = async () => {
 		setIsDeleting(true)
 		try {
-			await deleteUser()
+			await deleteUser(isPageDashboard ? user.id : undefined)
 			toast.success('Cuenta eliminada')
 		} catch (error) {
 			toast.error('No se pudo eliminar la cuenta')
