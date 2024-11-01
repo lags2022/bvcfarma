@@ -18,17 +18,20 @@ import { cn } from '@/lib/utils'
 
 interface DataTablePaginationProps<TData> {
 	table: Table<TData>
-  typeTableDashboard?: 'view' | 'all'
+	isDashboard: boolean
 }
 
 export function OrderPagination<TData>({
 	table,
-  typeTableDashboard
+	isDashboard,
 }: DataTablePaginationProps<TData>) {
 	return (
-		<div className={cn("flex items-center justify-between",
-      typeTableDashboard === 'view' && "mx-4 md:mx-6"
-    )}>
+		<div
+			className={cn(
+				'flex items-center justify-between',
+				isDashboard && 'mx-4 md:mx-6',
+			)}
+		>
 			<div className="flex items-center space-x-2">
 				<p className="text-sm font-medium">Filas por página</p>
 				<Select

@@ -54,14 +54,14 @@ export const DashboardPromotions = () => {
 				<div className="flex-1 pb-0">
 					<ChartContainer
 						config={chartConfig}
-						className="aspect-auto w-full h-[250px]"
+						className="aspect-auto w-full h-[300px] sm:h-[350px]"
 					>
 						<RadialBarChart
 							data={chartData}
 							startAngle={-90}
 							endAngle={380}
 							innerRadius="20%"
-							outerRadius="90%"
+							outerRadius="100%"
 						>
 							<ChartTooltip
 								cursor={false}

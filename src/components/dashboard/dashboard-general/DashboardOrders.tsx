@@ -12,7 +12,14 @@ export const DashboardOrders = async () => {
 
 	return (
 		<DashboardWrapperItem isTable>
-			<Order typeTableDashboard="view" data={ordersParse} columns={orderColumnsUser} />
+			<Order
+				data={ordersParse}
+				columns={orderColumnsUser}
+				meta={{
+					typeTableDashboard: 'ownerDashboard',
+					route: '/dashboard/orders',
+				}}
+			/>
 		</DashboardWrapperItem>
 	)
 }

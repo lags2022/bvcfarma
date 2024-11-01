@@ -4,6 +4,7 @@ import {
 	ColumnDef,
 	ColumnFiltersState,
 	SortingState,
+	TableMeta,
 	VisibilityState,
 	flexRender,
 	getCoreRowModel,
@@ -29,17 +30,21 @@ import { cn } from '@/lib/utils'
 
 import { OrderPagination } from './OrderPagination'
 import { OrderToolbar } from './OrderToolbar'
+import { RouteTable, TypeTableDashboard } from '@/interfaces/general'
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[]
 	data: TData[]
-	typeTableDashboard?: 'view' | 'all'
+	meta: {
+		typeTableDashboard: TypeTableDashboard
+		route: RouteTable
+	}
 }
 
 export function Order<TData, TValue>({
 	columns,
 	data,
-	typeTableDashboard,
+	meta,
 }: DataTableProps<TData, TValue>) {
 	// const [rowSelection, setRowSelection] = React.useState({})
 	const [columnVisibility, setColumnVisibility] =
@@ -53,6 +58,11 @@ export function Order<TData, TValue>({
 	const table = useReactTable({
 		data,
 		columns,
+		initialState: {
+			pagination: {
+				pageSize: meta.typeTableDashboard === 'ownerDashboard' ? 5 : 10,
+			},
+		},
 		state: {
 			sorting,
 			columnVisibility,
@@ -60,6 +70,7 @@ export function Order<TData, TValue>({
 			columnFilters,
 			globalFilter, // Inicializa el filtro global
 		},
+		meta,
 		// enableRowSelection: true,
 		// onRowSelectionChange: setRowSelection,
 		onSortingChange: setSorting,
@@ -95,30 +106,35 @@ export function Order<TData, TValue>({
 		// },
 	})
 
+	const isDashboard = ['ownerDashboard', 'ownerDashboardOrders'].includes(
+		meta.typeTableDashboard,
+	)
+
 	return (
-		<div
-			className={
-				typeTableDashboard !== 'view' ? 'contain space-y-4' : 'space-y-3'
-			}
-		>
+		<div className={!isDashboard ? 'contain space-y-4' : 'space-y-3'}>
 			{/* cabecera */}
 			<div
 				className={cn(
 					'flex gap-3 items-center justify-between',
-					typeTableDashboard === 'view' && 'mx-4 md:mx-6',
+					isDashboard && 'mx-4 md:mx-6',
+					meta.typeTableDashboard === 'ownerDashboardOrders' &&
+						'flex-col items-start',
 				)}
 			>
-				{typeTableDashboard === 'view' ? (
+				{isDashboard ? (
 					<h4 className="font-semibold">Lista de Órdenes ({data.length})</h4>
 				) : null}
-				<OrderToolbar typeTableDashboard={typeTableDashboard} table={table} />
+				<OrderToolbar
+					typeTableDashboard={meta.typeTableDashboard}
+					table={table}
+				/>
 			</div>
 
 			{/* tabla */}
 			<div
 				className={cn(
 					'rounded-md border [&>div]:table-order-scrollbar',
-					typeTableDashboard === 'view' && 'rounded-none border-x-0',
+					isDashboard && 'rounded-none border-x-0',
 				)}
 			>
 				<Table className="bg-white dark:bg-black rounded-lg">
@@ -167,7 +183,7 @@ export function Order<TData, TValue>({
 					</div>
 				)}
 			</div>
-			<OrderPagination typeTableDashboard={typeTableDashboard} table={table} />
+			<OrderPagination isDashboard={isDashboard} table={table} />
 		</div>
 	)
 }

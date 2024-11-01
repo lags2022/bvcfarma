@@ -19,7 +19,13 @@ import {
 import { ProfileAlerts } from './ProfileAlerts'
 import { ProfileImageUserUpdate } from './ProfileImageUserUpdate'
 
-export const Profile = ({ user }: { user: UserWithSelectedAddressFields }) => {
+export const Profile = ({
+	user,
+	isPageDashboard,
+}: {
+	user: UserWithSelectedAddressFields
+	isPageDashboard?: boolean
+}) => {
 	const INITIAL_VALUES = {
 		name: user?.name || '',
 		email: user.email,
@@ -63,7 +69,7 @@ export const Profile = ({ user }: { user: UserWithSelectedAddressFields }) => {
 	const onSubmit = async (data: UserUpdateProfileSchemaType) => {
 		try {
 			if (!Object.keys(errors).length) {
-				await updateUser(data)
+				await updateUser(data, isPageDashboard ? user.id : undefined)
 				// await new Promise((resolve) => setTimeout(resolve, 20000))
 
 				toast.success('Cambios realizados')

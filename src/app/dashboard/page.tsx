@@ -3,7 +3,7 @@ import { DashboardCustomerRate } from '@/components/dashboard/dashboard-general/
 import { DashboardHero } from '@/components/dashboard/dashboard-general/DashboardHero'
 import { DashboardIndicatorsContainer } from '@/components/dashboard/dashboard-general/DashboardIndicators'
 import { DashboardOrders } from '@/components/dashboard/dashboard-general/DashboardOrders'
-import { DashboardProducts } from '@/components/dashboard/dashboard-general/DashboardProducts'
+import { DashboardTopProducts } from '@/components/dashboard/dashboard-general/DashboardTopProducts'
 import { DashboardProfit } from '@/components/dashboard/dashboard-general/DashboardProfit'
 import { DashboardPromotions } from '@/components/dashboard/dashboard-general/DashboardPromotions'
 import { DashboardSales } from '@/components/dashboard/dashboard-general/DashboardSales'
@@ -38,7 +38,7 @@ export default async function PageDashboard() {
 				<DashboardCustomerRate />
 			</div>
 			<div className="flex col-span-8 md:col-span-4 order-6 xl:order-none xl:col-span-3">
-				<DashboardProducts />
+				<DashboardTopProducts />
 			</div>
 			<div className="flex col-span-8 md:col-span-4 order-7 xl:order-none xl:col-span-3">
 				<DashboardUserLocation />

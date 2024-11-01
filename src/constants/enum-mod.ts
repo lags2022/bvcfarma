@@ -31,3 +31,10 @@ export const STATUS_ORDER_MOD = {
 	ASSIGNED: 'Asignado',
 	DELIVERED: 'Entregado',
 } as const
+
+export const ROLE_MOD = {
+	CUSTOMER: 'Usuario',
+	MERCHANT: 'Farmacia',
+	ADMIN: 'Administrador',
+	OWNER: 'Propietario',
+} as const

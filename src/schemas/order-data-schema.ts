@@ -26,6 +26,7 @@ export const transformedOrders = (orders: OrderGetAll[]) =>
 			? `${order.orderAddress.firstName} ${order.orderAddress.lastName}`
 			: order.user.email, // Si no hay dirección, usa el correo del usuario
 		address: order.orderAddress?.address ?? 'Recojo en tienda', // Si no hay dirección, usa 'Recojo en tienda'
+		// options,
 	}))
 
 export const orderSchema = z.object({

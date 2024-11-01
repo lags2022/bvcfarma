@@ -18,18 +18,17 @@ export const SIDEBAR_ITEMS = [
 		icon: <ShoppingBag />,
 		label: 'Ordenes',
 		href: '/dashboard/orders',
-    badge: '15'
 	},
 	{
 		icon: <Package />,
 		label: 'Productos',
 		href: '/dashboard/products',
 	},
-	{
-		icon: <BarChart2 />,
-		label: 'Analíticas',
-		href: '/dashboard/analytics',
-	},
+	// {
+	// 	icon: <BarChart2 />,
+	// 	label: 'Analíticas',
+	// 	href: '/dashboard/analytics',
+	// },
 	{
 		icon: <Users />,
 		label: 'Clientes',

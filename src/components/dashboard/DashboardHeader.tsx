@@ -96,7 +96,7 @@ export const Dashboard = ({
 				</div>
 			</header>
 
-			<main className="mt-16 bg-light dark:bg-dark p-4 sm:px-6">
+			<main className="mt-16 min-h-[calc(100lvh-64px)] bg-light dark:bg-dark p-4 sm:px-6">
 				{children}
 			</main>
 		</div>

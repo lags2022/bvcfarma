@@ -29,6 +29,7 @@ export type UserWithSelectedAddressFields = Prisma.UserGetPayload<{
 export interface UserModelImplements {}
 export interface UserModelConstructor {
 	new (): UserModelImplements
+  getAll(): Promise<UserWithSelectedAddressFields[]>
 	getByEmail(
 		email: string,
 		password: string,

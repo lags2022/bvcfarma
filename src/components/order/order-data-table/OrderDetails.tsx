@@ -11,13 +11,16 @@ import { pluralizeWord } from '@/helpers/plurize-word'
 import { smoothScrollToTop } from '@/helpers/smooth-scroll-top'
 
 import { OrderStatus } from './OrderStatus'
+import { DashboardWrapperItem } from '@/components/dashboard/DashboardWrapperItem'
 
 export const OrderDetails = ({
 	order: order,
+	isPageDashboard,
 }: {
 	order: Order & {
 		orderItems?: OrderItemProduct[]
 	}
+	isPageDashboard?: boolean
 }) => {
 	useEffect(() => {
 		const cancelScrollAnimation = smoothScrollToTop()
@@ -28,10 +31,10 @@ export const OrderDetails = ({
 	}, [])
 
 	return (
-		<div className="w-full">
+		<div className="w-full space-y-4">
 			<div className="flex flex-col justify-center items-start gap-4">
 				<div className="flex justify-center items-center gap-2">
-					<ButtonGeneral href="/orders" size="icon" className="">
+					<ButtonGeneral href={isPageDashboard ? '/dashboard/orders' : "/orders"} size="icon">
 						<ArrowLeft />
 					</ButtonGeneral>
 					<h2 className="text-lg font-bold flex flex-col gap-2 tracking-tight">
@@ -47,26 +50,28 @@ export const OrderDetails = ({
 					Detalles del pedido y seguimiento
 				</p>
 			</div>
-			<div className="bg-white shadow-md rounded-lg flex justify-between flex-col sm:flex-row w-full p-6 gap-6">
-				<div className="sm:w-1/2">
-					<h3 className="font-semibold mb-4">Productos</h3>
-					<DetailsOrder
-						productsCart={order.orderItems!}
-						subtotal={order.subtotal}
-						totalCart={order.totalCart}
-						discount={order.discount}
-						shippingCost={order.shippingCost}
-						totalCheckout={order.total}
-						typeComponentShopping="checkout"
-					/>
-				</div>
-				<div className="sm:w-1/2">
-					<h3 className="font-semibold mb-4">Order Tracking</h3>
-					<div className="space-y-6">
-						<OrderStatus status={STATUS_ORDER_MOD[order.status]} />
+			<DashboardWrapperItem>
+				<div className="flex justify-between flex-col sm:flex-row w-full gap-6">
+					<div className="sm:w-1/2">
+						<h3 className="font-semibold mb-4">Productos</h3>
+						<DetailsOrder
+							productsCart={order.orderItems!}
+							subtotal={order.subtotal}
+							totalCart={order.totalCart}
+							discount={order.discount}
+							shippingCost={order.shippingCost}
+							totalCheckout={order.total}
+							typeComponentShopping="checkout"
+						/>
+					</div>
+					<div className="sm:w-1/2">
+						<h3 className="font-semibold mb-4">Order Tracking</h3>
+						<div className="space-y-6">
+							<OrderStatus status={STATUS_ORDER_MOD[order.status]} />
+						</div>
 					</div>
 				</div>
-			</div>
+			</DashboardWrapperItem>
 		</div>
 	)
 }

@@ -10,10 +10,11 @@ import { cn } from '@/lib/utils'
 
 import { OrderFacetedFilter } from './OrderFacetedFilter'
 import { OrderViewOptions } from './OrderViewOptions'
+import { TypeTableDashboard } from '@/interfaces/general'
 
 interface DataTableToolbarProps<TData> {
 	table: Table<TData>
-	typeTableDashboard?: 'view' | 'all'
+	typeTableDashboard?: TypeTableDashboard
 }
 
 export function OrderToolbar<TData>({
@@ -23,11 +24,11 @@ export function OrderToolbar<TData>({
 	const isFiltered = table.getState().columnFilters.length > 0
 
 	return (
-		<div className="flex flex-1 flex-col sm:flex-row gap-3 sm:items-center justify-between">
+		<div className="flex flex-1 flex-col sm:flex-row gap-3 sm:items-center w-full justify-between">
 			<div
 				className={cn(
 					'flex flex-1 items-center space-x-2',
-					typeTableDashboard === 'view' && 'justify-end',
+					typeTableDashboard === 'ownerDashboard' && 'justify-end',
 				)}
 			>
 				<Input
@@ -38,10 +39,10 @@ export function OrderToolbar<TData>({
 					// }
 					value={table.getState().globalFilter ?? ''} // Usa el filtro global del estado de la tabla
 					onChange={(event) => table.setGlobalFilter(event.target.value)} // Cambia el filtro global en lugar de uno específico
-					className="h-8 w-full sm:w-[250px]"
+					className="h-8 max-w-xs"
 				/>
 			</div>
-			{typeTableDashboard !== 'view' && (
+			{typeTableDashboard !== 'ownerDashboard' && (
 				<div className="flex items-center space-x-2">
 					{isFiltered && (
 						<Button

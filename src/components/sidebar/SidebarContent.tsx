@@ -4,6 +4,8 @@ import { logoutAction } from '@/actions/auth-action'
 import { SIDEBAR_ITEMS } from '@/constants/dashboard'
 
 import { SidebarItem } from './SidebarItem'
+import { useEffect, useState } from 'react'
+import { getAllOrders } from '@/actions/order-action'
 
 export const SidebarContent = ({
 	isExpanded = true,
@@ -12,6 +14,19 @@ export const SidebarContent = ({
 	isExpanded?: boolean
 	handleClose?: () => void
 }) => {
+	const [ordersCount, setOrdersCount] = useState(0)
+
+	useEffect(() => {
+		const fetchOrdersCount = async () => {
+			const orders = await getAllOrders()
+			setOrdersCount(orders.length)
+		}
+		fetchOrdersCount()
+		return () => {
+			setOrdersCount(0)
+		}
+	}, [])
+
 	return (
 		<>
 			{/* menu de la barra lateral sidebar */}
@@ -22,7 +37,7 @@ export const SidebarContent = ({
 							key={item.label}
 							icon={item.icon}
 							label={item.label}
-							badge={item.badge}
+							badge={ordersCount}
 							isExpanded={isExpanded}
 							href={item.href}
 							onClick={handleClose}

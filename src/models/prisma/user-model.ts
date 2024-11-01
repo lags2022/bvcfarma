@@ -296,4 +296,15 @@ export class UserModelPrisma implements UserModelImplements {
       }
     })
   }
+
+  static async getAll(): Promise<UserWithSelectedAddressFields[]> {
+    return executeAction(async () => {
+      return await prisma.user.findMany({
+        where: {
+          isActive: true,
+        },
+        select: selectUser,
+      })
+    })
+  }
 }

@@ -39,3 +39,14 @@ export interface ResponseStatusUserUpdated {
 	data: UserWithSelectedAddressFields
 	status: string
 }
+
+export type TypeTableDashboard =
+	| 'ownerDashboard'
+	| 'ownerDashboardOrders'
+	| 'customerOrders'
+
+export type RouteTable =
+	| '/orders'
+	| '/dashboard/orders'
+	| '/dashboard/products'
+	| '/dashboard/customers'

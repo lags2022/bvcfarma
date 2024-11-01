@@ -16,7 +16,7 @@ export function SidebarItem({
 	icon: React.ReactNode
 	label: string
 	isExpanded: boolean
-	badge?: string
+	badge?: number
 	href?: string
 	onClick?: () => void
 }) {
@@ -37,7 +37,7 @@ export function SidebarItem({
 				)}
 			>
 				<span>{label}</span>
-				{badge && (
+				{badge && label === 'Ordenes' ? (
 					<Badge
 						className={cn(
 							'group-hover:bg-picker-4 hover:bg-picker-4 group-hover:text-white hover:text-white',
@@ -47,7 +47,7 @@ export function SidebarItem({
 					>
 						{badge}
 					</Badge>
-				)}
+				) : null}
 			</div>
 		</ButtonGeneral>
 	)

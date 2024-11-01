@@ -19,7 +19,14 @@ export default async function OrdersPage() {
 				</p>
 			</div>
 			<div className="w-full overflow-hidden">
-				<Order data={orderParse} columns={orderColumnsUser} />
+				<Order
+					data={orderParse}
+					columns={orderColumnsUser}
+					meta={{
+						typeTableDashboard: 'all',
+						route: '/orders',
+					}}
+				/>
 			</div>
 		</main>
 	)

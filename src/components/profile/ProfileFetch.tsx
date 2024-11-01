@@ -1,10 +1,21 @@
-import { getUserWithAddress } from '@/actions/user-action'
+import {
+	getUserWithAddress,
+	getUserWithAddressByUserId,
+} from '@/actions/user-action'
 
 import { Profile } from './Profile'
 import { ButtonGeneral } from '../button/ButtonGeneral'
 
-export const ProfileFetch = async () => {
-	const user = await getUserWithAddress()
+export const ProfileFetch = async ({
+	userId: userId,
+	isPageDashboard,
+}: {
+	userId?: string
+	isPageDashboard?: boolean
+}) => {
+	const user = userId
+		? await getUserWithAddressByUserId(userId)
+		: await getUserWithAddress()
 
 	if (!user)
 		return (
@@ -15,5 +26,5 @@ export const ProfileFetch = async () => {
 			</div>
 		)
 
-	return <Profile user={user} />
+	return <Profile isPageDashboard={isPageDashboard} user={user} />
 }

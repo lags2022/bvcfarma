@@ -59,7 +59,7 @@ export const DashboardSales = () => {
 					<DataPickerShared />
 				</div>
 				<div>
-					<ChartContainer config={chartConfig} className='aspect-auto w-full h-[250px]'>
+					<ChartContainer config={chartConfig} className='aspect-auto w-full h-[300px] sm:h-[350px]'>
 						<ComposedChart
 							accessibilityLayer
 							margin={{

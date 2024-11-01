@@ -46,14 +46,28 @@ export async function getUserWithAddress() {
 	}
 }
 
-// update user
-export async function updateUser(dataUpdate: UserUpdateProfileSchemaType) {
+// obtener el usuario con el address desde la id de la sesion
+export async function getUserWithAddressByUserId(userId: string) {
 	try {
-		const userId = await getIdFromSession()
+		const user = await userController().getByIdWithAddress(userId)
+
+		return user
+	} catch (error) {
+		throw error
+	}
+}
+
+// update user
+export async function updateUser(
+	dataUpdate: UserUpdateProfileSchemaType,
+	userIdFromClient?: string,
+) {
+	try {
+		const userId = userIdFromClient || (await getIdFromSession())
 
 		const userUpdate = await userController().update(userId!, dataUpdate)
 
-		if (userUpdate.status === 'success') {
+		if (userUpdate.status === 'success' && !userIdFromClient) {
 			await updateSession({
 				user: {
 					name: userUpdate.data.name,
@@ -62,7 +76,13 @@ export async function updateUser(dataUpdate: UserUpdateProfileSchemaType) {
 			})
 		}
 
-		redirect('/profile')
+		const routeRedirect = !userIdFromClient
+			? userUpdate.data.role === 'OWNER'
+				? '/dashboard/settings'
+				: '/profile'
+			: '/dashboard/customers'
+
+		redirect(routeRedirect)
 	} catch (error) {
 		throw error
 	}
@@ -93,6 +113,16 @@ export async function updatePassword(password: string) {
 		if (userUpdate.status === 'success') {
 			return userUpdate
 		}
+	} catch (error) {
+		throw error
+	}
+}
+
+// all users
+export async function getAllUsers() {
+	try {
+		const users = await userController().getAll()
+		return users
 	} catch (error) {
 		throw error
 	}

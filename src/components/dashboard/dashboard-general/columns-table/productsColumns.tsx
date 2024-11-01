@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import { ColumnDef } from '@tanstack/react-table'
 import { EyeIcon, Trash2 } from 'lucide-react'
@@ -10,140 +10,66 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { modDate } from '@/helpers/mod-date'
-import { pluralizeWord } from '@/helpers/plurize-word'
-import { OrderSchemaType } from '@/schemas/order-data-schema'
-
-import { OrderColumnHeader } from '../order-data-table/OrderColumnHeader'
+// import { modDate } from '@/helpers/mod-date'
+// import { pluralizeWord } from '@/helpers/plurize-word'
 
 import { Checkbox } from '@/components/ui/checkbox'
+import { ProductsSchemaType } from '@/schemas/products-table-schema'
+import { OrderColumnHeader } from '@/components/order/order-data-table/OrderColumnHeader'
+import Image from 'next/image'
 
 type CustomColumnDef<TData extends object> = ColumnDef<TData> & {
 	alias?: string
 }
 
-export const orderColumnsUser: CustomColumnDef<OrderSchemaType>[] = [
+export const productsColumns: CustomColumnDef<ProductsSchemaType>[] = [
 	{
-		accessorKey: 'ocNumber',
-		header: ({ column, table }) => {
-			return (
-				<OrderColumnHeader
-					typeTableDashboard={table.options.meta?.typeTableDashboard!}
-					column={column}
-					title="Order ID"
-				/>
-			)
-		},
-		alias: 'Order ID',
-		cell: ({ row }) => (
-			<div className="flex flex-col">
-				{row.getValue('ocNumber')}{' '}
-				<span className="text-gray-500">
-					{pluralizeWord({
-						quantity: row.original.quantityItems,
-						singular: 'item',
-						language: 'en',
-					})}
-				</span>
-			</div>
-		),
-		enableGlobalFilter: true,
-	},
-	{
-		id: 'customer',
-		accessorKey: 'customer',
+		id: 'name',
+		accessorKey: 'name',
 		header: ({ column, table }) => (
 			<OrderColumnHeader
 				typeTableDashboard={table.options.meta?.typeTableDashboard!}
 				column={column}
-				title="Comprador"
+				title="Producto"
 			/>
 		),
-		alias: 'Comprador',
+		alias: 'Producto',
 		cell: ({ row }) => {
 			return (
-				<div className="flex space-x-2">
-					<span className="max-w-[100px] truncate font-medium">
-						{row.getValue('customer')}
+				<div className="flex gap-2 items-center">
+					<Image
+						src={row.original.image}
+						alt={row.getValue('name')}
+						width={50}
+						height={50}
+						className="rounded-md aspect-square size-8 object-cover"
+					/>
+					<span className="max-w-[250px] capitalize truncate font-medium">
+						{row.getValue('name')}
 					</span>
 				</div>
 			)
 		},
-		enableGlobalFilter: true,
-	},
-	{
-		accessorKey: 'address',
-		header: ({ column, table }) => (
-			<OrderColumnHeader
-				typeTableDashboard={table.options.meta?.typeTableDashboard!}
-				column={column}
-				title="Dirección"
-			/>
-		),
-		alias: 'Dirección',
-		cell: ({ row }) => {
-			return (
-				<div className="flex space-x-2">
-					<span className="max-w-56 truncate font-medium flex flex-col">
-						{row.getValue('address')}
-						<span className="text-xs text-muted-foreground">
-							{row.original.deliveryType}
-						</span>
-					</span>
-				</div>
-			)
-		},
-		enableGlobalFilter: true,
-	},
-	{
-		accessorKey: 'status',
-		header: ({ column, table }) => (
-			<OrderColumnHeader
-				typeTableDashboard={table.options.meta?.typeTableDashboard!}
-				column={column}
-				title="Estado"
-			/>
-		),
-		cell: ({ row }) => {
-			// const status = formatStatusOrder.find(
-			// 	(status) => status.value === row.getValue('status'),
-			// )
-
-			// if (!status) {
-			// 	return null
-			// }
-
-			return (
-				<div className="flex w-[100px] items-center">
-					{/* {status.icon && (
-						<status.icon className="mr-2 h-4 w-4 text-muted-foreground" />
-					)} */}
-					<span>{row.getValue('status')}</span>
-				</div>
-			)
-		},
-		filterFn: (row, id, value) => {
+    filterFn: (row, id, value) => {
 			return value.includes(row.getValue(id))
 		},
 		enableGlobalFilter: true,
 	},
 	{
-		accessorKey: 'paidAt',
+		accessorKey: 'price',
 		header: ({ column, table }) => (
 			<OrderColumnHeader
 				typeTableDashboard={table.options.meta?.typeTableDashboard!}
 				column={column}
-				title="Fecha de pago"
+				title="Precio"
 			/>
 		),
-		alias: 'Fecha de pago',
+		alias: 'Precio',
 		cell: ({ row }) => {
 			return (
-				<div className="flex space-x-2">
-					<span className="max-w-[500px] truncate font-medium">
-						{row.getValue('paidAt')
-							? modDate(row.getValue('paidAt'), 'full')
-							: 'Actualizar pago'}
+				<div className="flex">
+					<span className="max-w-56 font-medium">
+						{row.getValue('price')}
 					</span>
 				</div>
 			)
@@ -151,50 +77,68 @@ export const orderColumnsUser: CustomColumnDef<OrderSchemaType>[] = [
 		enableGlobalFilter: false,
 	},
 	{
-		accessorKey: 'paymentMethod',
+		accessorKey: 'stock',
 		header: ({ column, table }) => (
 			<OrderColumnHeader
 				typeTableDashboard={table.options.meta?.typeTableDashboard!}
 				column={column}
-				title="Tipo de pago"
+				title="Stock"
 			/>
 		),
-		alias: 'Tipo de pago',
 		cell: ({ row }) => {
 			return (
 				<div className="flex w-[100px] items-center">
-					{/* {status.icon && (
-						<status.icon className="mr-2 h-4 w-4 text-muted-foreground" />
-					)} */}
-					<span className="capitalize">{row.getValue('paymentMethod')}</span>
-				</div>
-			)
-		},
-		filterFn: (row, id, value) => {
-			return value.includes(row.getValue(id))
-		},
-		enableGlobalFilter: true,
-	},
-	{
-		accessorKey: 'total',
-		header: ({ column, table }) => (
-			<OrderColumnHeader
-				typeTableDashboard={table.options.meta?.typeTableDashboard!}
-				column={column}
-				title="Total"
-			/>
-		),
-		alias: 'Total',
-		cell: ({ row }) => {
-			return (
-				<div className="flex space-x-2">
-					<span className="max-w-[500px] truncate font-medium">
-						S./ {row.getValue('total')}
-					</span>
+					<span>{row.getValue('stock')}</span>
 				</div>
 			)
 		},
 		enableGlobalFilter: false,
+	},
+  {
+		accessorKey: 'typeOffer',
+		header: ({ column, table }) => (
+			<OrderColumnHeader
+				typeTableDashboard={table.options.meta?.typeTableDashboard!}
+				column={column}
+				title="Tipo de Oferta"
+			/>
+		),
+		cell: ({ row }) => {
+			return (
+				<div className="flex">
+					<span className="max-w-[100px] capitalize truncate font-medium">
+						{row.getValue('typeOffer')}
+					</span>
+				</div>
+			)
+		},
+    filterFn: (row, id, value) => {
+			return value.includes(row.getValue(id))
+		},
+		enableGlobalFilter: true,
+	},
+  {
+		accessorKey: 'typeProduct',
+		header: ({ column, table }) => (
+			<OrderColumnHeader
+				typeTableDashboard={table.options.meta?.typeTableDashboard!}
+				column={column}
+				title="Tipo"
+			/>
+		),
+		cell: ({ row }) => {
+			return (
+				<div className="flex">
+					<span className="max-w-[100px] truncate capitalize font-medium">
+						{row.getValue('typeProduct')}
+					</span>
+				</div>
+			)
+		},
+    filterFn: (row, id, value) => {
+			return value.includes(row.getValue(id))
+		},
+		enableGlobalFilter: true,
 	},
 	{
 		id: 'details',
@@ -234,14 +178,9 @@ export const orderColumnsUser: CustomColumnDef<OrderSchemaType>[] = [
 		enableSorting: false,
 		enableHiding: false,
 	},
-
-	// {
-	// 	id: 'actions',
-	// 	cell: ({ row }) => <OrderDataTableRowActions row={row} />,
-	// },
 ]
 
-export const orderColumnsDashboardOrders: CustomColumnDef<OrderSchemaType>[] = [
+export const productsColumnsDashboardProduct: CustomColumnDef<ProductsSchemaType>[] = [
 	{
 		id: 'select',
 		header: ({ table }) => (
@@ -265,7 +204,7 @@ export const orderColumnsDashboardOrders: CustomColumnDef<OrderSchemaType>[] = [
 		),
 		enableSorting: false,
 		enableHiding: false,
-    enableGlobalFilter: false,
+		enableGlobalFilter: false,
 	},
-	...orderColumnsUser,
+	...productsColumns,
 ]

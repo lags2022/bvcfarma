@@ -90,7 +90,7 @@ export const DashboardProfit = () => {
 					</TabsList>
 					{Object.entries(timePeriodsData).map(([period, data]) => (
 						<TabsContent key={period} value={period} className="w-full">
-							<ChartContainer config={chartConfig} className="aspect-auto w-full h-[250px]">
+							<ChartContainer config={chartConfig} className="aspect-auto w-full h-[300px]">
 								<AreaChart
 									data={data}
 									margin={{ top: 5, right: 20, left: 20, bottom: 5 }}
