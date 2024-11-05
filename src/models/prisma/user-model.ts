@@ -87,9 +87,9 @@ export class UserModelPrisma implements UserModelImplements {
 						id: userExists.id,
 					},
 					data: {
-            name: data.name,
-            password: data.password,
-            isActive: true,
+						name: data.name,
+						password: data.password,
+						isActive: true,
 					},
 					select: selectUser,
 				})
@@ -273,38 +273,39 @@ export class UserModelPrisma implements UserModelImplements {
 		})
 	}
 
-  static async updatePassword(
-    id: string,
-    password: string,
-  ): Promise<ResponseStatus> {
-    return executeAction(async () => {
-      const hashedPassword = await bcrypt.hash(password, 10)
+	static async updatePassword(
+		id: string,
+		password: string,
+	): Promise<ResponseStatus> {
+		return executeAction(async () => {
+			const hashedPassword = await bcrypt.hash(password, 10)
 
-      await prisma.user.update({
-        where: {
-          id,
-          isActive: true,
-        },
-        data: {
-          password: hashedPassword,
-        },
-      })
+			await prisma.user.update({
+				where: {
+					id,
+					isActive: true,
+				},
+				data: {
+					password: hashedPassword,
+				},
+			})
 
-      return {
-        message: 'Contraseña actualizada',
-        status: 'success',
-      }
-    })
-  }
+			return {
+				message: 'Contraseña actualizada',
+				status: 'success',
+			}
+		})
+	}
 
-  static async getAll(): Promise<UserWithSelectedAddressFields[]> {
-    return executeAction(async () => {
-      return await prisma.user.findMany({
-        where: {
-          isActive: true,
-        },
-        select: selectUser,
-      })
-    })
-  }
+	static async getAll(): Promise<UserWithSelectedAddressFields[]> {
+		return executeAction(async () => {
+			return await prisma.user.findMany({
+				where: {
+					isActive: true,
+					role: { in: ['CUSTOMER', 'MERCHANT'] }, // Filtrar solo usuarios con roles "customer" o "pharmacy"
+				},
+				select: selectUser,
+			})
+		})
+	}
 }

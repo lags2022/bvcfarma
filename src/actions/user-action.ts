@@ -14,6 +14,8 @@ async function getUserById({ userId }: { userId: string }) {
 	try {
 		const user = await userController().getById(userId)
 
+		console.log('fukk1')
+
 		return user
 	} catch (error) {
 		throw error
@@ -24,6 +26,9 @@ async function getUserById({ userId }: { userId: string }) {
 export async function getUser(shouldRedirect: boolean = true) {
 	try {
 		const userId = await getIdFromSession(shouldRedirect)
+
+		// por siacaso revisar
+		if (!userId) return
 
 		const user = await getUserById({ userId: userId! })
 
@@ -99,7 +104,7 @@ export async function deleteUser(userIdFromClient?: string) {
 			await logoutAction()
 		}
 
-    redirect('/dashboard/customers')
+		redirect('/dashboard/customers')
 	} catch (error) {
 		throw error
 	}

@@ -3,6 +3,8 @@ import type { Metadata } from 'next'
 import { Maven_Pro } from 'next/font/google'
 import { Toaster } from 'react-hot-toast'
 
+import { WhatsappFloating } from '@/components/shared/WhatsappFloating'
+
 const mavenPro = Maven_Pro({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -20,6 +22,7 @@ export default function RootLayout({
 			<body className={mavenPro.className}>
 				{children}
 				<Toaster />
+				<WhatsappFloating />
 			</body>
 		</html>
 	)

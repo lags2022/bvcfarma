@@ -9,7 +9,7 @@ export default function RootLayout({
 	children: React.ReactNode
 }>) {
 	return (
-		<ThemeProvider attribute="class" forcedTheme='light'>
+		<ThemeProvider attribute="class" forcedTheme="light">
 			<div className="bg-gray-100">
 				<Navbar />
 				<main className="mt-[140px]">{children}</main>
