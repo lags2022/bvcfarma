@@ -44,13 +44,13 @@ export function ChatEffectText({
 						animate={{ opacity: 1, y: 0 }}
 						exit={{ opacity: 0, y: -20 }}
 						transition={{ duration: 0.5 }}
-						className="p-3 rounded-2xl shadow-sm rounded-br-none bg-picker-4"
+						className="p-3 rounded-2xl shadow-sm rounded-br-none bg-white dark:bg-black"
 					>
 						<ChatTypewriterText text="¡Hola! ¿Cómo puedo ayudarte hoy?" />
 					</motion.div>
 					<X
 						onClick={() => setCloseButton(true)}
-						className="absolute size-4 p-0.5 z-20 -top-2 -left-2 rounded-full cursor-pointer bg-red-500 text-white"
+						className="absolute size-4 p-0.5 z-50 -top-2 -left-2 rounded-full cursor-pointer bg-red-500 text-white"
 					/>
 				</>
 			)}

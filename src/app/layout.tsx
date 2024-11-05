@@ -4,6 +4,7 @@ import { Maven_Pro } from 'next/font/google'
 import { Toaster } from 'react-hot-toast'
 
 import { WhatsappFloating } from '@/components/shared/WhatsappFloating'
+import { StartLogoLoader } from '@/components/start/StartLogoLoader'
 
 const mavenPro = Maven_Pro({ subsets: ['latin'] })
 
@@ -20,9 +21,11 @@ export default function RootLayout({
 	return (
 		<html lang="es">
 			<body className={mavenPro.className}>
-				{children}
-				<Toaster />
-				<WhatsappFloating />
+				<StartLogoLoader>
+					{children}
+					<Toaster />
+					<WhatsappFloating />
+				</StartLogoLoader>
 			</body>
 		</html>
 	)

@@ -7,7 +7,7 @@ interface TypewriterTextProps {
 export function ChatTypewriterText({ text }: TypewriterTextProps) {
 	return (
 		<motion.h1
-			className="text-xs text-white"
+			className="text-xs text-current dark:text-white"
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
 			transition={{

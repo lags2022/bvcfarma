@@ -92,7 +92,7 @@ export function ChatAssistant({
 
 			<div className="flex">
 				{isOpen || closeButton || (
-					<div className="relative translate-x-5 -translate-y-4 z-0">
+					<div className="relative translate-x-5 -translate-y-4">
 						<ChatEffectText setCloseButton={setCloseButton} />
 					</div>
 				)}
