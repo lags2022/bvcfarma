@@ -7,10 +7,10 @@ import { useState } from 'react'
 
 import { cn } from '@/lib/utils'
 
+import { ChatEffectText } from './ChatEffectText'
 import { ChatSectionTabChatAI } from './ChatSectionTabChatAI'
 import { ChatSectionTabHome } from './ChatSectionTabHome'
 import { ChatGirl } from '../svg/Icons'
-import { ChatEffectText } from './ChatEffectText'
 
 export function ChatAssistant({
 	userName,

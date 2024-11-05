@@ -1,8 +1,8 @@
-import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useEffect, useState } from 'react'
-import { ChatTypewriterText } from './ChatTypewriterText'
 import { X } from 'lucide-react'
+import { useEffect, useState } from 'react'
+
+import { ChatTypewriterText } from './ChatTypewriterText'
 
 export function ChatEffectText({
 	setCloseButton,
