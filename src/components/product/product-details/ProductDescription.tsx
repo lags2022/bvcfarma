@@ -47,7 +47,7 @@ export const ProductDescription = ({
 	return (
 		<>
 			<Tabs className="hidden md:block" defaultValue="descripción">
-				<TabsList className="bg-gray-200">
+				<TabsList className="bg-gray-200 dark:bg-slate-900">
 					{descriptionLabels.map((item) => (
 						<TabsTrigger
 							key={item.id}

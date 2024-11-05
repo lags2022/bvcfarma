@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
+import { StartLoadingText } from './StartLoadingText'
 import { LogoAnimated } from '../shared/LogoAnimated'
 
 export const StartLoadingScreen = ({
@@ -16,9 +17,9 @@ export const StartLoadingScreen = ({
 			setProgress((prev) => {
 				if (prev >= 100) {
 					clearInterval(interval)
-					// setTimeout(() => {
-					setIsComplete(true)
-					// }, 500) // Wait a bit after reaching 100%
+					setTimeout(() => {
+						setIsComplete(true)
+					}, 100) // Wait a bit after reaching 100%
 					return 100
 				}
 				return prev + 1
@@ -86,7 +87,13 @@ export const StartLoadingScreen = ({
 							ease: 'easeInOut',
 						}}
 					>
-						{progress === 100 ? 'Completado' : 'Cargando...'}
+						{progress === 100 ? (
+							<span className="font-bold text-picker-4">Completado</span>
+						) : (
+							<div className="h-5">
+								<StartLoadingText />
+							</div>
+						)}
 					</motion.div>
 
 					{/* Decorative Elements */}

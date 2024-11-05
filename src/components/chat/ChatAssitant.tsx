@@ -3,6 +3,7 @@
 import { TriangleDownIcon } from '@radix-ui/react-icons'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Home, MessageSquare } from 'lucide-react'
+import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 
 import { cn } from '@/lib/utils'
@@ -22,9 +23,16 @@ export function ChatAssistant({
 	const [isOpen, setIsOpen] = useState(false)
 	const [activeTab, setActiveTab] = useState<'home' | 'chat'>('home')
 	const [closeButton, setCloseButton] = useState(false)
+	const pathname = usePathname()
 
 	return (
-		<div className="fixed right-0 bottom-4 sm:right-4 flex flex-col items-end z-50 w-full px-4 sm:px-0 sm:w-[380px] max-h-dvh pt-8 text-sm">
+		<div
+			className={cn(
+				'fixed right-0 bottom-4 sm:right-4 flex flex-col items-end z-50 px-4 sm:px-0 max-h-dvh pt-8 text-sm',
+				pathname.startsWith('/products') && 'bottom-20 sm:bottom-4',
+				isOpen ? 'w-full sm:w-[380px]' : 'w-auto',
+			)}
+		>
 			<AnimatePresence>
 				{isOpen && (
 					<motion.div

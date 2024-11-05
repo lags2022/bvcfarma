@@ -97,7 +97,7 @@ export const FavoriteButton = ({
 	return (
 		<Button
 			variant="outline"
-			className={cn('size-10 border-none hover:bg-white', className)}
+			className={cn('size-10 border-none hover:bg-white dark:bg-picker-3 hover:dark:bg-picker-4', className)}
 			size="icon"
 			// onClick={handleClick}
 			onClick={handleFavorite}

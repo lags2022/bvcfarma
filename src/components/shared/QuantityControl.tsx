@@ -68,7 +68,7 @@ export const QuantityControl = ({
 					{isStock ? 'Agregar al carrito' : 'Agotado'}
 				</ButtonGeneral>
 			) : (
-				<div className="flex items-center justify-between w-full bg-gray-200 rounded-md h-10">
+				<div className="flex items-center justify-between w-full bg-gray-200 dark:bg-slate-900 rounded-md h-10">
 					{quantity === 1 ? (
 						<ButtonGeneral size="icon" onClick={handleRemove}>
 							<Trash2 className="size-4" />

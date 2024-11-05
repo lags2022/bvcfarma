@@ -50,12 +50,12 @@ export const ProductCartOrCheckout = ({
 				)}
 			>
 				<div className="w-full flex justify-between">
-					<h3 className="font-semibold text-gray-800 capitalize">{name}</h3>
-					<p className="font-semibold text-gray-800">S./ {subtotalItem}</p>
+					<h3 className="font-semibold text-gray-800 dark:text-white capitalize">{name}</h3>
+					<p className="font-semibold text-gray-800 dark:text-white">S./ {subtotalItem}</p>
 				</div>
 				<div className="w-full flex justify-between items-center">
 					<div className="flex items-center gap-2">
-						<p className="text-gray-600 w-fit">Cantidad:</p>
+						<p className="text-gray-600 dark:text-white w-fit">Cantidad:</p>
 						<div className="w-fit">
 							<span>{quantity}</span>
 						</div>

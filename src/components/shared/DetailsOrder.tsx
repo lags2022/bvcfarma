@@ -91,23 +91,25 @@ export const DetailsOrder = ({
 				)}
 			>
 				<div className="flex justify-between mb-2">
-					<span className="text-gray-600">Subtotal</span>
-					<span className="font-semibold text-gray-800">
+					<span className="text-gray-600 dark:text-white">Subtotal</span>
+					<span className="font-semibold text-gray-800 dark:text-white">
 						S/ {subtotal.toFixed(2)}
 					</span>
 				</div>
 
 				<div className="flex justify-between mb-2">
-					<span className="text-gray-600">Descuento</span>
-					<span className="font-semibold text-gray-800">
+					<span className="text-gray-600 dark:text-white">Descuento</span>
+					<span className="font-semibold text-gray-800 dark:text-white">
 						- S/ {discount.toFixed(2)}
 					</span>
 				</div>
 
 				{typeComponentShopping === 'checkout' && (
 					<div className="flex justify-between mb-2">
-						<span className="text-gray-600">Costo de envío</span>
-						<span className="font-semibold text-gray-800">
+						<span className="text-gray-600 dark:text-white">
+							Costo de envío
+						</span>
+						<span className="font-semibold text-gray-800 dark:text-white">
 							S/ {shippingCost.toFixed(2)}
 						</span>
 					</div>
@@ -123,8 +125,10 @@ export const DetailsOrder = ({
 						typeComponentShopping === 'cart' && 'mb-4',
 					)}
 				>
-					<span className="text-gray-600 font-semibold">Total</span>
-					<span className="font-semibold text-gray-800">
+					<span className="text-gray-600 font-semibold dark:text-white">
+						Total
+					</span>
+					<span className="font-semibold text-gray-800 dark:text-white">
 						S/{' '}
 						{typeComponentShopping === 'checkout'
 							? totalCheckout.toFixed(2)

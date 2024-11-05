@@ -1,6 +1,5 @@
 import { Footer } from '@/components/footer/Footer'
 import { Navbar } from '@/components/navbar/Navbar'
-import { WhatsappFloating } from '@/components/shared/WhatsappFloating'
 import { ThemeProvider } from '@/providers/Theme.provider'
 import { TransitionPageProvider } from '@/providers/TransitionPageProvider'
 
@@ -17,7 +16,6 @@ export default function RootLayout({
 					<TransitionPageProvider>{children}</TransitionPageProvider>
 				</main>
 				<Footer />
-				<WhatsappFloating />
 			</div>
 		</ThemeProvider>
 	)

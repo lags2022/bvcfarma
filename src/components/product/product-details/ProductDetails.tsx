@@ -1,20 +1,13 @@
 'use client'
 
 import { format } from '@formkit/tempo'
-import {
-	Star,
-	Share2,
-	Clock,
-	Package,
-	Beaker,
-	FlaskConical,
-} from 'lucide-react'
+import { Share2, Clock, Package, FlaskConical } from 'lucide-react'
+import { usePathname } from 'next/navigation'
 
 import { FavoriteButton } from '@/components/shared/FavoriteButton'
 import { QuantityControl } from '@/components/shared/QuantityControl'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { TYPEOFFER } from '@/constants/general'
 import { useFetchFavorites } from '@/hooks/useFetchFavorites'
 import { ProductPropsView } from '@/interfaces/products'
@@ -36,6 +29,7 @@ export const ProductDeilts = ({
 	subCategory,
 	savingsScale,
 }: ProductPropsView) => {
+	const pathname = usePathname()
 	const isStock = parseInt(stock) >= 1
 
 	// quiero que el formato sea
@@ -46,7 +40,7 @@ export const ProductDeilts = ({
 	return (
 		<section className="text-sm mx-auto md:mx-0">
 			{typeOffer && (
-				<Badge className="capitalize bg-picker-3 text-white">
+				<Badge className="capitalize bg-picker-3 hover:bg-picker-4 text-white cursor-default">
 					{typeOffer} {TYPEOFFER[typeOffer]}
 				</Badge>
 			)}
@@ -67,28 +61,30 @@ export const ProductDeilts = ({
 					<p className="my-1">
 						{isStock ? 'Disponible en stock' : 'Sin stock'}
 					</p>
-					<div className="bg-white z-10 overflow-hidden md:bg-transparent fixed bottom-0 right-0 md:right-auto w-screen md:w-auto md:bottom-auto md:relative">
-						<div className="flex justify-between md:justify-normal px-4 py-3 md:p-0 gap-4 mb-0 md:mb-6 mx-auto max-w-lg md:max-w-none">
-							<QuantityControl
-								id={id}
-								name={name}
-								image={image}
-								typeOffer={typeOffer}
-								price={price}
-								isStock={isStock}
-							/>
-							<div className="order-first md:order-none">
-								<FavoriteButton productId={id} />
+					{pathname.startsWith('/products') && (
+						<div className="bg-white z-10 overflow-hidden md:bg-transparent fixed bottom-0 right-0 md:right-auto w-screen md:w-auto md:bottom-auto md:relative">
+							<div className="flex justify-between md:justify-normal px-4 py-3 md:p-0 gap-4 mb-0 md:mb-6 mx-auto max-w-lg md:max-w-none">
+								<QuantityControl
+									id={id}
+									name={name}
+									image={image}
+									typeOffer={typeOffer}
+									price={price}
+									isStock={isStock}
+								/>
+								<div className="order-first md:order-none">
+									<FavoriteButton productId={id} />
+								</div>
+								<Button
+									variant="outline"
+									className="size-10 border-none hover:bg-white dark:bg-picker-3 hover:dark:bg-picker-4"
+									size="icon"
+								>
+									<Share2 className="size-4" />
+								</Button>
 							</div>
-							<Button
-								variant="outline"
-								className="size-10 border-none hover:bg-white"
-								size="icon"
-							>
-								<Share2 className="size-4" />
-							</Button>
 						</div>
-					</div>
+					)}
 					<ProductSavingsScale savingsScale={savingsScale} />
 				</div>
 
