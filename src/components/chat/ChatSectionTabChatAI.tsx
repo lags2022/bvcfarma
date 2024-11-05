@@ -142,7 +142,7 @@ export function ChatSectionTabChatAI({
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1 }}
 				transition={{ delay: 0.3 }}
-				className="p-4 border-t bg-white dark:bg-black"
+				className="p-4 border-t bg-white dark:bg-gray-900"
 			>
 				<form onSubmit={handleSubmit} className="flex gap-2">
 					<input

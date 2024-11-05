@@ -3,6 +3,8 @@
 import { Session } from 'next-auth'
 import { useState } from 'react'
 
+import { TransitionPageProvider } from '@/providers/TransitionPageProvider'
+
 import { Dashboard } from './DashboardHeader'
 import { Sidebar } from '../sidebar/Sidebar'
 
@@ -31,7 +33,7 @@ export const DashboardProvider = ({
 				isExpanded={isExpanded}
 				toggleSidebar={toggleSidebar}
 			>
-				{children}
+				<TransitionPageProvider>{children}</TransitionPageProvider>
 			</Dashboard>
 		</div>
 	)

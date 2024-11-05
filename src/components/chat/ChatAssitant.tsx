@@ -30,7 +30,7 @@ export function ChatAssistant({
 						animate={{ opacity: 1, scale: 1, y: 0 }}
 						exit={{ opacity: 0, scale: 0.8, y: 20 }}
 						transition={{ type: 'spring', damping: 20, stiffness: 300 }}
-						className="w-full bg-white dark:bg-black rounded-2xl shadow-2xl overflow-hidden relative"
+						className="w-full bg-white dark:bg-gray-900 rounded-2xl shadow-2xl overflow-hidden relative"
 					>
 						{/* Header */}
 						<div className="bg-picker-4 dark:bg-picker-3 p-4 flex items-center justify-between">
@@ -53,7 +53,7 @@ export function ChatAssistant({
 						</div>
 
 						{/* Content Area */}
-						<div className="h-[60vh] bg-gray-50 dark:bg-black pb-[58px]">
+						<div className="h-[60vh] bg-gray-50 dark:bg-gray-900 pb-[58px]">
 							<AnimatePresence mode="wait">
 								{activeTab === 'home' ? (
 									<ChatSectionTabHome
@@ -94,7 +94,7 @@ export function ChatAssistant({
 				whileTap={{ scale: 0.9 }}
 				onClick={() => setIsOpen(!isOpen)}
 				className={cn(
-					'bg-picker-4 text-white p-1 rounded-full shadow-lg hover:bg-picker-5 transition-colors m-2 sm:m-4',
+					'bg-picker-4 text-white p-1 rounded-full shadow-lg hover:bg-picker-3 transition-colors m-2 sm:m-4',
 					isOpen && 'p-4',
 				)}
 			>
@@ -127,7 +127,7 @@ function ButtonTabs({
 			className={`p-4 flex items-center justify-center gap-2 transition-colors
       ${
 				activeTab === tabKey
-					? 'bg-picker-1 dark:bg-picker-3 dark:hover:bg-picker-4 text-picker-4 dark:text-white border-t-2 border-picker-4 dark:border-picker-1'
+					? 'bg-picker-1 dark:bg-picker-3 dark:hover:bg-picker-4 text-picker-4 dark:text-white border-t-2 border-picker-4 dark:border-black'
 					: 'text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-900 dark:hover:text-white'
 			}`}
 		>

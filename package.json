@@ -54,6 +54,7 @@
     "next-auth": "^5.0.0-beta.20",
     "next-cloudinary": "^6.16.0",
     "next-themes": "^0.3.0",
+    "next-transition-router": "^0.2.1",
     "openai": "^4.71.0",
     "react": "^18",
     "react-canvas-confetti": "^2.0.7",

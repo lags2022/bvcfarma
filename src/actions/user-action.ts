@@ -14,8 +14,6 @@ async function getUserById({ userId }: { userId: string }) {
 	try {
 		const user = await userController().getById(userId)
 
-		console.log('fukk1')
-
 		return user
 	} catch (error) {
 		throw error
