@@ -6,8 +6,10 @@ import { ColumnDef } from '@tanstack/react-table'
 import { EyeIcon, Trash2 } from 'lucide-react'
 import Link from 'next/link'
 
+import { deleteUser } from '@/actions/user-action'
 import { OrderColumnHeader } from '@/components/order/order-data-table/OrderColumnHeader'
 import { AvatarCustom } from '@/components/shared/AvatarCustom'
+import { DeleteAlertDialogTrigger } from '@/components/shared/dashboard/DeleteAlertDialogTrigger'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
 	Tooltip,
@@ -164,7 +166,19 @@ export const usersColumns: CustomColumnDef<UsersSchemaType>[] = [
 					<TooltipProvider delayDuration={0}>
 						<Tooltip>
 							<TooltipTrigger className="p-2 rounded-sm border border-border transition-[background] ease duration-300 group hover:bg-picker-4">
-								<Trash2 className="size-4 transition-colors ease duration-300 group-hover:text-white" />
+								<DeleteAlertDialogTrigger
+									actionHandler={() => deleteUser(row.original.id)}
+                  isTable={true}
+									messagesArray={[
+										'Cuenta eliminada',
+										'No se pudo eliminar la cuenta',
+										'Borrar cuenta',
+										'Borrando cuenta...',
+										`¿Estás seguro de que quieres borrar la cuenta?`,
+										`Por favor, espera mientras eliminamos la cuenta y todos los datos asociados.`,
+										`Esta acción no se puede deshacer. Esto eliminará permanentemente la cuenta y todos los datos asociados a ella.`,
+									]}
+								/>
 							</TooltipTrigger>
 							<TooltipContent align="center">Eliminar</TooltipContent>
 						</Tooltip>

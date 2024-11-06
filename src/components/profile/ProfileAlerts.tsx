@@ -1,31 +1,27 @@
 import { LoaderCircle } from 'lucide-react'
+import { usePathname } from 'next/navigation'
 
-import {
-	AlertDialog,
-	AlertDialogAction,
-	AlertDialogCancel,
-	AlertDialogContent,
-	AlertDialogDescription,
-	AlertDialogFooter,
-	AlertDialogHeader,
-	AlertDialogTitle,
-	AlertDialogTrigger,
-} from '@/components/ui/alert-dialog'
+import { deleteUser } from '@/actions/user-action'
 import { Button } from '@/components/ui/button'
 
+import { DeleteAlertDialogTrigger } from '../shared/dashboard/DeleteAlertDialogTrigger'
+
 export const ProfileAlerts = ({
-	handleDeleteUser,
 	isSubmitting,
 	isDeleting,
-	showDeleteDialog,
-	setShowDeleteDialog,
+	isPageDashboard,
+	setIsDeleting,
+	userId,
 }: {
-	handleDeleteUser: () => void
 	isSubmitting: boolean
 	isDeleting: boolean
-	showDeleteDialog: boolean
-	setShowDeleteDialog: (open: boolean) => void
+	isPageDashboard?: boolean
+	setIsDeleting: (isDeleting: boolean) => void
+	userId: string
 }) => {
+	const pathname = usePathname()
+	const phrase = pathname.startsWith('/dashboard/customers') ? 'la' : 'tu'
+
 	return (
 		<div className="flex flex-col sm:flex-row justify-between items-center gap-4">
 			<Button
@@ -42,54 +38,21 @@ export const ProfileAlerts = ({
 					'Guardar cambios'
 				)}
 			</Button>
-			<AlertDialog
-				open={showDeleteDialog || isDeleting}
-				onOpenChange={(open) => !isDeleting && setShowDeleteDialog(open)}
-			>
-				<AlertDialogTrigger asChild>
-					<Button
-						variant="destructive"
-						className="w-full focus-visible:ring-red-500 focus-visible:ring-offset-red-500 sm:w-auto"
-						disabled={isSubmitting || isDeleting}
-						onClick={() => setShowDeleteDialog(true)}
-					>
-						Borrar cuenta
-					</Button>
-				</AlertDialogTrigger>
-				<AlertDialogContent>
-					<AlertDialogHeader>
-						<AlertDialogTitle>
-							{isDeleting
-								? 'Borrando cuenta...'
-								: '¿Estás seguro de que quieres borrar tu cuenta?'}
-						</AlertDialogTitle>
-						<AlertDialogDescription>
-							{isDeleting
-								? 'Por favor, espera mientras eliminamos tu cuenta y todos los datos asociados.'
-								: 'Esta acción no se puede deshacer. Esto eliminará permanentemente tu cuenta y todos los datos asociados a ella.'}
-						</AlertDialogDescription>
-					</AlertDialogHeader>
-					<AlertDialogFooter>
-						<AlertDialogCancel disabled={isSubmitting || isDeleting}>
-							Cancelar
-						</AlertDialogCancel>
-						<AlertDialogAction
-							className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-							onClick={handleDeleteUser}
-							disabled={isDeleting}
-						>
-							{isDeleting ? (
-								<>
-									<LoaderCircle className="animate-spin mr-2" />
-									Borrando...
-								</>
-							) : (
-								'Borrar cuenta'
-							)}
-						</AlertDialogAction>
-					</AlertDialogFooter>
-				</AlertDialogContent>
-			</AlertDialog>
+			<DeleteAlertDialogTrigger
+				isDeleting={isDeleting}
+				isSubmitting={isSubmitting}
+				setIsDeleting={setIsDeleting}
+				actionHandler={() => deleteUser(isPageDashboard ? userId : undefined)}
+				messagesArray={[
+					'Cuenta eliminada',
+					'No se pudo eliminar la cuenta',
+					'Borrar cuenta',
+					'Borrando cuenta...',
+					`¿Estás seguro de que quieres borrar ${phrase} cuenta?`,
+					`Por favor, espera mientras eliminamos ${phrase} cuenta y todos los datos asociados.`,
+					`Esta acción no se puede deshacer. Esto eliminará permanentemente ${phrase} cuenta y todos los datos asociados a ella.`,
+				]}
+			/>
 		</div>
 	)
 }

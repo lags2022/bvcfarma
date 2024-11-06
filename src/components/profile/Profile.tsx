@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { Controller, FieldPath, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 
-import { deleteUser, updateUser } from '@/actions/user-action'
+import { updateUser } from '@/actions/user-action'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
@@ -39,7 +39,6 @@ export const Profile = ({
 	}
 
 	const [isDeleting, setIsDeleting] = useState(false)
-	const [showDeleteDialog, setShowDeleteDialog] = useState(false)
 
 	const {
 		control,
@@ -79,19 +78,6 @@ export const Profile = ({
 			toast.error('No se pudo enviar los cambios, revisa el formulario')
 		} catch (error) {
 			toast.error('No se pudo enviar los cambios')
-		}
-	}
-
-	const handleDeleteUser = async () => {
-		setIsDeleting(true)
-		try {
-			await deleteUser(isPageDashboard ? user.id : undefined)
-			toast.success('Cuenta eliminada')
-		} catch (error) {
-			toast.error('No se pudo eliminar la cuenta')
-		} finally {
-			setIsDeleting(false)
-			setShowDeleteDialog(false)
 		}
 	}
 
@@ -266,11 +252,11 @@ export const Profile = ({
 			</div>
 
 			<ProfileAlerts
-				handleDeleteUser={handleDeleteUser}
 				isSubmitting={isSubmitting}
 				isDeleting={isDeleting}
-				showDeleteDialog={showDeleteDialog}
-				setShowDeleteDialog={setShowDeleteDialog}
+        isPageDashboard={isPageDashboard}
+        setIsDeleting={setIsDeleting}
+        userId={user.id}
 			/>
 		</form>
 	)
