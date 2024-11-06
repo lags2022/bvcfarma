@@ -2,6 +2,7 @@
 
 import { Order, OrderItemProduct } from '@prisma/client'
 import { ArrowLeft } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
 import { ButtonGeneral } from '@/components/button/ButtonGeneral'
@@ -22,6 +23,8 @@ export const OrderDetails = ({
 	}
 	isPageDashboard?: boolean
 }) => {
+	const router = useRouter()
+
 	useEffect(() => {
 		const cancelScrollAnimation = smoothScrollToTop()
 
@@ -35,7 +38,8 @@ export const OrderDetails = ({
 			<div className="flex flex-col justify-center items-start gap-4">
 				<div className="flex justify-center items-center gap-2">
 					<ButtonGeneral
-						href={isPageDashboard ? '/dashboard/orders' : '/orders'}
+						// href={isPageDashboard ? '/dashboard/orders' : '/orders'}
+						onClick={() => router.back()}
 						size="icon"
 					>
 						<ArrowLeft />

@@ -4,9 +4,9 @@ import { orderController } from '@/lib/factoryController'
 
 import { getIdFromSession } from './session-action'
 
-export async function getOrdersByUser() {
+export async function getOrdersByUser(userIdFromClient?: string) {
 	try {
-		const userId = await getIdFromSession()
+		const userId = userIdFromClient || (await getIdFromSession())
 
 		const orders = await orderController().getAllByUserId(userId!)
 

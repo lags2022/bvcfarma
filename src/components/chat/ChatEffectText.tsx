@@ -44,7 +44,7 @@ export function ChatEffectText({
 						animate={{ opacity: 1, y: 0 }}
 						exit={{ opacity: 0, y: -20 }}
 						transition={{ duration: 0.5 }}
-						className="p-3 rounded-2xl shadow-sm rounded-br-none bg-white dark:bg-black"
+						className="p-3 rounded-2xl shadow-sm rounded-br-none bg-white dark:bg-slate-900"
 					>
 						<ChatTypewriterText text="¡Hola! ¿Cómo puedo ayudarte hoy?" />
 					</motion.div>

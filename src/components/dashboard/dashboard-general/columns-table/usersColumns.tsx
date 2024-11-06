@@ -3,7 +3,7 @@
 // import { modDate } from '@/helpers/mod-date'
 // import { pluralizeWord } from '@/helpers/plurize-word'
 import { ColumnDef } from '@tanstack/react-table'
-import { EyeIcon, Trash2 } from 'lucide-react'
+import { EyeIcon, ShoppingBag, Trash2 } from 'lucide-react'
 import Link from 'next/link'
 
 import { deleteUser } from '@/actions/user-action'
@@ -153,6 +153,7 @@ export const usersColumns: CustomColumnDef<UsersSchemaType>[] = [
 		cell: ({ row, table }) => {
 			return (
 				<div className="flex items-center gap-2 justify-center">
+					{/* view */}
 					<Link href={`${table.options.meta?.route}/${row.original.id}`}>
 						<TooltipProvider delayDuration={0}>
 							<Tooltip>
@@ -163,12 +164,14 @@ export const usersColumns: CustomColumnDef<UsersSchemaType>[] = [
 							</Tooltip>
 						</TooltipProvider>
 					</Link>
+
+					{/* delete */}
 					<TooltipProvider delayDuration={0}>
 						<Tooltip>
 							<TooltipTrigger className="p-2 rounded-sm border border-border transition-[background] ease duration-300 group hover:bg-picker-4">
 								<DeleteAlertDialogTrigger
 									actionHandler={() => deleteUser(row.original.id)}
-                  isTable={true}
+									isTable={true}
 									messagesArray={[
 										'Cuenta eliminada',
 										'No se pudo eliminar la cuenta',
@@ -183,6 +186,18 @@ export const usersColumns: CustomColumnDef<UsersSchemaType>[] = [
 							<TooltipContent align="center">Eliminar</TooltipContent>
 						</Tooltip>
 					</TooltipProvider>
+
+					{/* view orders */}
+					<Link href={`${table.options.meta?.route}/${row.original.id}/orders`}>
+						<TooltipProvider delayDuration={0}>
+							<Tooltip>
+								<TooltipTrigger className="p-2 rounded-sm border border-border transition-[background] ease duration-300 group hover:bg-picker-4">
+									<ShoppingBag className="size-4 transition-colors ease duration-300 group-hover:text-white" />
+								</TooltipTrigger>
+								<TooltipContent align="center">Órdenes</TooltipContent>
+							</Tooltip>
+						</TooltipProvider>
+					</Link>
 				</div>
 			)
 		},
