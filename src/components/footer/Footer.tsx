@@ -98,20 +98,15 @@ export const Footer = () => {
 								Preguntas Frecuentes
 							</a>
 						</li>
-						<li>
-							<a href="#" className="hover:text-blue-600">
-								Plan de Referidos
-							</a>
-						</li>
 						<li>Fono: (+51) 987 654 321</li>
 					</ul>
 				</div>
 				<div className="space-y-4 [&_h3]:font-semibold">
-					<div className='space-y-4'>
+					<div className="space-y-4">
 						<h3>Síguenos</h3>
 						<Social className=" justify-start [&>a>svg]:text-gray-400 hover:[&>a>svg]:text-gray-500" />
 					</div>
-					<div className=''>
+					<div className="">
 						<h3>Libro de Reclamaciones</h3>
 						<Link href="/complaints">
 							<ComplaintsBook className="fill-picker-1 h-8 mt-2" />
