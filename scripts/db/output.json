@@ -1,0 +1,1013 @@
+{
+  "product_line": [
+    {
+      "id": 1,
+      "name": "ac.farma"
+    },
+    {
+      "id": 2,
+      "name": "algotec (c"
+    },
+    {
+      "id": 3,
+      "name": "alicorp"
+    },
+    {
+      "id": 4,
+      "name": "avanx"
+    },
+    {
+      "id": 5,
+      "name": "bayer"
+    },
+    {
+      "id": 6,
+      "name": "bionic lab"
+    },
+    {
+      "id": 7,
+      "name": "biotech fa"
+    },
+    {
+      "id": 8,
+      "name": "biotemp"
+    },
+    {
+      "id": 9,
+      "name": "bmc farma"
+    },
+    {
+      "id": 10,
+      "name": "boehringer"
+    },
+    {
+      "id": 11,
+      "name": "bonapharm"
+    },
+    {
+      "id": 12,
+      "name": "caferma"
+    },
+    {
+      "id": 13,
+      "name": "carnot-lab"
+    },
+    {
+      "id": 14,
+      "name": "cipa labor"
+    },
+    {
+      "id": 15,
+      "name": "colgate-pa"
+    },
+    {
+      "id": 16,
+      "name": "cont.linea"
+    },
+    {
+      "id": 17,
+      "name": "continenta"
+    },
+    {
+      "id": 18,
+      "name": "cresse"
+    },
+    {
+      "id": 19,
+      "name": "danny"
+    },
+    {
+      "id": 20,
+      "name": "daxolab"
+    },
+    {
+      "id": 21,
+      "name": "diphasac"
+    },
+    {
+      "id": 22,
+      "name": "dist. drog"
+    },
+    {
+      "id": 23,
+      "name": "drog.tobal"
+    },
+    {
+      "id": 24,
+      "name": "elifarma l"
+    },
+    {
+      "id": 25,
+      "name": "emcure"
+    },
+    {
+      "id": 26,
+      "name": "faes farma"
+    },
+    {
+      "id": 27,
+      "name": "farmaquil"
+    },
+    {
+      "id": 28,
+      "name": "farmasalud"
+    },
+    {
+      "id": 29,
+      "name": "farmindust"
+    },
+    {
+      "id": 30,
+      "name": "farvet"
+    },
+    {
+      "id": 31,
+      "name": "fast&up"
+    },
+    {
+      "id": 32,
+      "name": "gedeon"
+    },
+    {
+      "id": 33,
+      "name": "genfar lab"
+    },
+    {
+      "id": 34,
+      "name": "germany en"
+    },
+    {
+      "id": 35,
+      "name": "good brand"
+    },
+    {
+      "id": 36,
+      "name": "goto marke"
+    },
+    {
+      "id": 37,
+      "name": "gsk"
+    },
+    {
+      "id": 38,
+      "name": "huerto ala"
+    },
+    {
+      "id": 39,
+      "name": "iqfarma (i"
+    },
+    {
+      "id": 40,
+      "name": "jhonson&jh"
+    },
+    {
+      "id": 41,
+      "name": "knop"
+    },
+    {
+      "id": 42,
+      "name": "korea - ph"
+    },
+    {
+      "id": 43,
+      "name": "lab.farm.o"
+    },
+    {
+      "id": 44,
+      "name": "lab.farmas"
+    },
+    {
+      "id": 45,
+      "name": "lab.medroc"
+    },
+    {
+      "id": 46,
+      "name": "lab.nutr.p"
+    },
+    {
+      "id": 47,
+      "name": "lab.pharme"
+    },
+    {
+      "id": 48,
+      "name": "lab.quilla"
+    },
+    {
+      "id": 49,
+      "name": "lab.superf"
+    },
+    {
+      "id": 50,
+      "name": "laborat. g"
+    },
+    {
+      "id": 51,
+      "name": "lansier"
+    },
+    {
+      "id": 52,
+      "name": "leblon"
+    },
+    {
+      "id": 53,
+      "name": "lenca corp"
+    },
+    {
+      "id": 54,
+      "name": "lusa"
+    },
+    {
+      "id": 55,
+      "name": "lyafarm"
+    },
+    {
+      "id": 56,
+      "name": "markos lab"
+    },
+    {
+      "id": 57,
+      "name": "mat.quirur"
+    },
+    {
+      "id": 58,
+      "name": "medical"
+    },
+    {
+      "id": 59,
+      "name": "medical st"
+    },
+    {
+      "id": 60,
+      "name": "medifarma"
+    },
+    {
+      "id": 61,
+      "name": "mega lifes"
+    },
+    {
+      "id": 62,
+      "name": "menarini"
+    },
+    {
+      "id": 63,
+      "name": "myf"
+    },
+    {
+      "id": 64,
+      "name": "ninet"
+    },
+    {
+      "id": 65,
+      "name": "nivea"
+    },
+    {
+      "id": 66,
+      "name": "nutralab"
+    },
+    {
+      "id": 67,
+      "name": "oq.pharma"
+    },
+    {
+      "id": 68,
+      "name": "perufarma"
+    },
+    {
+      "id": 69,
+      "name": "pharma gen"
+    },
+    {
+      "id": 70,
+      "name": "pharmagen"
+    },
+    {
+      "id": 71,
+      "name": "pharmex"
+    },
+    {
+      "id": 72,
+      "name": "port.bahia"
+    },
+    {
+      "id": 73,
+      "name": "port.linea"
+    },
+    {
+      "id": 74,
+      "name": "portugal -"
+    },
+    {
+      "id": 75,
+      "name": "procter &"
+    },
+    {
+      "id": 76,
+      "name": "prod.de ve"
+    },
+    {
+      "id": 77,
+      "name": "qm pharma"
+    },
+    {
+      "id": 78,
+      "name": "quilab cif"
+    },
+    {
+      "id": 79,
+      "name": "repres.san"
+    },
+    {
+      "id": 80,
+      "name": "roxfarma"
+    },
+    {
+      "id": 81,
+      "name": "samplix"
+    },
+    {
+      "id": 82,
+      "name": "sanofi-ave"
+    },
+    {
+      "id": 83,
+      "name": "sanofi-gen"
+    },
+    {
+      "id": 84,
+      "name": "sebal farm"
+    },
+    {
+      "id": 85,
+      "name": "sun pharma"
+    },
+    {
+      "id": 86,
+      "name": "terbol per"
+    },
+    {
+      "id": 87,
+      "name": "teva"
+    },
+    {
+      "id": 88,
+      "name": "thefar"
+    },
+    {
+      "id": 89,
+      "name": "top medic"
+    },
+    {
+      "id": 90,
+      "name": "unimed"
+    },
+    {
+      "id": 91,
+      "name": "worwag"
+    },
+    {
+      "id": 92,
+      "name": "ajr labs"
+    },
+    {
+      "id": 93,
+      "name": "sanofi"
+    }
+  ],
+  "code_unit": [
+    {
+      "id": 1,
+      "name": "cja"
+    },
+    {
+      "id": 2,
+      "name": "und"
+    },
+    {
+      "id": 3,
+      "name": "tbo"
+    },
+    {
+      "id": 4,
+      "name": "fco"
+    },
+    {
+      "id": 5,
+      "name": "bolsa"
+    },
+    {
+      "id": 6,
+      "name": "caja"
+    },
+    {
+      "id": 7,
+      "name": "caja."
+    },
+    {
+      "id": 8,
+      "name": "pte"
+    },
+    {
+      "id": 9,
+      "name": "unidad"
+    },
+    {
+      "id": 10,
+      "name": "unid"
+    },
+    {
+      "id": 11,
+      "name": "pote"
+    },
+    {
+      "id": 12,
+      "name": "pqte"
+    },
+    {
+      "id": 13,
+      "name": "sob"
+    },
+    {
+      "id": 14,
+      "name": "pot"
+    },
+    {
+      "id": 15,
+      "name": "tub"
+    },
+    {
+      "id": 16,
+      "name": "amp"
+    },
+    {
+      "id": 17,
+      "name": "gts"
+    },
+    {
+      "id": 18,
+      "name": "pack"
+    },
+    {
+      "id": 19,
+      "name": "lata"
+    },
+    {
+      "id": 20,
+      "name": "lta"
+    },
+    {
+      "id": 21,
+      "name": "tarro"
+    },
+    {
+      "id": 22,
+      "name": "vale"
+    },
+    {
+      "id": 23,
+      "name": "jbe"
+    },
+    {
+      "id": 24,
+      "name": "cuidado personal"
+    }
+  ],
+  "category": [
+    {
+      "id": 1,
+      "name": "medicamento"
+    },
+    {
+      "id": 2,
+      "name": "higiene personal"
+    },
+    {
+      "id": 3,
+      "name": "nutriciónal"
+    },
+    {
+      "id": 4,
+      "name": "nutricional"
+    },
+    {
+      "id": 5,
+      "name": "antitusigeno"
+    },
+    {
+      "id": 6,
+      "name": "cuidado personal"
+    },
+    {
+      "id": 7,
+      "name": "mamá y bebé"
+    },
+    {
+      "id": 8,
+      "name": "antigripal"
+    },
+    {
+      "id": 9,
+      "name": "analgesico"
+    },
+    {
+      "id": 10,
+      "name": "antipiretico"
+    },
+    {
+      "id": 11,
+      "name": "salud"
+    },
+    {
+      "id": 12,
+      "name": "antiacido"
+    },
+    {
+      "id": 13,
+      "name": "antipeptido"
+    },
+    {
+      "id": 14,
+      "name": "antiinfeccioso"
+    },
+    {
+      "id": 15,
+      "name": "vitaminas"
+    },
+    {
+      "id": 16,
+      "name": "portugal bahia"
+    },
+    {
+      "id": 17,
+      "name": "medicamentos"
+    },
+    {
+      "id": 18,
+      "name": "dispositivos medicos"
+    },
+    {
+      "id": 19,
+      "name": "maternidad"
+    },
+    {
+      "id": 20,
+      "name": "dermocosmética"
+    },
+    {
+      "id": 21,
+      "name": "dispositivo medico"
+    },
+    {
+      "id": 22,
+      "name": "multivitaminico"
+    },
+    {
+      "id": 23,
+      "name": "infantil"
+    },
+    {
+      "id": 24,
+      "name": "nutrición"
+    },
+    {
+      "id": 25,
+      "name": "dispositivos médicos"
+    }
+  ],
+  "subcategory": [
+    {
+      "id": 1,
+      "name": "antiviral",
+      "category": "medicamento"
+    },
+    {
+      "id": 2,
+      "name": "antihiperlipidemico",
+      "category": "medicamento"
+    },
+    {
+      "id": 3,
+      "name": "antibiotico",
+      "category": "medicamento"
+    },
+    {
+      "id": 4,
+      "name": "antidepresivo",
+      "category": "medicamento"
+    },
+    {
+      "id": 5,
+      "name": "antifungico",
+      "category": "medicamento"
+    },
+    {
+      "id": 6,
+      "name": "corticoide",
+      "category": "medicamento"
+    },
+    {
+      "id": 7,
+      "name": "hormona",
+      "category": "medicamento"
+    },
+    {
+      "id": 8,
+      "name": "antiespasmodico",
+      "category": "medicamento"
+    },
+    {
+      "id": 9,
+      "name": "antihipertensivo",
+      "category": "medicamento"
+    },
+    {
+      "id": 10,
+      "name": "antineoplasico",
+      "category": "medicamento"
+    },
+    {
+      "id": 11,
+      "name": "relajante muscular",
+      "category": "medicamento"
+    },
+    {
+      "id": 12,
+      "name": "vit.b12",
+      "category": "medicamento"
+    },
+    {
+      "id": 13,
+      "name": "antiulceroso",
+      "category": "medicamento"
+    },
+    {
+      "id": 14,
+      "name": "para manos",
+      "category": "higiene personal"
+    },
+    {
+      "id": 15,
+      "name": "niños",
+      "category": "nutriciónal"
+    },
+    {
+      "id": 16,
+      "name": "adulto",
+      "category": "nutricional"
+    },
+    {
+      "id": 17,
+      "name": "expectorante",
+      "category": "antitusigeno"
+    },
+    {
+      "id": 18,
+      "name": "corporal",
+      "category": "cuidado personal"
+    },
+    {
+      "id": 19,
+      "name": "limpieza corporal",
+      "category": "higiene personal"
+    },
+    {
+      "id": 20,
+      "name": "leche emoliente",
+      "category": "cuidado personal"
+    },
+    {
+      "id": 21,
+      "name": "limpieza capilar",
+      "category": "higiene personal"
+    },
+    {
+      "id": 22,
+      "name": "facial",
+      "category": "cuidado personal"
+    },
+    {
+      "id": 23,
+      "name": "capilar",
+      "category": "cuidado personal"
+    },
+    {
+      "id": 24,
+      "name": "limpieza facial",
+      "category": "higiene personal"
+    },
+    {
+      "id": 25,
+      "name": "limpieza intima",
+      "category": "higiene personal"
+    },
+    {
+      "id": 26,
+      "name": "cicatrizante",
+      "category": "cuidado personal"
+    },
+    {
+      "id": 27,
+      "name": "limpieza dental",
+      "category": "higiene personal"
+    },
+    {
+      "id": 28,
+      "name": "bebe",
+      "category": "higiene personal"
+    },
+    {
+      "id": 29,
+      "name": "niños",
+      "category": "higiene personal"
+    },
+    {
+      "id": 30,
+      "name": "multivitaminico",
+      "category": "nutricional"
+    },
+    {
+      "id": 31,
+      "name": "minerales",
+      "category": "nutricional"
+    },
+    {
+      "id": 32,
+      "name": "colageno",
+      "category": "nutricional"
+    },
+    {
+      "id": 33,
+      "name": "fortificador de huesos",
+      "category": "nutricional"
+    },
+    {
+      "id": 34,
+      "name": "equilibrar hormonal",
+      "category": "nutricional"
+    },
+    {
+      "id": 35,
+      "name": "modulador del sueño",
+      "category": "nutricional"
+    },
+    {
+      "id": 36,
+      "name": "antianemico",
+      "category": "nutricional"
+    },
+    {
+      "id": 37,
+      "name": "natural",
+      "category": "nutricional"
+    },
+    {
+      "id": 38,
+      "name": "expectorante",
+      "category": "nutricional"
+    },
+    {
+      "id": 39,
+      "name": "cuidado pulmonar",
+      "category": "nutricional"
+    },
+    {
+      "id": 40,
+      "name": "eliminar calculos",
+      "category": "nutricional"
+    },
+    {
+      "id": 41,
+      "name": "inmunodefensa",
+      "category": "nutricional"
+    },
+    {
+      "id": 42,
+      "name": "rehidratante",
+      "category": "nutricional"
+    },
+    {
+      "id": 43,
+      "name": "malestar del cuerpo",
+      "category": "antigripal"
+    },
+    {
+      "id": 44,
+      "name": "antimigrañoso",
+      "category": "analgesico"
+    },
+    {
+      "id": 45,
+      "name": "niños",
+      "category": "antipiretico"
+    },
+    {
+      "id": 46,
+      "name": "bebe",
+      "category": "analgesico"
+    },
+    {
+      "id": 47,
+      "name": "cuidado bucal",
+      "category": "salud"
+    },
+    {
+      "id": 48,
+      "name": "vitaminas b",
+      "category": "nutricional"
+    },
+    {
+      "id": 49,
+      "name": "vitaminas b",
+      "category": "cuidado personal"
+    },
+    {
+      "id": 50,
+      "name": "antianemico",
+      "category": "salud"
+    },
+    {
+      "id": 51,
+      "name": "analgesico natural",
+      "category": "salud"
+    },
+    {
+      "id": 52,
+      "name": "protector acido",
+      "category": "antiacido"
+    },
+    {
+      "id": 53,
+      "name": "antireflujo",
+      "category": "antipeptido"
+    },
+    {
+      "id": 54,
+      "name": "antibiotico",
+      "category": "antiinfeccioso"
+    },
+    {
+      "id": 55,
+      "name": "mujeres gestantes",
+      "category": "nutricional"
+    },
+    {
+      "id": 56,
+      "name": "estomacal",
+      "category": "nutricional"
+    },
+    {
+      "id": 57,
+      "name": "analgesico natural",
+      "category": "nutricional"
+    },
+    {
+      "id": 58,
+      "name": "hidratante",
+      "category": "nutricional"
+    },
+    {
+      "id": 59,
+      "name": "niños",
+      "category": "nutricional"
+    },
+    {
+      "id": 60,
+      "name": "mujer",
+      "category": "nutricional"
+    },
+    {
+      "id": 61,
+      "name": "para colon irritable",
+      "category": "salud"
+    },
+    {
+      "id": 62,
+      "name": "vitamina e",
+      "category": "vitaminas"
+    },
+    {
+      "id": 63,
+      "name": "alivia dolor de garganta",
+      "category": "salud"
+    },
+    {
+      "id": 64,
+      "name": "protector hepatico",
+      "category": "salud"
+    },
+    {
+      "id": 65,
+      "name": "multivitaminico",
+      "category": "vitaminas"
+    },
+    {
+      "id": 66,
+      "name": "probiotico",
+      "category": "salud"
+    },
+    {
+      "id": 67,
+      "name": "crema corporal",
+      "category": "cuidado personal"
+    },
+    {
+      "id": 68,
+      "name": "sexualidad",
+      "category": "cuidado personal"
+    },
+    {
+      "id": 69,
+      "name": "suplemento alimenticio",
+      "category": "nutricional"
+    },
+    {
+      "id": 70,
+      "name": "bloqueadores",
+      "category": "portugal bahia"
+    },
+    {
+      "id": 71,
+      "name": "suspensión oral",
+      "category": "medicamento"
+    },
+    {
+      "id": 72,
+      "name": "jabones",
+      "category": "cuidado personal"
+    },
+    {
+      "id": 73,
+      "name": "suspensión oral",
+      "category": "medicamentos"
+    },
+    {
+      "id": 74,
+      "name": "suspension oral",
+      "category": "medicamentos"
+    },
+    {
+      "id": 75,
+      "name": "multivitamínico",
+      "category": "nutricional"
+    },
+    {
+      "id": 76,
+      "name": "confort",
+      "category": "cuidado personal"
+    },
+    {
+      "id": 77,
+      "name": "comprimidos",
+      "category": "medicamentos"
+    },
+    {
+      "id": 78,
+      "name": "pediátricos",
+      "category": "maternidad"
+    },
+    {
+      "id": 79,
+      "name": "shampoo",
+      "category": "cuidado personal"
+    },
+    {
+      "id": 80,
+      "name": "repelentes",
+      "category": "dermocosmética"
+    },
+    {
+      "id": 81,
+      "name": "adulto",
+      "category": "multivitaminico"
+    },
+    {
+      "id": 82,
+      "name": "niños",
+      "category": "multivitaminico"
+    },
+    {
+      "id": 83,
+      "name": "complemento",
+      "category": "infantil"
+    },
+    {
+      "id": 84,
+      "name": "complemento",
+      "category": "maternidad"
+    },
+    {
+      "id": 85,
+      "name": "suplemento alimenticio",
+      "category": "nutrición"
+    },
+    {
+      "id": 86,
+      "name": "ungüento",
+      "category": "cuidado personal"
+    },
+    {
+      "id": 87,
+      "name": "multivitamínico",
+      "category": "nutrición"
+    }
+  ]
+}

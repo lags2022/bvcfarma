@@ -55,13 +55,13 @@ model UserAddress {
 
   // Relación con el modelo 'Country'
   countryId Int?     @map("country_id")
-  country   Country? @relation(fields: [countryId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  country   Country? @relation(fields: [countryId], references: [id], onDelete: SetNull, onUpdate: Cascade)
 
   // Relación con el modelo 'User'
   userId String @unique @map("user_id") @db.Uuid
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
-  @@map("user_addresses")
+  @@map("user_address")
 }
 
 model Country {
@@ -72,22 +72,101 @@ model Country {
   userAddresses  UserAddress[]
   orderAddresses OrderAddress[]
 
-  @@map("countries")
+  @@map("country")
 }
 
 // usado mas para el slug
-model FieldsAddProduct {
+model Product {
   id String @id @default(uuid()) @db.Uuid
 
-  // TODO: REVISAR SI CAMBIAR POR UUID
-  // idProductErp String @map("id_product_erp") @db.Uuid
-  idProductErp Int @map("id_product_erp") @db.Integer
+  idExcel     String?   @map("id_excel") @db.VarChar(50)
+  name        String    @db.VarChar(255)
+  priceUnit   Float?    @map("price_unit")
+  stock       Int?      @default(0)
+  expiration  DateTime? @db.Date
+  lote        String?   @db.VarChar(20)
+  imageUrl    String?   @map("image_url") @db.VarChar(255)
+  description String?   @db.Text
+  slug        String?   @db.VarChar(255)
+  isActive    Boolean   @default(true) @map("is_active")
 
-  slug      String?
-  notActive Boolean @default(false) @map("not_active")
+  productLineId      Int?              @map("product_line_id") @db.Integer
+  productLine        ProductLine?      @relation(fields: [productLineId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  categoryId         Int?              @map("category_id") @db.Integer
+  category           Category?         @relation(fields: [categoryId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  subCategoryId      Int?              @map("sub_category_id") @db.Integer
+  subCategory        SubCategory?      @relation(fields: [subCategoryId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  distributionTypeId Int?              @db.Integer
+  distributionType   DistributionType? @relation(fields: [distributionTypeId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  typeOfferId        Int?              @db.Integer
+  typeOffer          TypeOffer?        @relation(fields: [typeOfferId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  codeUnitId         Int?              @db.Integer
+  codeUnit           CodeUnit?         @relation(fields: [codeUnitId], references: [id], onDelete: SetNull, onUpdate: Cascade)
 
-  @@unique([idProductErp, slug])
-  @@map("fields_add_product")
+  orderItemProduct OrderItemProduct[]
+
+  @@map("product")
+}
+
+model CodeUnit {
+  id   Int    @id @default(autoincrement()) @db.Integer
+  name String @db.VarChar(30)
+
+  Product Product[]
+
+  @@map("code_unit")
+}
+
+model ProductLine {
+  id   Int    @id @default(autoincrement()) @db.Integer
+  name String @db.VarChar(50)
+
+  Product Product[]
+
+  @@map("product_line")
+}
+
+model Category {
+  id   Int    @id @default(autoincrement()) @db.Integer
+  name String @db.VarChar(50)
+
+  Product     Product[]
+  SubCategory SubCategory[]
+
+  @@map("category")
+}
+
+model SubCategory {
+  id   Int    @id @default(autoincrement()) @db.Integer
+  name String @db.VarChar(50)
+
+  Product Product[]
+
+  categoryId Int?      @map("category_id") @db.Integer
+  category   Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@map("sub_category")
+}
+
+model DistributionType {
+  id          Int     @id @default(autoincrement()) @db.Integer
+  name        String  @db.VarChar(10)
+  description String? @db.VarChar(100)
+  alias       String? @db.VarChar(100)
+
+  Product Product[]
+
+  @@map("distribution_type")
+}
+
+model TypeOffer {
+  id          Int     @id @default(autoincrement()) @db.Integer
+  name        String  @db.VarChar(20)
+  description String? @db.VarChar(100)
+
+  Product Product[]
+
+  @@map("type_offer")
 }
 
 model Order {
@@ -117,7 +196,7 @@ model Order {
 
   // Relación con el modelo 'User'
   userId String @map("user_id") @db.Uuid
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   // Relación con el modelo 'CulqiCharge', 'OrderItemProduct' y 'OrderAddress'
   culqiCharge  CulqiCharge?
@@ -151,29 +230,27 @@ model CulqiCharge {
 
   // Relación con el modelo 'Order'
   orderId String @unique @map("order_id") @db.Uuid
-  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("culqi_charge")
 }
 
 model OrderItemProduct {
-  id           Int    @id @default(autoincrement()) @db.Integer
-  price        String @db.VarChar(8)
-  quantity     Int // unidades del mismo producto
-  name         String @map("name") @db.VarChar(150)
-  image        String @map("image") @db.VarChar(255)
-  subtotalItem Float  @map("subtotal_item")
-  // confirmedUnits Int?   @map("confirmed_units")
+  id           String @id @default(uuid()) @db.Uuid
+  quantity     Int
+  priceAtTime  Float  @map("price_at_time") // precio del producto en el momento de la compra
+  subtotalItem Float  @map("subtotal_item") // subtotal del producto
 
-  // TODO: REVISAR SI CAMBIAR POR UUID
-  // idProductErp String @map("id_product_erp") @db.Uuid
-  idProductErp Int @map("id_product_erp") @db.Integer
+  nameProductBackup  String @map("name_product_backup") @db.VarChar(150) // por si eliminan el producto, no colocar en el frontend
+  imageProductBackup String @map("image_product_backup") @db.VarChar(255) // por si eliminan la imagen del producto, no colocar en el frontend
 
   // Relaciones
-  orderId String @map("order_id") @db.Uuid
-  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String?  @map("product_id") @db.Uuid
+  product   Product? @relation(fields: [productId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  orderId   String   @map("order_id") @db.Uuid
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
-  @@map("order_item_products")
+  @@map("order_item_product")
 }
 
 model OrderAddress {
@@ -195,12 +272,12 @@ model OrderAddress {
   reference  String? @db.VarChar(150)
 
   // Relación con el modelo 'Country'
-  countryId Int     @map("country_id") @db.Integer
-  country   Country @relation(fields: [countryId], references: [id], onDelete: Cascade)
+  countryId Int?     @map("country_id") @db.Integer
+  country   Country? @relation(fields: [countryId], references: [id], onDelete: SetNull, onUpdate: Cascade)
 
   // Relación con el modelo 'Order'
   orderId String @unique @map("order_id") @db.Uuid
-  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("order_address")
 }

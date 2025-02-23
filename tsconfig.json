@@ -32,7 +32,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts",
+    ".next/types/**/*.ts", "scripts/db/excel.js", "scripts/db/seed-product.ts",
   ],
   "exclude": [
     "node_modules"
